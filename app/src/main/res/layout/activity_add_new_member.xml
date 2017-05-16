@@ -4,6 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.yahia.rewards_program.AddNewMember">
+    tools:context="com.example.yahia.rewards_program.AddNewMember"
+    tools:layout_editor_absoluteY="89dp"
+    tools:layout_editor_absoluteX="0dp">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="647dp"
+        tools:layout_editor_absoluteY="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <EditText
+            android:id="@+id/firstNameTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/lastNameTxt"
+            android:layout_alignStart="@+id/lastNameTxt"
+            android:layout_marginBottom="20dp"
+            android:ems="10"
+            android:hint="@string/hintFirstName"
+            android:inputType="textPersonName"
+            android:padding="15dp" />
+
+        <EditText
+            android:id="@+id/lastNameTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/newPhoneNumber"
+            android:layout_alignStart="@+id/newPhoneNumber"
+            android:layout_marginBottom="20dp"
+            android:ems="10"
+            android:hint="@string/hintLastName"
+            android:inputType="textPersonName"
+            android:padding="15dp" />
+
+        <EditText
+            android:id="@+id/newPhoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:ems="10"
+            android:hint="@string/hintPhoneNumber"
+            android:inputType="phone"
+            android:padding="15dp" />
+
+        <Button
+            android:id="@+id/createNewMember_btn"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_below="@+id/newPhoneNumber"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="84dp"
+            android:height="30dp"
+            android:elevation="0dp"
+            android:text="@string/createMember"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/newMemberTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="54dp"
+            android:text="@string/newMemberTitle"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

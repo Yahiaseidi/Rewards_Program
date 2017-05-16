@@ -6,4 +6,10 @@
     <string name="alternateID">Enter Alternate ID</string>
     <string name="newMember">New Rewards Member</string>
     <string name="Admin">Admin View</string>
+    <string name="createMember">Become a Rewards Member</string>
+    <string name="newMemberTitle">Sign Up For Rewards</string>
+    <string name="hintFirstName">First Name</string>
+    <string name="hintLastName">Last Name</string>
+    <string name="hintPhoneNumber">Phone Number</string>
+    <string name="mainActivityWelcome">Welcome To Sammy\'s Mini Mart!</string>
 </resources>
