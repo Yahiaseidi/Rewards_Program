@@ -23,13 +23,15 @@
                 style="@android:style/Widget.Button.Toggle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="228dp"
+                android:layout_marginTop="31dp"
                 android:width="@android:dimen/thumbnail_width"
                 android:height="70dp"
                 android:text="@string/alternateID"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:layout_below="@+id/imageView"
+                android:layout_centerHorizontal="true"
+                android:onClick="goToEnterAlternateID"
+                />
 
             <Button
                 android:id="@+id/newMember_btn"
@@ -42,7 +44,9 @@
                 android:width="@android:dimen/thumbnail_width"
                 android:height="70dp"
                 android:text="@string/newMember"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:onClick="goToAddNewMember"
+                />
 
             <Button
                 android:id="@+id/adminView_btn"
