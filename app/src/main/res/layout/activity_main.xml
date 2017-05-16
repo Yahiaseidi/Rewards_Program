@@ -23,52 +23,52 @@
                 style="@android:style/Widget.Button.Toggle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="31dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="95dp"
+                android:layout_toStartOf="@+id/imageView"
                 android:width="@android:dimen/thumbnail_width"
                 android:height="70dp"
-                android:text="@string/alternateID"
-                android:textSize="18sp"
-                android:layout_below="@+id/imageView"
-                android:layout_centerHorizontal="true"
                 android:onClick="goToEnterAlternateID"
-                />
+                android:text="@string/alternateID"
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/newMember_btn"
                 style="@android:style/Widget.Button.Toggle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/alternateID_btn"
-                android:layout_below="@+id/alternateID_btn"
-                android:layout_marginTop="20dp"
+                android:layout_alignBaseline="@+id/alternateID_btn"
+                android:layout_alignBottom="@+id/alternateID_btn"
+                android:layout_toEndOf="@+id/imageView"
                 android:width="@android:dimen/thumbnail_width"
                 android:height="70dp"
-                android:text="@string/newMember"
-                android:textSize="18sp"
                 android:onClick="goToAddNewMember"
-                />
-
-            <Button
-                android:id="@+id/adminView_btn"
-                style="@android:style/Widget.Button.Toggle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/newMember_btn"
-                android:layout_below="@+id/newMember_btn"
-                android:layout_marginTop="20dp"
-                android:width="@android:dimen/thumbnail_width"
-                android:height="70dp"
-                android:text="@string/Admin"
+                android:text="@string/newMember"
                 android:textSize="18sp" />
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                app:srcCompat="@drawable/money"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="36dp"
+                app:srcCompat="@drawable/money" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="sans-serif"
+                android:text="Welcome To Sammy's Mini Mart!"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="@android:color/holo_green_light"
+                android:textSize="60sp"
+                android:textStyle="bold"
+                android:typeface="serif" />
 
         </RelativeLayout>
     </FrameLayout>
