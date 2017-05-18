@@ -3,6 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_notifications">Notifications</string>
     <string name="alternateID">Enter Alternate ID</string>
+    <string name="settings">Settings</string>
     <string name="newMember">New Rewards Member</string>
     <string name="Admin">Admin View</string>
     <string name="createMember">Become a Rewards Member</string>

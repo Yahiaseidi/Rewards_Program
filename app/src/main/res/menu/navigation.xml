@@ -13,9 +13,20 @@
         />
 
     <item
+        android:id="@+id/navigation_enter_phone"
+        android:icon="@drawable/ic_enter_phone"
+        android:title="@string/newMember"
+        />
+
+    <item
         android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/ic_admin"
         android:title="@string/Admin" />
+
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings" />
 
 
 </menu>
