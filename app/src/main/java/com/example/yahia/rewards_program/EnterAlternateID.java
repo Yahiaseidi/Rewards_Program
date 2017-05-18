@@ -27,6 +27,10 @@ public class EnterAlternateID extends AppCompatActivity {
                         Intent intent2 = new Intent(EnterAlternateID.this, MainActivity.class);
                         startActivity(intent2);
                         break;
+                    case R.id.navigation_notifications:
+                        Intent intent3 = new Intent(EnterAlternateID.this, AdminView.class);
+                        startActivity(intent3);
+                        break;
                 }
                 return false;
             }
