@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -13,9 +14,11 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
     public BottomNavigationView bottom;
-
     public void bottomNav() {
         bottom = (BottomNavigationView)findViewById(R.id.navigation);
+        Menu menu = bottom.getMenu();
+        MenuItem newMember = menu.findItem(R.id.navigation_dashboard);
+        newMember.setTitle("Add New Member");
         bottom.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -25,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent1);
                         break;
                     case R.id.navigation_dashboard:
-                        Intent intent2 = new Intent(MainActivity.this, MainActivity.class);
+                        Intent intent2 = new Intent(MainActivity.this, AddNewMember.class);
                         startActivity(intent2);
                         break;
                     case R.id.navigation_notifications:
