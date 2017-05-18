@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-public class AddNewMember extends AppCompatActivity {
+public class AddNewMember extends MainActivity {
 
     EditText newPhoneNumber;
 
@@ -13,7 +13,7 @@ public class AddNewMember extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_member);
-
+        bottomNav();
         newPhoneNumber = (EditText)findViewById(R.id.newPhoneNumber);
 
         newPhoneNumber.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -25,6 +25,6 @@ public class AddNewMember extends AppCompatActivity {
                 }
             }
         });
-
+        bottomNav();
     }
 }

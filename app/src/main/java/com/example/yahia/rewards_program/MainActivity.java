@@ -12,32 +12,37 @@ import android.content.Intent;
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+    public BottomNavigationView bottom;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    return true;
+    public void bottomNav() {
+        bottom = (BottomNavigationView)findViewById(R.id.navigation);
+        bottom.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.navigation_home:
+                        Intent intent1 = new Intent(MainActivity.this, MainActivity.class);
+                        startActivity(intent1);
+                        break;
+                    case R.id.navigation_dashboard:
+                        Intent intent2 = new Intent(MainActivity.this, MainActivity.class);
+                        startActivity(intent2);
+                        break;
+                    case R.id.navigation_notifications:
+                        Intent intent3 = new Intent(MainActivity.this, AdminView.class);
+                        startActivity(intent3);
+                        break;
+                }
+                return false;
             }
-            return false;
-        }
-
-    };
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        bottomNav();
     }
 
     //Takes user into the Enter Alternate ID view

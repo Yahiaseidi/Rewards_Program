@@ -7,11 +7,12 @@ import android.support.v7.app.AppCompatActivity;
  * Created by Yahia on 5/15/2017.
  */
 
-public class AdminView extends AppCompatActivity {
+public class AdminView extends MainActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_view);
+        bottomNav();
     }
 }
 
