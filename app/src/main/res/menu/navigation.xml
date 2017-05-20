@@ -15,7 +15,7 @@
     <item
         android:id="@+id/navigation_enter_phone"
         android:icon="@drawable/ic_enter_phone"
-        android:title="@string/newMember"
+        android:title="@string/usePhone"
         />
 
     <item

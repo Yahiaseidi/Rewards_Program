@@ -35,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent3 = new Intent(MainActivity.this, AdminView.class);
                         startActivity(intent3);
                         break;
+                    case R.id.navigation_enter_phone:
+                        Intent intent4 = new Intent(MainActivity.this, EnterAlternateID.class);
+                        startActivity(intent4);
+                        break;
                 }
                 return false;
             }
