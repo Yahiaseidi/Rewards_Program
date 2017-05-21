@@ -23,10 +23,6 @@
         android:icon="@drawable/ic_admin"
         android:title="@string/Admin" />
 
-    <item
-        android:id="@+id/navigation_settings"
-        android:icon="@drawable/ic_settings"
-        android:title="@string/settings" />
 
 
 </menu>

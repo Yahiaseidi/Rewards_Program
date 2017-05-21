@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
@@ -19,8 +20,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".EnterAlternateID" />
-        <activity android:name=".AddNewMember"></activity>
-        <activity android:name=".AdminView"></activity>
+        <activity android:name=".AddNewMember" />
+        <activity android:name=".AdminView" />
+        <activity android:name=".Settings"></activity>
     </application>
 
 </manifest>

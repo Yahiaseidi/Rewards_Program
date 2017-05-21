@@ -23,13 +23,16 @@
                 style="@android:style/Widget.Button.Toggle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textView3"
-                android:layout_marginTop="41dp"
-                android:layout_toEndOf="@+id/imageView"
+                android:layout_alignBottom="@+id/newMember_btn"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="93dp"
                 android:width="@android:dimen/thumbnail_width"
                 android:height="70dp"
+                android:background="#636363"
                 android:onClick="goToEnterAlternateID"
                 android:text="@string/alternateID"
+                android:textColor="@android:color/background_light"
+                android:textColorLink="#D4D4D4"
                 android:textSize="18sp" />
 
             <Button
@@ -37,49 +40,40 @@
                 style="@android:style/Widget.Button.Toggle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
                 android:layout_alignStart="@+id/alternateID_btn"
-                android:layout_alignTop="@+id/alternateID_btn"
-                android:layout_marginTop="85dp"
+                android:layout_marginBottom="78dp"
                 android:width="@android:dimen/thumbnail_width"
                 android:height="70dp"
+                android:background="#636363"
                 android:onClick="goToAddNewMember"
                 android:text="@string/newMember"
+                android:textColor="@android:color/background_light"
                 android:textSize="18sp" />
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
-                app:srcCompat="@drawable/money" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/imageView"
+                android:layout_above="@+id/alternateID_btn"
                 android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="20dp"
+                android:layout_marginBottom="40dp"
                 android:fontFamily="sans-serif"
                 android:text="@string/mainActivityWelcome"
                 android:textAllCaps="false"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:textColor="@android:color/holo_green_light"
+                android:textColor="@android:color/holo_red_dark"
                 android:textSize="36sp"
                 android:textStyle="bold"
                 android:typeface="serif" />
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/imageView"
                 android:layout_width="250dp"
                 android:layout_height="250dp"
-                android:layout_marginEnd="104dp"
-                app:srcCompat="@drawable/scanner"
-                android:layout_alignTop="@+id/alternateID_btn"
-                android:layout_toStartOf="@+id/imageView" />
+                app:srcCompat="@drawable/unnamed"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
 
 
         </RelativeLayout>
