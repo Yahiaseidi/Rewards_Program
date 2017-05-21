@@ -12,6 +12,6 @@
     <string name="hintFirstName">First Name</string>
     <string name="hintLastName">Last Name</string>
     <string name="hintPhoneNumber">Phone Number</string>
-    <string name="mainActivityWelcome">Scan your card!</string>
+    <string name="mainActivityWelcome">SCAN YOUR CARD</string>
     <string name="title_activity_settings">Settings</string>
 </resources>

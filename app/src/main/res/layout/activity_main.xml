@@ -55,15 +55,14 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/alternateID_btn"
+                android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="40dp"
-                android:fontFamily="sans-serif"
+                android:layout_marginTop="20dp"
                 android:text="@string/mainActivityWelcome"
                 android:textAllCaps="false"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 android:textColor="@android:color/holo_red_dark"
-                android:textSize="36sp"
+                android:textSize="48sp"
                 android:textStyle="bold"
                 android:typeface="serif" />
 
@@ -72,7 +71,7 @@
                 android:layout_width="250dp"
                 android:layout_height="250dp"
                 app:srcCompat="@drawable/unnamed"
-                android:layout_alignParentTop="true"
+                android:layout_below="@+id/textView3"
                 android:layout_centerHorizontal="true" />
 
 
