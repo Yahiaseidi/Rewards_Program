@@ -10,16 +10,25 @@ import android.view.View;
 import android.widget.TextView;
 import android.content.Intent;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
-    public BottomNavigationView bottom;
-    public void bottomNav() {
-        bottom = (BottomNavigationView)findViewById(R.id.navigation);
-        Menu menu = bottom.getMenu();
-        MenuItem newMember = menu.findItem(R.id.navigation_dashboard);
-        newMember.setTitle("Add New Member");
-        bottom.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        //Calls the helper function to stop basic android animation.
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
+
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(0);
+        menuItem.setChecked(true);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
@@ -31,25 +40,18 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent2 = new Intent(MainActivity.this, AddNewMember.class);
                         startActivity(intent2);
                         break;
-                    case R.id.navigation_notifications:
-                        Intent intent3 = new Intent(MainActivity.this, AdminView.class);
+                    case R.id.navigation_enter_phone:
+                        Intent intent3 = new Intent(MainActivity.this, EnterAlternateID.class);
                         startActivity(intent3);
                         break;
-                    case R.id.navigation_enter_phone:
-                        Intent intent4 = new Intent(MainActivity.this, EnterAlternateID.class);
+                    case R.id.navigation_notifications:
+                        Intent intent4 = new Intent(MainActivity.this, AdminView.class);
                         startActivity(intent4);
                         break;
                 }
                 return false;
             }
         });
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        bottomNav();
     }
 
     //Takes user into the Enter Alternate ID view

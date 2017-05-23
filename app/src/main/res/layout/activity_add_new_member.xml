@@ -18,52 +18,30 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/firstNameTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/lastNameTxt"
-                android:layout_alignStart="@+id/lastNameTxt"
-                android:layout_marginBottom="20dp"
-                android:ems="10"
-                android:hint="@string/hintFirstName"
-                android:inputType="textPersonName"
-                android:padding="15dp" />
-
-            <EditText
-                android:id="@+id/lastNameTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/newPhoneNumber"
-                android:layout_alignStart="@+id/newPhoneNumber"
-                android:layout_marginBottom="20dp"
-                android:ems="10"
-                android:hint="@string/hintLastName"
-                android:inputType="textPersonName"
-                android:padding="15dp" />
-
-            <EditText
                 android:id="@+id/newPhoneNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
                 android:ems="10"
                 android:hint="@string/hintPhoneNumber"
                 android:inputType="phone"
-                android:padding="15dp" />
+                android:padding="15dp"
+                android:layout_marginTop="33dp"
+                android:layout_below="@+id/enterID_txt"
+                android:layout_centerHorizontal="true" />
+
 
             <Button
                 android:id="@+id/createNewMember_btn"
                 style="@style/Widget.AppCompat.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                android:layout_below="@+id/newPhoneNumber"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="84dp"
+                android:layout_marginTop="29dp"
                 android:height="30dp"
                 android:elevation="0dp"
                 android:text="@string/createMember"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:layout_below="@+id/newPhoneNumber"
+                android:layout_centerHorizontal="true" />
 
             <TextView
                 android:id="@+id/newMemberTitle"
@@ -76,6 +54,17 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="24sp"
                 android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/enterID_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
+                android:ems="10"
+                android:hint="@string/scan_card"
+                android:inputType="number"
+                android:layout_below="@+id/newMemberTitle"
+                android:layout_alignStart="@+id/newPhoneNumber" />
         </RelativeLayout>
     </FrameLayout>
 
@@ -85,6 +74,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="?android:attr/windowBackground"
+        app:itemIconTint="@color/selected_item_color"
+        app:itemTextColor="@color/selected_item_color"
         app:menu="@menu/navigation" />
 
 </LinearLayout>

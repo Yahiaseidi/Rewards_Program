@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_black_24dp"
+        android:enabled="true"
         android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_dashboard"
         android:icon="@drawable/ic_person_add_black_24dp"
+        android:enabled="true"
         android:title="@string/newMember"
         />
 
     <item
         android:id="@+id/navigation_enter_phone"
         android:icon="@drawable/ic_enter_phone"
+        android:enabled="true"
         android:title="@string/usePhone"
         />
 
     <item
         android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_admin"
+        android:icon="@drawable/ic_android_admin"
+        android:enabled="true"
         android:title="@string/Admin" />
-
-
 
 </menu>
