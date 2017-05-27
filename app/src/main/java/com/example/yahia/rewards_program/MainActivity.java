@@ -9,7 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.content.Intent;
-
+import com.amazonaws.auth.CognitoCachingCredentialsProvider;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.dynamodbv2.*;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,9 +20,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         //Calls the helper function to stop basic android animation.
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
@@ -52,6 +55,29 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        //Start of what I added. Here is what makes a mapper and credintail objects.
+        Runnable runnable = new Runnable() {
+            public void run() {
+
+                CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
+                        getApplicationContext(),
+                        "us-east-1:58f4f084-a42c-48ee-beb1-b78e5058e168", // Identity Pool ID
+                        Regions.US_EAST_1 // Region
+                );
+
+                AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentialsProvider);
+                DynamoDBMapper mapper = new DynamoDBMapper(ddbClient);
+                //Here you make a new user object and either use my getters or setters to get info and change info as you want.
+                users user = new users();
+                user.setCard_id("34235234");
+                user.setPhone_number("7313455084");
+                user.setReward_points("44");
+                mapper.save(user);
+            }
+        };
+        new Thread(runnable).start();
+        //End of what I added.
     }
 
     //Takes user into the Enter Alternate ID view
@@ -66,4 +92,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(newActivity);
     }
 
+
+
+
+    private void database() {
+
+
+
+
+
+
+    }
 }

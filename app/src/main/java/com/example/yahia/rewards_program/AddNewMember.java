@@ -16,6 +16,12 @@ import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.util.Log;
+
+import com.amazonaws.auth.CognitoCachingCredentialsProvider;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
+
 import java.lang.reflect.Field;
 
 public class AddNewMember extends AppCompatActivity {
@@ -23,6 +29,7 @@ public class AddNewMember extends AppCompatActivity {
     EditText newPhoneNumber;
     EditText cardNumber;
     Button createNewMember_btn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,4 +104,7 @@ public class AddNewMember extends AppCompatActivity {
             }
         });
     }
+
+
+
 }
