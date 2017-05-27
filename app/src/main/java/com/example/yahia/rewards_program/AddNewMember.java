@@ -24,7 +24,7 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 
 import java.lang.reflect.Field;
 
-public class AddNewMember extends AppCompatActivity {
+public class AddNewMember extends AppCompatActivity implements View.OnClickListener {
 
     EditText newPhoneNumber;
     EditText cardNumber;
@@ -40,7 +40,7 @@ public class AddNewMember extends AppCompatActivity {
         newPhoneNumber = (EditText)findViewById(R.id.newPhoneNumber);
         createNewMember_btn = (Button)findViewById(R.id.createNewMember_btn);
         cardNumber = (EditText)findViewById(R.id.enterID_txt);
-
+        createNewMember_btn.setOnClickListener(AddNewMember.this);
         cardNumber.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus){
@@ -70,6 +70,8 @@ public class AddNewMember extends AppCompatActivity {
                 }
             }
         });
+
+
 
         //Calls the helper function to stop basic android animation.
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
@@ -105,6 +107,35 @@ public class AddNewMember extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onClick(View v) {
+        if (v == createNewMember_btn)
+        {
+            final String phone = newPhoneNumber.getText().toString();
+            final String card_id = cardNumber.getText().toString();
+            Runnable runnable = new Runnable() {
+                public void run() {
 
+                    CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
+                            getApplicationContext(),
+                            "us-east-1:58f4f084-a42c-48ee-beb1-b78e5058e168", // Identity Pool ID
+                            Regions.US_EAST_1 // Region
+                    );
+
+                    AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentialsProvider);
+                    DynamoDBMapper mapper = new DynamoDBMapper(ddbClient);
+                    //Here you make a new user object and either use my getters or setters to get info and change info as you want.
+                    users user = new users();
+                    user.setCard_id(card_id);
+                    user.setPhone_number(phone);
+                    user.setReward_points("0");
+                    mapper.save(user);
+                }
+            };
+            new Thread(runnable).start();
+
+        }
+
+    }
 
 }

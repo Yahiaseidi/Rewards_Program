@@ -92,15 +92,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(newActivity);
     }
 
-
-
-
-    private void database() {
-
-
-
-
-
-
-    }
 }
