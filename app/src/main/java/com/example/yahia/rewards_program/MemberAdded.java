@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class MemberAdded extends AppCompatActivity {
 
@@ -24,7 +25,7 @@ public class MemberAdded extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.navigation_home:
                         Intent intent1 = new Intent(MemberAdded.this, MainActivity.class);
                         startActivity(intent1);
@@ -45,5 +46,10 @@ public class MemberAdded extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public void goToHome(View view) {
+        Intent newActivity = new Intent(this, MainActivity.class);
+        startActivity(newActivity);
     }
 }

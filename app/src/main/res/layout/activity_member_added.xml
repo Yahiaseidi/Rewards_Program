@@ -27,6 +27,22 @@
                 android:textStyle="bold"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
+
+            <Button
+                android:id="@+id/backToHome_btn"
+                style="@android:style/Widget.Button.Toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:width="@android:dimen/thumbnail_width"
+                android:height="70dp"
+                android:background="#636363"
+                android:onClick="goToHome"
+                android:text="@string/homeButton"
+                android:textColor="@android:color/background_light"
+                android:textColorLink="#D4D4D4"
+                android:textSize="18sp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
         </RelativeLayout>
     </FrameLayout>
 
