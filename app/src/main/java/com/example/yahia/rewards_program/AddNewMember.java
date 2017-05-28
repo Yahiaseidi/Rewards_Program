@@ -133,9 +133,14 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
                 }
             };
             new Thread(runnable).start();
+            goToMemberAdded();
 
         }
 
+    }
+    public void goToMemberAdded() {
+        Intent newActivity = new Intent(this, MemberAdded.class);
+        startActivity(newActivity);
     }
 
 }

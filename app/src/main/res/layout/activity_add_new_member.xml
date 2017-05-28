@@ -35,13 +35,14 @@
                 style="@style/Widget.AppCompat.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
+                android:layout_below="@+id/newPhoneNumber"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="29dp"
                 android:height="30dp"
                 android:elevation="0dp"
+                android:onClick="goToMemberAdded"
                 android:text="@string/createMember"
-                android:textSize="18sp"
-                android:layout_below="@+id/newPhoneNumber"
-                android:layout_centerHorizontal="true" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/newMemberTitle"
