@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,9 +43,26 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
         createNewMember_btn = (Button)findViewById(R.id.createNewMember_btn);
         cardNumber = (EditText)findViewById(R.id.enterID_txt);
         createNewMember_btn.setOnClickListener(AddNewMember.this);
-        cardNumber.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+        //Makes sure the createNewMember button is not clicked before text is validated
+        newPhoneNumber.setError("Invalid Phone #");
+        cardNumber.setError("Required");
+        createNewMember_btn.setClickable(false);
+
+        //Validate Card ID
+        cardNumber.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus){
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //Do Nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Do nothing
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
                 if(cardNumber.getText().length() == 0 )
                 {
                     cardNumber.setError("Required");
@@ -56,22 +75,28 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        newPhoneNumber.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        //Validate Phone Number
+        newPhoneNumber.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus){
-                if(newPhoneNumber.getText().length() < 10 || newPhoneNumber.getText().length() > 10)
-                {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //Do Nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Do nothing
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (newPhoneNumber.getText().length() < 10 || newPhoneNumber.getText().length() > 10) {
                     newPhoneNumber.setError("Invalid Phone #");
                     createNewMember_btn.setClickable(false);
-                }
-                else
-                {
+                } else {
                     createNewMember_btn.setClickable(true);
                 }
             }
         });
-
-
 
         //Calls the helper function to stop basic android animation.
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
@@ -138,6 +163,7 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
     public void goToMemberAdded() {
         Intent newActivity = new Intent(this, MemberAdded.class);
         startActivity(newActivity);

@@ -1,12 +1,15 @@
 package com.example.yahia.rewards_program;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.content.Intent;
 import com.amazonaws.auth.CognitoCachingCredentialsProvider;
@@ -17,12 +20,32 @@ import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.*;
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+//    EditText barCode_editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Listens for a barcode being scanned
+//        barCode_editText = (EditText)findViewById(R.id.barCode_editText);
+//        barCode_editText.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+//
+//                if(keyEvent.getAction() == keyEvent.KEYCODE_ENTER)
+//                {
+//                    Intent intent10 = new Intent(MainActivity.this, MemberAccount.class);
+//                    startActivity(intent10);
+//                    return true;
+//                }
+//
+//                return false;
+//            }
+//        });
+
+
         //Calls the helper function to stop basic android animation.
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
@@ -80,15 +103,15 @@ public class MainActivity extends AppCompatActivity {
         //End of what I added.
     }
 
-    //Takes user into the Enter Alternate ID view
-    public void goToEnterAlternateID(View view) {
-        Intent newActivity = new Intent(this, EnterAlternateID.class);
-        startActivity(newActivity);
-    }
-
     //Takes user into the Add New Member view
     public void goToAddNewMember(View view) {
         Intent newActivity = new Intent(this, AddNewMember.class);
+        startActivity(newActivity);
+    }
+
+    //Takes user into the Enter Alternate ID view
+    public void goToEnterAlternateID(View view) {
+        Intent newActivity = new Intent(this, EnterAlternateID.class);
         startActivity(newActivity);
     }
 

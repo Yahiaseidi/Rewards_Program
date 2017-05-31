@@ -25,7 +25,8 @@
         <activity android:name=".AdminView" />
         <activity android:name=".Settings" />
         <activity android:name=".MemberAdded" />
-        <activity android:name=".Winnings"></activity>
+        <activity android:name=".Winnings" />
+        <activity android:name=".MemberAccount"></activity>
     </application>
 
 </manifest>

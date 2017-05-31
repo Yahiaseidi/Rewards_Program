@@ -18,12 +18,12 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/editText3"
+                android:id="@+id/phone_editText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="117dp"
+                android:layout_marginTop="115dp"
                 android:ems="10"
                 android:hint="Enter Phone Number"
                 android:inputType="phone"
@@ -32,14 +32,17 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/phoneSearch_btn"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/editText3"
-                android:layout_toEndOf="@+id/editText3"
-                android:text="Search"
+                android:layout_alignBaseline="@+id/phone_editText"
+                android:layout_alignBottom="@+id/phone_editText"
+                android:layout_toEndOf="@+id/phone_editText"
+                android:onClick="goToMemberAccount"
+                android:text="@string/search"
                 android:textSize="30sp" />
+
         </RelativeLayout>
     </FrameLayout>
 
