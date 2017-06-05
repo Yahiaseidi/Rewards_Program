@@ -32,4 +32,5 @@ dependencies {
     compile 'com.amazonaws:aws-android-sdk-ddb:2.2.+'
     compile 'com.amazonaws:aws-android-sdk-ddb-mapper:2.2.+'
     testCompile 'junit:junit:4.12'
+    compile project (':mysql-connector-java-5.1.42-bin')
 }
