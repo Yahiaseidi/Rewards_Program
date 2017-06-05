@@ -16,11 +16,17 @@ import com.amazonaws.auth.CognitoCachingCredentialsProvider;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.*;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.*;
+import com.mysql.jdbc.Connection;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
 //    EditText barCode_editText;
+
+    //Declaring connection variables
+    Connection con;
+    String un, pass, db, ip;
+    //End Declaring connection variables
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
+        //Declaring server ip, database, username, and password
+        ip = "rewards-program.database.windows.net";
+        db = "Rewards Program";
+        un = "sammy";
+        pass = "Testing1";
+        //Finished declaring server ip, database, username, and password
 
         //Calls the helper function to stop basic android animation.
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
