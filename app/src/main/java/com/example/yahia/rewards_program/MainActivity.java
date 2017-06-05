@@ -2,6 +2,7 @@ package com.example.yahia.rewards_program;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,11 @@ import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.*;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.*;
 import com.mysql.jdbc.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -125,6 +131,78 @@ public class MainActivity extends AppCompatActivity {
     public void goToEnterAlternateID(View view) {
         Intent newActivity = new Intent(this, EnterAlternateID.class);
         startActivity(newActivity);
+    }
+
+    //Ben added this code.  it's probably useless.
+    protected String doInBackground(String... params)
+    {
+        String z;
+        boolean isSuccess;
+        String phoneNo = ""; //TODO:  FIND A WAY TO PASS THIS THING A PHONE NUMBER, AND CHECK AGAINST IT!
+        //if(phoneNo.trim().equals(""))
+          //  z = "Please enter Username and Password";
+        //else
+        {
+            try
+            {
+                con = connectionclass(un, pass, db, ip);        // Connect to database
+                if (con == null)
+                {
+                    z = "Check Your Internet Access!";
+                }
+                else
+                {
+                    // Change below query according to your own database.
+                    String query = "select * from users where user_name= '" + phoneNo.toString() + "'";
+                    Statement stmt = con.createStatement();
+                    ResultSet rs = stmt.executeQuery(query);
+                    if(rs.next())
+                    {
+                        z = "Login successful";
+                        isSuccess=true;
+                        con.close();
+                    }
+                    else
+                    {
+                        z = "Invalid Credentials!";
+                        isSuccess = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                isSuccess = false;
+                z = ex.getMessage();
+            }
+        }
+        return z;
+    }
+
+    //Ben added this function. it's probably garbage.
+    public Connection connectionclass(String user, String password, String database, String server)
+    {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        Connection connection = null;
+        String ConnectionURL = null;
+        try{
+            Class.forName("net.sourceforge.jtds.jdbc.Driver");
+            ConnectionURL = "jdbc:jtds:sqlserver://" + server + database + ";user=" + user+ ";password=" + password + ";";
+            connection = (Connection) DriverManager.getConnection(ConnectionURL);
+        }
+        catch (SQLException se)
+        {
+            Log.e("error here 1 : ", se.getMessage());
+        }
+        catch (ClassNotFoundException e)
+        {
+            Log.e("error here 2 : ", e.getMessage());
+        }
+        catch (Exception e)
+        {
+            Log.e("error here 3 : ", e.getMessage());
+        }
+        return connection;
     }
 
 }
