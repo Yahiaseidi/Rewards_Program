@@ -1,43 +1,113 @@
 package com.example.yahia.rewards_program;
 
-import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.*;
-/**
- * Created by Leslie on 5/26/2017.
- */
-@DynamoDBTable(tableName = "users")
-public class users{
-    private String card_id;
-    private String phone_number;
-    private String reward_points;
 
-    @DynamoDBHashKey(attributeName = "card_id")
-    public String getCard_id() {
-        return card_id;
+public class Users {
+
+    /**
+     * Item numbers
+     */
+    @com.google.gson.annotations.SerializedName("numbers")
+    private String mNumbers;
+
+    /**
+     * Item Id
+     */
+    @com.google.gson.annotations.SerializedName("id")
+    private String mId;
+
+    /**
+     * Indicates if the item is pointsd
+     */
+    @com.google.gson.annotations.SerializedName("points")
+    private String mPoints;
+
+    @com.google.gson.annotations.SerializedName("card")
+    private String mCard;
+
+    /**
+     * Users constructor
+     */
+    public Users() {
+
     }
 
-    public void setCard_id(String card_id){
-        this.card_id = card_id;
+    @Override
+    public String toString() {
+        return getNumber();
     }
 
-    @DynamoDBRangeKey(attributeName = "phone_number")
-    public String getPhone_number() {
-        return phone_number;
+    /**
+     * Initializes a new Users
+     *
+     * @param numbers
+     *            The item numbers
+     * @param id
+     *            The item id
+     */
+    public Users(String numbers, String id) {
+        this.setNumber(numbers);
+        this.setId(id);
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    /**
+     * Returns the item numbers
+     */
+    public String getNumber() {
+        return mNumbers;
     }
 
-    @DynamoDBAttribute(attributeName = "reward_points")
-    public String getReward_points() {
-        return  reward_points;
+    /**
+     * Sets the item numbers
+     *
+     * @param numbers
+     *            numbers to set
+     */
+    public final void setNumber(String numbers) {
+        mNumbers = numbers;
     }
 
-    public void setReward_points(String reward_points) {
-        this.reward_points = reward_points;
+    public String getCard() {
+        return mCard;
     }
 
 
+    public final void setCard(String card) {
+        mCard = card;
+    }
+
+    /**
+     * Returns the item id
+     */
+    public String getId() {
+        return mId;
+    }
+
+    /**
+     * Sets the item id
+     *
+     * @param id
+     *            id to set
+     */
+    public final void setId(String id) {
+        mId = id;
+    }
+
+    /**
+     * Indicates if the item is marked as pointsd
+     */
+    public String getPoints() {
+        return mPoints;
+    }
+
+    /**
+     * Marks the item as pointsd or inpointsd
+     */
+    public void setPoints(String points) {
+        mPoints = points;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof Users && ((Users) o).mId == mId;
+    }
 }
-
-

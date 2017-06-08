@@ -1,10 +1,12 @@
 package com.example.yahia.rewards_program;
 
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,10 +18,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
+
 import java.net.MalformedURLException;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
+import com.microsoft.windowsazure.mobileservices.table.query.ExecutableQuery;
 
 public class AddNewMember extends AppCompatActivity implements View.OnClickListener{
 
@@ -46,6 +52,8 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
         newPhoneNumber.setError("Invalid Phone #");
         cardNumber.setError("Required");
         createNewMember_btn.setClickable(false);
+
+
 
         //Validate Card ID
         cardNumber.addTextChangedListener(new TextWatcher() {
@@ -154,11 +162,15 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
         if (v == createNewMember_btn)
         {
 
-            addItem();
-            goToMemberAdded();
-
-
+            try {
+                numExists(newPhoneNumber.getText().toString());
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
     public void goToMemberAdded() {
@@ -187,6 +199,13 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
             protected Void doInBackground(Void... params) {
                 try {
                     final Users entity = addItemInTable(item);
+                    List<Users> list = mUsersTable.where().field("numbers").eq("7315019862").execute().get();
+                    if(list.size() == 0) {
+                    }
+                    else {
+                        System.out.println("not");
+                    }
+                    //System.out.println(user.getNumber());
                 } catch (final Exception e) {
                     //createAndShowDialogFromTask(e, "Error");
                 }
@@ -197,10 +216,52 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
         runAsyncTask(task);
     }
 
+
     public Users addItemInTable(Users item) throws ExecutionException, InterruptedException {
         Users entity = mUsersTable.insert(item).get();
         return entity;
     }
+
+    public void numExists(final String s) throws ExecutionException, InterruptedException {
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    List<Users> list = mUsersTable.where().field("numbers").eq(s).execute().get();
+                    if(list.size() == 0) {
+                        addItem();
+                        goToMemberAdded();
+                    }
+                } catch (final Exception e) {
+                    //createAndShowDialogFromTask(e, "Error");
+                }
+
+                return null;
+            }
+        };
+
+
+        runAsyncTask(task);
+        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+
+        dlgAlert.setMessage("This phone number already exists!");
+        dlgAlert.setTitle("Error Message...");
+        dlgAlert.setPositiveButton("OK", null);
+        dlgAlert.setCancelable(true);
+        dlgAlert.create().show();
+
+        dlgAlert.setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+
+
+    }
+
+
 
     private AsyncTask<Void, Void, Void> runAsyncTask(AsyncTask<Void, Void, Void> task) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -209,5 +270,7 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
             return task.execute();
         }
     }
+
+
 
 }
