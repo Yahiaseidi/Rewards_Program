@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
@@ -26,6 +27,8 @@ import java.util.concurrent.ExecutionException;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.microsoft.windowsazure.mobileservices.table.query.ExecutableQuery;
+
+import javax.xml.transform.Result;
 
 public class AddNewMember extends AppCompatActivity implements View.OnClickListener{
 
@@ -223,45 +226,74 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
     }
 
     public void numExists(final String s) throws ExecutionException, InterruptedException {
-        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
+        AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>(){
+
+            //This method queries the database table to verify that the new member's phone number is not in the database.
             @Override
-            protected Void doInBackground(Void... params) {
+            protected String doInBackground(Void... voids) {
+
+                String result = "";
+
                 try {
                     List<Users> list = mUsersTable.where().field("numbers").eq(s).execute().get();
                     if(list.size() == 0) {
                         addItem();
-                        goToMemberAdded();
+                        result = "success";
+                    }
+                    else
+                    {
+                        result = "fail";
                     }
                 } catch (final Exception e) {
-                    //createAndShowDialogFromTask(e, "Error");
+                    //e.printStackTrace();
                 }
 
-                return null;
+                return result;
+            }
+
+            //After the query has been completed, this method runs and shows the messages corresponding with the results.
+            @Override
+            protected void onPostExecute(String result) {
+                if(result.equalsIgnoreCase("fail")){
+                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(AddNewMember.this);
+
+                    dlgAlert.setMessage("This phone number already exists!");
+                    dlgAlert.setTitle("Error Message...");
+                    dlgAlert.setPositiveButton("OK", null);
+                    dlgAlert.setCancelable(true);
+                    dlgAlert.create().show();
+
+                    dlgAlert.setPositiveButton("Ok",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+                }
+                else if(result.equalsIgnoreCase("success"))
+                {
+                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(AddNewMember.this);
+
+                    dlgAlert.setMessage("New member has been added!!");
+                    dlgAlert.setTitle("Success...");
+                    dlgAlert.setCancelable(true);
+                    dlgAlert.create().show();
+
+                    //Delays the running of method goToMemberAdded() by 3000 milliseconds
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            goToMemberAdded();
+                        }
+                    }, 3000);
+                }
             }
         };
 
-
-        runAsyncTask(task);
-        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
-
-        dlgAlert.setMessage("This phone number already exists!");
-        dlgAlert.setTitle("Error Message...");
-        dlgAlert.setPositiveButton("OK", null);
-        dlgAlert.setCancelable(true);
-        dlgAlert.create().show();
-
-        dlgAlert.setPositiveButton("Ok",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-
-
+        task.execute();
 
     }
-
-
 
     private AsyncTask<Void, Void, Void> runAsyncTask(AsyncTask<Void, Void, Void> task) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -270,7 +302,5 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
             return task.execute();
         }
     }
-
-
 
 }
