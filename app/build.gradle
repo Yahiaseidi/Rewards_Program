@@ -36,5 +36,4 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.5.0'
     testCompile 'junit:junit:4.12'
     compile files('libs/azure-mobile-android-3.3.0.jar')
-    compile files('libs/okhttp-3.8.0.jar')
 }
