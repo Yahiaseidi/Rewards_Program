@@ -38,8 +38,6 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
     private MobileServiceClient mClient;
     private MobileServiceTable<Users> mUsersTable;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +54,6 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
         cardNumber.setError("Required");
         createNewMember_btn.setClickable(false);
 
-
-
         //Validate Card ID
         cardNumber.addTextChangedListener(new TextWatcher() {
             @Override
@@ -70,6 +66,7 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
                 //Do nothing
             }
 
+            //Validates the length of the text box after each new entry.
             @Override
             public void afterTextChanged(Editable s) {
                 if(cardNumber.getText().length() == 0 )
@@ -96,6 +93,7 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
                 //Do nothing
             }
 
+            //Validates the length of the text box after every new entry.
             @Override
             public void afterTextChanged(Editable s) {
                 if (newPhoneNumber.getText().length() < 10 || newPhoneNumber.getText().length() > 10) {
@@ -150,15 +148,12 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
             newPhoneNumber = (EditText) findViewById(R.id.newPhoneNumber);
             cardNumber = (EditText) findViewById(R.id.enterID_txt);
 
-
         } catch (MalformedURLException e) {
             //  createAndShowDialog(new Exception("There was an error creating the Mobile Service. Verify the URL"), "Error");
         } catch (Exception e){
             //createAndShowDialog(e, "Error");
         }
-
     }
-
 
     @Override
     public void onClick(View v) {
@@ -173,7 +168,6 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
                 e.printStackTrace();
             }
         }
-
     }
 
     public void goToMemberAdded() {
@@ -251,13 +245,13 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
                 return result;
             }
 
-            //After the query has been completed, this method runs and shows the messages corresponding with the results.
+            //After the query has been completed, this method runs and shows the messages corresponding to the results.
             @Override
             protected void onPostExecute(String result) {
                 if(result.equalsIgnoreCase("fail")){
                     AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(AddNewMember.this);
 
-                    dlgAlert.setMessage("This phone number already exists!");
+                    dlgAlert.setMessage("There is an account linked to this phone number already!");
                     dlgAlert.setTitle("Error Message...");
                     dlgAlert.setPositiveButton("OK", null);
                     dlgAlert.setCancelable(true);
