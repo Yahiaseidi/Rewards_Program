@@ -196,13 +196,6 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
             protected Void doInBackground(Void... params) {
                 try {
                     final Users entity = addItemInTable(item);
-                    List<Users> list = mUsersTable.where().field("numbers").eq("7315019862").execute().get();
-                    if(list.size() == 0) {
-                    }
-                    else {
-                        System.out.println("not");
-                    }
-                    //System.out.println(user.getNumber());
                 } catch (final Exception e) {
                     //createAndShowDialogFromTask(e, "Error");
                 }

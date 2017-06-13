@@ -34,6 +34,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile 'com.andrognito.pinlockview:pinlockview:2.0.1'
     testCompile 'junit:junit:4.12'
     compile files('libs/azure-mobile-android-3.3.0.jar')
 }

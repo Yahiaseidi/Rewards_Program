@@ -5,6 +5,8 @@
     <color name="colorAccent">#d30000</color>
     <color name="background">#D4D4D4</color>
     <color name="background_material_light">#e3e3e3</color>
+    <color name="black">#000000</color>
+
 </resources>
 
 

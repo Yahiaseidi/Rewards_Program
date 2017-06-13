@@ -1,8 +1,13 @@
 package com.example.yahia.rewards_program;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,8 +19,16 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import java.net.MalformedURLException;
+import java.util.concurrent.ExecutionException;
+import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
+import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
+import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
+import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
+
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 public class EnterAlternateID extends AppCompatActivity implements View.OnClickListener {
@@ -23,6 +36,9 @@ public class EnterAlternateID extends AppCompatActivity implements View.OnClickL
     EditText phone_editText;
     TextView textView5;
     Button phoneSearch_btn;
+    private String number;
+    private MobileServiceClient mClient;
+    private MobileServiceTable<Users> mUsersTable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +49,7 @@ public class EnterAlternateID extends AppCompatActivity implements View.OnClickL
         phoneSearch_btn = (Button)findViewById(R.id.phoneSearch_btn);
         phone_editText = (EditText)findViewById(R.id.phone_editText);
         phoneSearch_btn.setOnClickListener(EnterAlternateID.this);
-
+        number = phone_editText.getText().toString();
         //Makes sure the button is not pressed before validation of text
         phone_editText.setError("Invalid Phone #");
         phoneSearch_btn.setClickable(false);
@@ -97,58 +113,82 @@ public class EnterAlternateID extends AppCompatActivity implements View.OnClickL
             }
         });
 
+        try {
+            mClient = new MobileServiceClient(
+                    "https://rewards-program.azurewebsites.net",
+                    this);
+
+
+            mUsersTable = mClient.getTable(Users.class);
+
+        } catch (MalformedURLException e) {
+            //  createAndShowDialog(new Exception("There was an error creating the Mobile Service. Verify the URL"), "Error");
+        } catch (Exception e){
+            //createAndShowDialog(e, "Error");
+        }
     }
 
     public void onClick(View view) {
         if (view == phoneSearch_btn)
         {
-//            Runnable runnable = new Runnable() {
-//                public void run() {
-//
-//                    CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
-//                            getApplicationContext(),
-//                            "us-east-1:58f4f084-a42c-48ee-beb1-b78e5058e168", // Identity Pool ID
-//                            Regions.US_EAST_1 // Region
-//                    );
-//
-//                    try {
-//                        AmazonDynamoDBClient ddbClient = new AmazonDynamoDBClient(credentialsProvider);
-//                        DynamoDBMapper mapper = new DynamoDBMapper(ddbClient);
-//
-//                        String phoneNumber = phone_editText.toString();
-//
-//                        users findUser = new users();
-//                        findUser.setPhone_number(phoneNumber);
-//
-//                        Condition rangeKeyCondition = new Condition()
-//                                .withComparisonOperator(ComparisonOperator.EQ);
-//
-//                        DynamoDBQueryExpression queryExpression = new DynamoDBQueryExpression()
-//                                .withHashKeyValues(findUser)
-//                                .withRangeKeyCondition("phone_number", rangeKeyCondition)
-//                                .withConsistentRead(false);
-//
-//                        PaginatedQueryList<users> result = mapper.query(users.class, queryExpression);
-//
-//                        String results = result.get(0).toString();
-//
-//                        Toast.makeText(getBaseContext(), "Your ID is " + results + "!", Toast.LENGTH_SHORT ).show();
-//                    }
-//                    catch (Exception e) {
-//                        System.err.println(e.getMessage());
-//                    }
-//
-//                }
-//            };
-//
-//            new Thread(runnable).start();
-            goToMemberAccount();
+            number = phone_editText.getText().toString();
+
+
+            try {
+                numExists(number);
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
     }
 
-    public void goToMemberAccount() {
-        Intent newActivity = new Intent(this, MemberAccount.class);
+    public void goToMemberAccount(String points) {
+        Intent newActivity = new Intent(getBaseContext(), MemberAccount.class);
+        newActivity.putExtra("EXTRA_SESSION_ID", points);
         startActivity(newActivity);
     }
+
+
+    public void numExists(final String s) throws ExecutionException, InterruptedException {
+        AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>(){
+            @Override
+            protected String doInBackground(Void... voids) {
+
+                String result = "";
+                try {
+                    List<Users> list = mUsersTable.where().field("numbers").eq(s).execute().get();
+                    if(list.size() == 0) {
+                        result = "";
+                    }
+                    else
+                    {
+                        Users user = list.get(0);
+                        goToMemberAccount(user.getPoints());
+                        result = "";
+                    }
+                } catch (final Exception e) {
+                    //e.printStackTrace();
+                }
+
+                return result;
+            }
+        };
+
+        task.execute();
+
+    }
+
+    private AsyncTask<Void, Void, Void> runAsyncTask(AsyncTask<Void, Void, Void> task) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            return task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        } else {
+            return task.execute();
+        }
+    }
+
 }
+
+
