@@ -133,7 +133,6 @@ public class EnterAlternateID extends AppCompatActivity implements View.OnClickL
         {
             number = phone_editText.getText().toString();
 
-
             try {
                 numExists(number);
             } catch (ExecutionException e) {
@@ -154,26 +153,50 @@ public class EnterAlternateID extends AppCompatActivity implements View.OnClickL
 
     public void numExists(final String s) throws ExecutionException, InterruptedException {
         AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>(){
+
+            //Runs a query to the database in the background.
             @Override
             protected String doInBackground(Void... voids) {
 
                 String result = "";
+
                 try {
                     List<Users> list = mUsersTable.where().field("numbers").eq(s).execute().get();
                     if(list.size() == 0) {
-                        result = "";
+                        result = "fail";
                     }
                     else
                     {
                         Users user = list.get(0);
                         goToMemberAccount(user.getPoints());
-                        result = "";
+                        result = "success";
                     }
                 } catch (final Exception e) {
                     //e.printStackTrace();
                 }
 
                 return result;
+            }
+
+            //After the query has been completed, this method runs and shows the messages corresponding to the results.
+            @Override
+            protected void onPostExecute(String result) {
+                if(result.equalsIgnoreCase("fail")){
+                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(EnterAlternateID.this);
+
+                    dlgAlert.setMessage("Oops there is no account linked to this phone number!");
+                    dlgAlert.setTitle("Error Message...");
+                    dlgAlert.setPositiveButton("OK", null);
+                    dlgAlert.setCancelable(true);
+                    dlgAlert.create().show();
+
+                    dlgAlert.setPositiveButton("Ok",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+                }
             }
         };
 
