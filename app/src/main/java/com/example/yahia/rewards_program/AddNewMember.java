@@ -159,7 +159,6 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if (v == createNewMember_btn)
         {
-
             try {
                 numExists(newPhoneNumber.getText().toString());
             } catch (ExecutionException e) {
@@ -224,7 +223,6 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
                 try {
                     List<Users> list = mUsersTable.where().field("numbers").eq(s).execute().get();
                     if(list.size() == 0) {
-                        addItem();
                         result = "success";
                     }
                     else
@@ -245,6 +243,70 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
                     AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(AddNewMember.this);
 
                     dlgAlert.setMessage("There is an account linked to this phone number already!");
+                    dlgAlert.setTitle("Error Message...");
+                    dlgAlert.setPositiveButton("OK", null);
+                    dlgAlert.setCancelable(true);
+                    dlgAlert.create().show();
+
+                    dlgAlert.setPositiveButton("Ok",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+                }
+                else if(result.equalsIgnoreCase("success"))
+                {
+                    try {
+                        cardExists(cardNumber.getText().toString());
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+
+        task.execute();
+
+    }
+
+    //Checks the scanned ID Card Number to make sure it is not a duplicate card number already being used. 
+    public void cardExists (final String id) throws ExecutionException, InterruptedException {
+        AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>(){
+
+            //This method queries the database table to verify that the new member's phone number is not in the database.
+            @Override
+            protected String doInBackground(Void... voids) {
+
+                String result = "";
+
+                try {
+                    List<Users> list = mUsersTable.where().field("card").eq(id).execute().get();
+
+                    if(list.size() == 0) {
+                        addItem();
+                        result = "success";
+                    }
+                    else
+                    {
+                        result = "duplicate";
+                    }
+                } catch (final Exception e) {
+                    //e.printStackTrace();
+                }
+
+                return result;
+            }
+
+            //After the query has been completed, this method runs and shows the messages corresponding to the results.
+            @Override
+            protected void onPostExecute(String result) {
+                if(result.equalsIgnoreCase("duplicate")){
+                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(AddNewMember.this);
+
+                    dlgAlert.setMessage("Looks like this Card ID number is already linked to an account. Please use new card!");
                     dlgAlert.setTitle("Error Message...");
                     dlgAlert.setPositiveButton("OK", null);
                     dlgAlert.setCancelable(true);
