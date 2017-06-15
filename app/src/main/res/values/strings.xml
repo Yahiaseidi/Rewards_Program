@@ -22,5 +22,6 @@
     <string name="search">Search</string>
     <string name="memberAccount">Member Account</string>
     <string name="menu_refresh">Refresh</string>
+    <string name="enterOrder">Enter New Order Amount</string>
 
 </resources>
