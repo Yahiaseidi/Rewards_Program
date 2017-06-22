@@ -10,12 +10,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 
+import java.lang.reflect.Member;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -27,17 +29,22 @@ public class MemberAccount extends AppCompatActivity {
     private ProgressBar progressBar_points = null;
     TextView point_total;
     TextView points_needed;
+    Button enterOrder_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_account);
 
+        enterOrder_btn = (Button)findViewById(R.id.enterOrder_btn);
+
         progressBar_points = (ProgressBar)findViewById(R.id.progressBar_points);
-        String s = getIntent().getStringExtra("EXTRA_SESSION_ID");
+        Bundle extras = getIntent().getExtras();
+        String pointTotal = extras.getString("points");
+        String cardNumber = extras.getString("card");
 
         int maxPoints = 100;
-        int points = Integer.parseInt(s);
+        int points = Integer.parseInt(pointTotal);
         int pointsNeeded = maxPoints - points;
 
         point_total = (TextView)findViewById(R.id.point_total);
@@ -50,7 +57,25 @@ public class MemberAccount extends AppCompatActivity {
         progressBar_points.setMax(100);
         progressBar_points.setProgress(points);
 
+        setOnClick(enterOrder_btn, cardNumber);
+
     }
 
+    private void setOnClick(final Button btn, final String str){
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToEnterOrderAmount(str);
+            }
+        });
+    }
+
+    public void goToEnterOrderAmount(String card) {
+        Intent newActivity = new Intent(getBaseContext(), EnterOrderAmount.class);
+        Bundle extras = new Bundle();
+        extras.putString("card", card);
+        newActivity.putExtras(extras);
+        startActivity(newActivity);
+    }
 
 }

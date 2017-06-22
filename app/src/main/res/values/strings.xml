@@ -23,5 +23,7 @@
     <string name="memberAccount">Member Account</string>
     <string name="menu_refresh">Refresh</string>
     <string name="enterOrder">Enter New Order Amount</string>
+    <string name="Add_Points_btn">Confirm Total</string>
+    <string name="order_total_hint">Enter Order Amount</string>
 
 </resources>
