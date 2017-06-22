@@ -14,7 +14,7 @@ public class EnterOrderAmount extends AppCompatActivity {
         setContentView(R.layout.activity_enter_order_amount);
 
         Bundle extras = getIntent().getExtras();
-        String cardNumber = extras.getString("card");
+        String cardNumber = extras.getString("card"); //retrieves the variable passed from the previous activity and adds it to cardNumber
 
         textView5 = (TextView)findViewById(R.id.textView5);
         textView5.setText("Your card number is: " + cardNumber);

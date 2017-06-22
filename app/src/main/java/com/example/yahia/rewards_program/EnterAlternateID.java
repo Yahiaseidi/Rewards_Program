@@ -144,6 +144,7 @@ public class EnterAlternateID extends AppCompatActivity implements View.OnClickL
 
     }
 
+    //Passes the points and cardNumber of the user to MemberAccount
     public void goToMemberAccount(String points, String card) {
         Intent newActivity = new Intent(getBaseContext(), MemberAccount.class);
         Bundle extras = new Bundle();
@@ -154,6 +155,7 @@ public class EnterAlternateID extends AppCompatActivity implements View.OnClickL
     }
 
 
+    //Checks if the number entered is in the database
     public void numExists(final String s) throws ExecutionException, InterruptedException {
         AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>(){
 

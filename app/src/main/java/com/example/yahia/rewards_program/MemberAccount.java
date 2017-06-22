@@ -61,6 +61,7 @@ public class MemberAccount extends AppCompatActivity {
 
     }
 
+    //Allows the string variable cardNumber to be passed to the goToEnterOrderAmount method on button click
     private void setOnClick(final Button btn, final String str){
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +71,7 @@ public class MemberAccount extends AppCompatActivity {
         });
     }
 
+    //Takes a cardNumber and passes the value to EnterOrderAmount activity
     public void goToEnterOrderAmount(String card) {
         Intent newActivity = new Intent(getBaseContext(), EnterOrderAmount.class);
         Bundle extras = new Bundle();
