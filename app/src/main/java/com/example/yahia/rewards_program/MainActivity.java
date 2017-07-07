@@ -1,20 +1,29 @@
 package com.example.yahia.rewards_program;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.content.Intent;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
-//    EditText barCode_editText;
+    private Thread thread;
+    private Handler handler = new Handler();
+    EditText barCode_editText;
 
 
     @Override
@@ -24,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Listens for a barcode being scanned
-//        barCode_editText = (EditText)findViewById(R.id.barCode_editText);
+        barCode_editText = (EditText)findViewById(R.id.barCode_editText);
 //        barCode_editText.setOnKeyListener(new View.OnKeyListener() {
 //            @Override
 //            public boolean onKey(View view, int i, KeyEvent keyEvent) {
@@ -42,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Calls the helper function to stop basic android animation.
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        final BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
         Menu menu = bottomNavigationView.getMenu();
@@ -74,7 +83,37 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        handler = new Handler(){
 
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+            }
+
+        };
+
+
+
+        new Thread(new Runnable(){
+            public void run() {
+                while(true)
+                {
+                    try {
+                        String x = barCode_editText.getText().toString();
+                        if(x.length() > 0) {
+                           startActivityFromMainThread();
+                            break;
+                        }
+                            Thread.sleep(5000);
+                        handler.sendEmptyMessage(0);
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        }).start();
     }
 
 
@@ -88,6 +127,18 @@ public class MainActivity extends AppCompatActivity {
     public void goToEnterAlternateID(View view) {
         Intent newActivity = new Intent(this, EnterAlternateID.class);
         startActivity(newActivity);
+    }
+
+    public void startActivityFromMainThread(){
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent (MainActivity.this, AddNewMember.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }
