@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.content.Intent;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         //Listens for a barcode being scanned
         barCode_editText = (EditText)findViewById(R.id.barCode_editText);
@@ -104,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                            startActivityFromMainThread();
                             break;
                         }
-                            Thread.sleep(5000);
+                            Thread.sleep(500);
                         handler.sendEmptyMessage(0);
 
                     } catch (InterruptedException e) {
