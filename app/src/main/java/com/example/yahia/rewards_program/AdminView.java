@@ -19,6 +19,11 @@ public class AdminView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_view);
 
+
+
+
+
+
         //Calls the helper function to stop basic android animation.
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
@@ -52,6 +57,7 @@ public class AdminView extends AppCompatActivity {
             }
         });
     }
+
 }
 
 
