@@ -58,6 +58,37 @@ public class MemberAccount extends AppCompatActivity {
         progressBar_points.setProgress(points);
 
         setOnClick(enterOrder_btn, cardNumber);
+        final BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
+
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(0);
+        menuItem.setChecked(true);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        Intent intent1 = new Intent(MemberAccount.this, MainActivity.class);
+                        startActivity(intent1);
+                        break;
+                    case R.id.navigation_dashboard:
+                        Intent intent2 = new Intent(MemberAccount.this, AddNewMember.class);
+                        startActivity(intent2);
+                        break;
+                    case R.id.navigation_enter_phone:
+                        Intent intent3 = new Intent(MemberAccount.this, EnterAlternateID.class);
+                        startActivity(intent3);
+                        break;
+                    case R.id.navigation_notifications:
+                        Intent intent4 = new Intent(MemberAccount.this, AdminView.class);
+                        startActivity(intent4);
+                        break;
+                }
+                return false;
+            }
+        });
 
     }
 
