@@ -47,21 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Listens for a barcode being scanned
         barCode_editText = (EditText)findViewById(R.id.barCode_editText);
-//        barCode_editText.setOnKeyListener(new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-//
-//                if(keyEvent.getAction() == keyEvent.KEYCODE_ENTER)
-//                {
-//                    Intent intent10 = new Intent(MainActivity.this, MemberAccount.class);
-//                    startActivity(intent10);
-//                    return true;
-//                }
-//
-//                return false;
-//            }
-//        });
-
 
         //Calls the helper function to stop basic android animation.
         final BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
@@ -214,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
                 if(result.equalsIgnoreCase("fail")){
                     AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(MainActivity.this);
 
-                    dlgAlert.setMessage("Oops there is no account linked to this phone number!");
+                    dlgAlert.setMessage("There is no account linked to this card number. Add member if needed!");
                     dlgAlert.setTitle("Error Message...");
                     dlgAlert.setPositiveButton("OK", null);
                     dlgAlert.setCancelable(true);
