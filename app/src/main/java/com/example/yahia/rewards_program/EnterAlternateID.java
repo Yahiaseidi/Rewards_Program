@@ -145,9 +145,10 @@ public class EnterAlternateID extends AppCompatActivity implements View.OnClickL
     }
 
     //Passes the points and cardNumber of the user to MemberAccount
-    public void goToMemberAccount(String points, String card) {
+    public void goToMemberAccount(String points, String card, String number) {
         Intent newActivity = new Intent(getBaseContext(), MemberAccount.class);
         Bundle extras = new Bundle();
+        extras.putString("number", number);
         extras.putString("points", points);
         extras.putString("card", card);
         newActivity.putExtras(extras);
@@ -173,7 +174,7 @@ public class EnterAlternateID extends AppCompatActivity implements View.OnClickL
                     else
                     {
                         Users user = list.get(0);
-                        goToMemberAccount(user.getPoints(), user.getCard());
+                        goToMemberAccount(user.getPoints(), user.getCard(), user.getNumber());
                         result = "success";
                     }
                 } catch (final Exception e) {

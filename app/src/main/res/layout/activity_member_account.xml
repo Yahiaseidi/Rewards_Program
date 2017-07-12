@@ -30,12 +30,24 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/phoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:text="text view"
+                android:textColor="@color/colorAccent"
+                android:textSize="50sp"
+                android:textStyle="bold" />
+
+            <TextView
                 android:id="@+id/points_needed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="false"
-                android:layout_marginTop="300dp"
+                android:layout_marginTop="350dp"
                 android:textColor="@color/colorAccent"
                 android:textSize="40sp" />
 
@@ -44,9 +56,9 @@
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textView"
+                android:layout_above="@+id/point_total"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="53dp"
+                android:layout_marginBottom="17dp"
                 android:indeterminate="false"
                 android:maxHeight="50dp"
                 android:maxWidth="700dp"
@@ -58,9 +70,8 @@
                 android:id="@+id/point_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/progressBar_points"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="17dp"
+                android:layout_centerVertical="true"
                 android:text="TextView"
                 android:textColor="@color/colorAccent"
                 android:textSize="30sp" />
@@ -70,17 +81,16 @@
                 style="@android:style/Widget.Button.Toggle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
                 android:layout_marginBottom="75dp"
                 android:width="@android:dimen/thumbnail_width"
                 android:height="70dp"
                 android:background="#636363"
+                android:onClick="goToEnterOrderAmount"
                 android:text="@string/enterOrder"
                 android:textColor="@android:color/background_light"
-                android:textSize="18sp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:onClick="goToEnterOrderAmount"
-                />
+                android:textSize="18sp" />
 
         </RelativeLayout>
     </FrameLayout>

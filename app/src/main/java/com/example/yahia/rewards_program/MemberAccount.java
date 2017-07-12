@@ -28,6 +28,7 @@ public class MemberAccount extends AppCompatActivity {
     private MobileServiceTable<Users> mUsersTable;
     private ProgressBar progressBar_points = null;
     TextView point_total;
+    TextView phone_number;
     TextView points_needed;
     Button enterOrder_btn;
 
@@ -42,16 +43,19 @@ public class MemberAccount extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String pointTotal = extras.getString("points");
         String cardNumber = extras.getString("card");
+        String phoneNumber = extras.getString("number");
 
         int maxPoints = 100;
         int points = Integer.parseInt(pointTotal);
         int pointsNeeded = maxPoints - points;
 
         point_total = (TextView)findViewById(R.id.point_total);
+        phone_number = (TextView)findViewById(R.id.phoneNumber);
         points_needed = (TextView)findViewById(R.id.points_needed);
 
         points_needed.setText("Points until next reward: " + pointsNeeded);
         point_total.setText(points + " points");
+        phone_number.setText(phoneNumber);
 
         progressBar_points.setVisibility(View.VISIBLE);
         progressBar_points.setMax(100);

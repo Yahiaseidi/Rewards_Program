@@ -169,10 +169,20 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void goToMemberAdded() {
-        Intent newActivity = new Intent(this, MemberAdded.class);
+
+    public void goToMemberAccount(String points, String card, String number) {
+        Intent newActivity = new Intent(getBaseContext(), MemberAccount.class);
+        Bundle extras = new Bundle();
+        extras.putString("number", number);
+        extras.putString("points", points);
+        extras.putString("card", card);
+        newActivity.putExtras(extras);
         startActivity(newActivity);
     }
+
+
+    //Checks if the number entered is in the database
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -281,6 +291,8 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
             protected String doInBackground(Void... voids) {
 
                 String result = "";
+                String card = "";
+                String number = "";
 
                 try {
                     List<Users> list = mUsersTable.where().field("card").eq(id).execute().get();
@@ -302,10 +314,9 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
 
             //After the query has been completed, this method runs and shows the messages corresponding to the results.
             @Override
-            protected void onPostExecute(String result) {
+            protected void onPostExecute(final String result) {
                 if(result.equalsIgnoreCase("duplicate")){
                     AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(AddNewMember.this);
-
                     dlgAlert.setMessage("Looks like this Card ID number is already linked to an account. Please use new card!");
                     dlgAlert.setTitle("Error Message...");
                     dlgAlert.setPositiveButton("OK", null);
@@ -333,9 +344,9 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            goToMemberAdded();
+                            goToMemberAccount("0", cardNumber.getText().toString(), newPhoneNumber.getText().toString());
                         }
-                    }, 3000);
+                    }, 2000);
                 }
             }
         };

@@ -157,9 +157,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void goToMemberAccount(String points, String card) {
+    public void goToMemberAccount(String points, String card, String number) {
         Intent newActivity = new Intent(getBaseContext(), MemberAccount.class);
         Bundle extras = new Bundle();
+        extras.putString("number", number);
         extras.putString("points", points);
         extras.putString("card", card);
         newActivity.putExtras(extras);
@@ -183,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
                     else
                     {
                         Users user = list.get(0);
-                        goToMemberAccount(user.getPoints(), user.getCard());
+                        goToMemberAccount(user.getPoints(), user.getCard(), user.getNumber());
                         result = "success";
                     }
                 } catch (final Exception e) {
