@@ -114,10 +114,10 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         String x = barCode_editText.getText().toString();
                         if(x.length() > 0) {
-                           startActivityFromMainThread(x);
-                           break;
+                            startActivityFromMainThread(x);
+                            break;
                         }
-                            Thread.sleep(500);
+                        Thread.sleep(500);
                         handler.sendEmptyMessage(0);
 
                     } catch (InterruptedException e) {
@@ -144,6 +144,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+        //Takes user into the Add New Member view
+        public void goToAddNewMember(View view) {
+            Intent newActivity = new Intent(this, AddNewMember.class);
+            startActivity(newActivity);
+        }
+        //Takes user into the Enter Alternate ID view
+        public void goToEnterAlternateID(View view) {
+            Intent newActivity = new Intent(this, EnterAlternateID.class);
+            startActivity(newActivity);
+        }
 
     public void startActivityFromMainThread(final String x){
 
@@ -152,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    cardExists(x);
+                    numExists(x);
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
@@ -171,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(newActivity);
     }
 
-    public void cardExists(final String s) throws ExecutionException, InterruptedException {
+    public void numExists(final String s) throws ExecutionException, InterruptedException {
         AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>(){
 
             //Runs a query to the database in the background.
@@ -204,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
                 if(result.equalsIgnoreCase("fail")){
                     AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(MainActivity.this);
 
-                    dlgAlert.setMessage("Oops there is no account linked to this card number!");
+                    dlgAlert.setMessage("Oops there is no account linked to this phone number!");
                     dlgAlert.setTitle("Error Message...");
                     dlgAlert.setPositiveButton("OK", null);
                     dlgAlert.setCancelable(true);
