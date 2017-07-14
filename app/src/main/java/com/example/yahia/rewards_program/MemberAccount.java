@@ -49,6 +49,11 @@ public class MemberAccount extends AppCompatActivity {
         int points = Integer.parseInt(pointTotal);
         int pointsNeeded = maxPoints - points;
 
+        if(pointsNeeded < 0)
+        {
+            pointsNeeded = 0;
+        }
+
         point_total = (TextView)findViewById(R.id.point_total);
         phone_number = (TextView)findViewById(R.id.phoneNumber);
         points_needed = (TextView)findViewById(R.id.points_needed);

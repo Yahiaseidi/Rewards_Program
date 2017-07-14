@@ -24,7 +24,6 @@ import java.util.concurrent.ExecutionException;
 
 public class EnterOrderAmount extends AppCompatActivity implements View.OnClickListener {
 
-    TextView textView5;
     EditText order_amount;
     Button addPoints;
     private MobileServiceClient mClient;
@@ -40,8 +39,6 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
         order_amount = (EditText) findViewById(R.id.orderAmount_txt);
         addPoints = (Button) findViewById(R.id.addPoints_btn);
         addPoints.setOnClickListener(EnterOrderAmount.this);
-        textView5 = (TextView) findViewById(R.id.textView5);
-        textView5.setText("Your card number is: " + cardNumber);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
@@ -95,7 +92,9 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
         final String cardNumber = extras.getString("card");
         AlertDialog.Builder dlgAlert = new AlertDialog.Builder(EnterOrderAmount.this);
 
-            dlgAlert.setMessage("Is this the correct amount?");
+        double orderTotal = Double.parseDouble(order_amount.getText().toString());
+
+            dlgAlert.setMessage("Is $" + orderTotal + " the correct order amount?");
             dlgAlert.setTitle("Confirmation...");
 
             dlgAlert.setPositiveButton("Yes",
@@ -130,7 +129,7 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
         runAsyncTask(task);
     }
 
-
+    //Updates the table with the correct amount of points.
     public void updateItemInTable(Users item) throws ExecutionException, InterruptedException {
         double currentPoints = Integer.parseInt(item.getPoints());
         double addedPoints = Double.parseDouble(order_amount.getText().toString());
