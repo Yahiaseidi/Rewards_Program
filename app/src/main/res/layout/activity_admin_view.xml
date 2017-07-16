@@ -29,18 +29,18 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/easy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="50dp"
                 android:ems="10"
                 android:inputType="number"
-                android:layout_alignBaseline="@+id/editText2"
-                android:layout_alignBottom="@+id/editText2"
-                android:layout_toStartOf="@+id/editText2" />
+                android:layout_alignBaseline="@+id/medium"
+                android:layout_alignBottom="@+id/medium"
+                android:layout_toStartOf="@+id/medium" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -50,12 +50,12 @@
                 android:layout_marginTop="100dp" />
 
             <EditText
-                android:id="@+id/editText3"
+                android:id="@+id/hard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/editText2"
+                android:layout_alignBottom="@+id/medium"
                 android:layout_marginStart="50dp"
-                android:layout_toEndOf="@+id/editText2"
+                android:layout_toEndOf="@+id/medium"
                 android:ems="10"
                 android:inputType="number" />
 
@@ -76,9 +76,9 @@
                 android:text="(Easy)"
                 android:textSize="25sp"
                 android:textStyle="italic"
-                android:layout_alignStart="@+id/editText"
+                android:layout_alignStart="@+id/easy"
                 android:layout_marginStart="72dp"
-                android:layout_below="@+id/editText" />
+                android:layout_below="@+id/easy" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -95,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/textView9"
-                android:layout_alignStart="@+id/editText3"
+                android:layout_alignStart="@+id/hard"
                 android:layout_marginStart="77dp"
                 android:text="(Hard)"
                 android:textSize="25sp"
@@ -112,7 +112,7 @@
                 android:textSize="40sp" />
 
             <EditText
-                android:id="@+id/editText4"
+                android:id="@+id/target"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView11"
@@ -129,21 +129,21 @@
                 android:textSize="25sp"
                 android:textStyle="italic"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/editText4" />
+                android:layout_below="@+id/target" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/update_btn"
                 style="@android:style/Widget.Button.Toggle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/target"
+                android:layout_alignStart="@+id/target"
                 android:layout_below="@+id/textView12"
                 android:layout_marginTop="28dp"
                 android:background="#636363"
                 android:text="Update"
                 android:textColor="@android:color/background_light"
-                android:textSize="25sp"
-                android:layout_alignEnd="@+id/editText4"
-                android:layout_alignStart="@+id/editText4" />
+                android:textSize="25sp" />
         </RelativeLayout>
     </FrameLayout>
 
