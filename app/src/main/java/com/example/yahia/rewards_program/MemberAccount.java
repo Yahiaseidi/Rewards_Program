@@ -1,10 +1,12 @@
 package com.example.yahia.rewards_program;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,12 +20,13 @@ import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 
 import java.lang.reflect.Member;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class MemberAccount extends AppCompatActivity {
+public class MemberAccount extends AppCompatActivity implements View.OnClickListener {
 
-
+    final int maxPoints = 100;
     private MobileServiceClient mClient;
     private MobileServiceTable<Users> mUsersTable;
     private ProgressBar progressBar_points = null;
@@ -31,6 +34,7 @@ public class MemberAccount extends AppCompatActivity {
     TextView phone_number;
     TextView points_needed;
     Button enterOrder_btn;
+    Button btn_reward_notification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,9 @@ public class MemberAccount extends AppCompatActivity {
         setContentView(R.layout.activity_member_account);
 
         enterOrder_btn = (Button)findViewById(R.id.enterOrder_btn);
+        enterOrder_btn.setOnClickListener(MemberAccount.this);
+        btn_reward_notification = (Button)findViewById(R.id.btn_reward_notification);
+        btn_reward_notification.setOnClickListener(MemberAccount.this);
 
         progressBar_points = (ProgressBar)findViewById(R.id.progressBar_points);
         Bundle extras = getIntent().getExtras();
@@ -45,13 +52,20 @@ public class MemberAccount extends AppCompatActivity {
         String cardNumber = extras.getString("card");
         String phoneNumber = extras.getString("number");
 
-        int maxPoints = 100;
         int points = Integer.parseInt(pointTotal);
         int pointsNeeded = maxPoints - points;
 
         if(pointsNeeded < 0)
         {
             pointsNeeded = 0;
+        }
+
+        //Checks the point total. Only after 100 points are available will the button be visible.
+        if(points > 100)
+        {
+            int numberOfRewards = (int)(Math.floor((points / 100)));
+            btn_reward_notification.setText("You currently have " + numberOfRewards + " rewards available. CLICK TO REDEEM ONE!");
+            btn_reward_notification.setVisibility(View.VISIBLE);
         }
 
         point_total = (TextView)findViewById(R.id.point_total);
@@ -66,7 +80,6 @@ public class MemberAccount extends AppCompatActivity {
         progressBar_points.setMax(100);
         progressBar_points.setProgress(points);
 
-        setOnClick(enterOrder_btn, cardNumber);
         final BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
@@ -99,16 +112,72 @@ public class MemberAccount extends AppCompatActivity {
             }
         });
 
+        try {
+            mClient = new MobileServiceClient(
+                    "https://rewards-program.azurewebsites.net",
+                    this);
+
+            mUsersTable = mClient.getTable(Users.class);
+
+        } catch (MalformedURLException e) {
+            //  createAndShowDialog(new Exception("There was an error creating the Mobile Service. Verify the URL"), "Error");
+        } catch (Exception e) {
+            //createAndShowDialog(e, "Error");
+        }
     }
 
-    //Allows the string variable cardNumber to be passed to the goToEnterOrderAmount method on button click
-    private void setOnClick(final Button btn, final String str){
-        btn.setOnClickListener(new View.OnClickListener() {
+    public void onClick(View view) {
+        Bundle extras = getIntent().getExtras();
+        final String cardNumber = extras.getString("card");
+
+        switch (view.getId()) {
+
+            case R.id.enterOrder_btn:
+                //Allows the string variable cardNumber to be passed to the goToEnterOrderAmount method on button click
+                goToEnterOrderAmount(cardNumber);
+                break;
+
+            case R.id.btn_reward_notification:
+                AlertDialog.Builder dlgAlert = new AlertDialog.Builder(MemberAccount.this);
+
+                dlgAlert.setMessage("Would you like to redeem one reward? 100 Points will be deducted from your account!");
+                dlgAlert.setTitle("Confirmation...");
+
+                dlgAlert.setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                updateItem(cardNumber);
+
+                            }
+                        });
+                dlgAlert.setNegativeButton("Cancel",null);
+                dlgAlert.create().show();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    public void updateItem(final String s) {
+        if (mClient == null) {
+            return;
+        }
+
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
             @Override
-            public void onClick(View v) {
-                goToEnterOrderAmount(str);
+            protected Void doInBackground(Void... params) {
+                try {
+                    List<Users> list = mUsersTable.where().field("card").eq(s).execute().get();
+                    updateItemInTable(list.get(0));
+                } catch (final Exception e) {
+                    //createAndShowDialogFromTask(e, "Error");
+                }
+                return null;
             }
-        });
+        };
+
+        runAsyncTask(task);
     }
 
     //Takes a cardNumber and passes the value to EnterOrderAmount activity
@@ -118,6 +187,30 @@ public class MemberAccount extends AppCompatActivity {
         extras.putString("card", card);
         newActivity.putExtras(extras);
         startActivity(newActivity);
+    }
+
+    //Updates the table with the correct amount of points after the redemption of a reward.
+    public void updateItemInTable(Users item) throws ExecutionException, InterruptedException {
+        double currentPoints = Integer.parseInt(item.getPoints());
+        int pointsAfterRedemption = (int)(currentPoints - maxPoints);
+        String newPointTotsl = Integer.toString(pointsAfterRedemption);
+        item.setPoints(newPointTotsl);
+        mUsersTable.update(item).get();
+        goToWinnings();
+    }
+
+    //Takes customer to redeem their points.
+    public void goToWinnings() {
+        Intent newActivity = new Intent(getBaseContext(), Winnings.class);
+        startActivity(newActivity);
+    }
+
+    private AsyncTask<Void, Void, Void> runAsyncTask(AsyncTask<Void, Void, Void> task) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            return task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        } else {
+            return task.execute();
+        }
     }
 
 }

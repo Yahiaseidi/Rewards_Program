@@ -27,7 +27,7 @@
         <activity android:name=".Settings" />
         <activity android:name=".Winnings" />
         <activity android:name=".MemberAccount" />
-        <activity android:name=".EnterOrderAmount"></activity>
+        <activity android:name=".EnterOrderAmount" />
     </application>
 
 </manifest>

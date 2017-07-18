@@ -81,16 +81,27 @@
                 style="@android:style/Widget.Button.Toggle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="75dp"
+                android:layout_marginBottom="36dp"
                 android:width="@android:dimen/thumbnail_width"
                 android:height="70dp"
                 android:background="#636363"
                 android:onClick="goToEnterOrderAmount"
                 android:text="@string/enterOrder"
                 android:textColor="@android:color/background_light"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+
+            <Button
+                android:id="@+id/btn_reward_notification"
+                style="@android:style/Widget.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/enterOrder_btn"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="38dp"
+                android:textSize="24sp"
+                android:visibility="invisible" />
 
         </RelativeLayout>
     </FrameLayout>
