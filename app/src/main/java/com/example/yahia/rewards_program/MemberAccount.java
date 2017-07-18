@@ -64,7 +64,7 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
         if(points > 100)
         {
             int numberOfRewards = (int)(Math.floor((points / 100)));
-            btn_reward_notification.setText("You currently have " + numberOfRewards + " rewards available. CLICK TO REDEEM ONE!");
+            btn_reward_notification.setText("You currently have " + numberOfRewards + " reward(s) available. CLICK TO REDEEM ONE!");
             btn_reward_notification.setVisibility(View.VISIBLE);
         }
 
