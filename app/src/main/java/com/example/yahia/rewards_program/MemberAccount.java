@@ -19,14 +19,13 @@ import android.widget.TextView;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 
-import java.lang.reflect.Member;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class MemberAccount extends AppCompatActivity implements View.OnClickListener {
 
-    final int maxPoints = 100;
+    final int rewardPointIncrement = 100;
     private MobileServiceClient mClient;
     private MobileServiceTable<Users> mUsersTable;
     private ProgressBar progressBar_points = null;
@@ -48,17 +47,12 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
 
         progressBar_points = (ProgressBar)findViewById(R.id.progressBar_points);
         Bundle extras = getIntent().getExtras();
-        String pointTotal = extras.getString("points");
-        String cardNumber = extras.getString("card");
-        String phoneNumber = extras.getString("number");
+        String pointTotal = extras.getString("points"); //Number of points in the customers account
+        String cardNumber = extras.getString("card"); //Customer's card number
+        String phoneNumber = extras.getString("number"); //Customer's phone number
 
         int points = Integer.parseInt(pointTotal);
-        int pointsNeeded = maxPoints - points;
-
-        if(pointsNeeded < 0)
-        {
-            pointsNeeded = 0;
-        }
+        int pointsNeeded = pointsNeededForReward(rewardPointIncrement, points);
 
         //Checks the point total. Only after 100 points are available will the button be visible.
         if(points > 100)
@@ -76,6 +70,7 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
         point_total.setText(points + " points");
         phone_number.setText(phoneNumber);
 
+        //Sets progress bar progress
         progressBar_points.setVisibility(View.VISIBLE);
         progressBar_points.setMax(100);
         progressBar_points.setProgress(points);
@@ -159,6 +154,7 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    //Retrieves the correct user from the datatable and calls the updateItemInTable method
     public void updateItem(final String s) {
         if (mClient == null) {
             return;
@@ -192,7 +188,7 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
     //Updates the table with the correct amount of points after the redemption of a reward.
     public void updateItemInTable(Users item) throws ExecutionException, InterruptedException {
         double currentPoints = Integer.parseInt(item.getPoints());
-        int pointsAfterRedemption = (int)(currentPoints - maxPoints);
+        int pointsAfterRedemption = (int)(currentPoints - rewardPointIncrement);
         String newPointTotsl = Integer.toString(pointsAfterRedemption);
         item.setPoints(newPointTotsl);
         mUsersTable.update(item).get();
@@ -203,6 +199,19 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
     public void goToWinnings() {
         Intent newActivity = new Intent(getBaseContext(), Winnings.class);
         startActivity(newActivity);
+    }
+
+    //Returns the number of points needed for customer to get another reward
+    public int pointsNeededForReward(int rewardIncrement, int customerPoints)
+    {
+        int pointsNeeded = rewardIncrement - customerPoints;
+
+        if(pointsNeeded < 0)
+        {
+            pointsNeeded = pointsNeeded + rewardIncrement;
+        }
+
+        return pointsNeeded;
     }
 
     private AsyncTask<Void, Void, Void> runAsyncTask(AsyncTask<Void, Void, Void> task) {

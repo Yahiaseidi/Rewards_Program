@@ -108,6 +108,7 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
 
     }
 
+    //Retrieves correct customer from data table
     public void updateItem(final String s) {
         if (mClient == null) {
             return;
