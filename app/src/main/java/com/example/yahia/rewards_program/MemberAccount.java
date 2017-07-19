@@ -208,7 +208,7 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
 
         if(pointsNeeded < 0)
         {
-            pointsNeeded = pointsNeeded + rewardIncrement;
+            pointsNeeded = rewardIncrement - (customerPoints % rewardIncrement);
         }
 
         return pointsNeeded;

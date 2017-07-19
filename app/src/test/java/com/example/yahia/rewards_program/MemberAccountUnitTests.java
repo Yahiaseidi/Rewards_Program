@@ -16,9 +16,9 @@ public class MemberAccountUnitTests extends MemberAccount {
     public void pointsNeededForRewardTest ()
     {
         int pointIncrement = 100;
-        int customerPoints = 186;
-        int expectedResult = 200 - 186;
+        int customerPoints = 1086;
+        int expectedResult = 14;
 
-        assertTrue("The points needed amount is not correct!", expectedResult == pointsNeededForReward(pointIncrement, customerPoints));
+        assertTrue("The points needed amount does not match the expected value!!", expectedResult == pointsNeededForReward(pointIncrement, customerPoints));
     }
 }
