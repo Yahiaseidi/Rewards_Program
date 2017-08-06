@@ -1,6 +1,7 @@
 package com.example.yahia.rewards_program;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -38,7 +39,7 @@ public class Winnings extends AppCompatActivity {
                         startActivity(intent3);
                         break;
                     case R.id.navigation_notifications:
-                        Intent intent4 = new Intent(Winnings.this, AdminView.class);
+                        Intent intent4 = new Intent(Winnings.this, PinView.class);
                         startActivity(intent4);
                         break;
                 }

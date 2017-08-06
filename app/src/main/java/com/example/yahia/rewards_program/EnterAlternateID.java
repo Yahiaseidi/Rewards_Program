@@ -70,7 +70,7 @@ public class EnterAlternateID extends AppCompatActivity implements View.OnClickL
             public void afterTextChanged(Editable s) {
                 if(phone_editText.getText().length() < 10 || phone_editText.getText().length() > 10)
                 {
-                    phone_editText.setError("Invalid Phone #");
+                    phone_editText.setError("Phone number must be 10 digits");
                     phoneSearch_btn.setClickable(false);
                 }
                 else
@@ -105,7 +105,7 @@ public class EnterAlternateID extends AppCompatActivity implements View.OnClickL
                         startActivity(intent3);
                         break;
                     case R.id.navigation_notifications:
-                        Intent intent4 = new Intent(EnterAlternateID.this, AdminView.class);
+                        Intent intent4 = new Intent(EnterAlternateID.this, PinView.class);
                         startActivity(intent4);
                         break;
                 }

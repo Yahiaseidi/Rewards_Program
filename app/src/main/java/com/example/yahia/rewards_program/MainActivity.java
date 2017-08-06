@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent3);
                         break;
                     case R.id.navigation_notifications:
-                        Intent intent4 = new Intent(MainActivity.this, AdminView.class);
+                        Intent intent4 = new Intent(MainActivity.this, PinView.class);
                         startActivity(intent4);
                         break;
                 }
@@ -89,8 +89,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         };
-
-
 
         new Thread(new Runnable(){
             public void run() {

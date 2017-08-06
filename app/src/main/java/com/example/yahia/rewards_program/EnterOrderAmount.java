@@ -64,7 +64,7 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
                         startActivity(intent3);
                         break;
                     case R.id.navigation_notifications:
-                        Intent intent4 = new Intent(EnterOrderAmount.this, AdminView.class);
+                        Intent intent4 = new Intent(EnterOrderAmount.this, PinView.class);
                         startActivity(intent4);
                         break;
                 }

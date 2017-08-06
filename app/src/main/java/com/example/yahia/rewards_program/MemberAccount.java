@@ -99,7 +99,7 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
                         startActivity(intent3);
                         break;
                     case R.id.navigation_notifications:
-                        Intent intent4 = new Intent(MemberAccount.this, AdminView.class);
+                        Intent intent4 = new Intent(MemberAccount.this, PinView.class);
                         startActivity(intent4);
                         break;
                 }

@@ -28,6 +28,9 @@
         <activity android:name=".Winnings" />
         <activity android:name=".MemberAccount" />
         <activity android:name=".EnterOrderAmount" />
+        <activity android:name=".PinView" />
+        <activity android:name=".AdminMain" />
+        <activity android:name=".ChangePassword"></activity>
     </application>
 
 </manifest>
