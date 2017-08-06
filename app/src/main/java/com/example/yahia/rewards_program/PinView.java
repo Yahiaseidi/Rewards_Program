@@ -15,7 +15,10 @@ import com.goodiebag.pinview.Pinview;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public class PinView extends AppCompatActivity {
@@ -70,7 +73,8 @@ public class PinView extends AppCompatActivity {
 
                 try {
                     List<Admin> list = mAdminTable.where().field("id").eq("97C70718-EA34-4ED3-87D2-EB274BD4B340").execute().get();
-                    if(list.get(0).getPassword().equals(enteredPass)) {
+                    String id = list.get(0).getId();
+                    if(list.get(0).getPassword().equals(getSecurePassword(enteredPass, id))) {
                         result = "success";
                     }
                     else
@@ -114,7 +118,26 @@ public class PinView extends AppCompatActivity {
         };
 
         task.execute();
+    }
 
+    public String getSecurePassword(String passwordToHash, String   salt){
+        String generatedPassword = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            md.update(salt.getBytes("UTF-8"));
+            byte[] bytes = md.digest(passwordToHash.getBytes("UTF-8"));
+            StringBuilder sb = new StringBuilder();
+            for(int i=0; i< bytes.length ;i++){
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            generatedPassword = sb.toString();
+        }
+        catch (NoSuchAlgorithmException e){
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return generatedPassword;
     }
 
 }

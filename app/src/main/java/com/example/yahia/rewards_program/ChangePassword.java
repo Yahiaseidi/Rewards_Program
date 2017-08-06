@@ -13,17 +13,15 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 
-import java.net.MalformedURLException;
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-
-import static com.example.yahia.rewards_program.R.id.newPhoneNumber;
 
 public class ChangePassword extends AppCompatActivity implements View.OnClickListener {
 
@@ -108,7 +106,7 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
                 String result = "";
 
                 try {
-                    List<Admin> list = mAdminTable.where().field("password").eq(pass).execute().get();
+                    List<Admin> list = mAdminTable.where().field("password").eq(getSecurePassword(pass, "97C70718-EA34-4ED3-87D2-EB274BD4B340")).execute().get();
                     if(list.size() == 0) {
                         result = "fail";
                     }
@@ -176,7 +174,7 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
     }
 
     public void updateItemInTable(Admin item) throws ExecutionException, InterruptedException {
-        item.setPassword(newPass.getText().toString());
+        item.setPassword(getSecurePassword(newPass.getText().toString(), item.getId()));
         mAdminTable.update(item).get();
     }
 
@@ -187,5 +185,25 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
         } else {
             return task.execute();
         }
+    }
+
+    public String getSecurePassword(String passwordToHash, String   salt){
+        String generatedPassword = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            md.update(salt.getBytes("UTF-8"));
+            byte[] bytes = md.digest(passwordToHash.getBytes("UTF-8"));
+            StringBuilder sb = new StringBuilder();
+            for(int i=0; i< bytes.length ;i++){
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            generatedPassword = sb.toString();
+        }
+        catch (NoSuchAlgorithmException e){
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return generatedPassword;
     }
 }
