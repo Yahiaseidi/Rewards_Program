@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.yahia.rewards_program.PinView">
+    tools:context="com.example.yahia.rewards_program.PinView"
+    android:background="@drawable/wallpaper2">
 
     <com.goodiebag.pinview.Pinview
         android:id="@+id/pinView"

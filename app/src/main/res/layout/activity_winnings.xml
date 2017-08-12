@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.yahia.rewards_program.AdminView">
+    tools:context="com.example.yahia.rewards_program.AdminView"
+    android:background="@drawable/wallpaper2">
 
     <FrameLayout
         android:id="@+id/content"
@@ -32,7 +33,7 @@
                 android:id="@+id/imageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#e3e3e3"
+                android:background="@android:color/transparent"
                 android:elevation="0dp"
                 app:srcCompat="@drawable/potofgold"
                 android:layout_marginEnd="86dp"
@@ -46,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/imageButton"
                 android:layout_centerHorizontal="true"
-                android:background="#e3e3e3"
+                android:background="@android:color/transparent"
                 android:elevation="0dp"
                 app:srcCompat="@drawable/potofgold" />
 
@@ -57,7 +58,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignTop="@+id/imageButton2"
                 android:layout_marginEnd="116dp"
-                android:background="#e3e3e3"
+                android:background="@android:color/transparent"
                 android:elevation="0dp"
                 app:srcCompat="@drawable/potofgold" />
 
@@ -91,7 +92,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="?android:attr/windowBackground"
+        android:background="@android:color/transparent"
         app:itemIconTint="@color/selected_item_color"
         app:itemTextColor="@color/selected_item_color"
         app:menu="@menu/navigation" />

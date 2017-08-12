@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.yahia.rewards_program.MainActivity">
+    tools:context="com.example.yahia.rewards_program.MainActivity"
+    android:background="@drawable/wallpaper2">
 
     <FrameLayout
         android:id="@+id/content"
@@ -96,7 +97,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="?android:attr/windowBackground"
+        android:background="@android:color/transparent"
         app:itemIconTint="@color/selected_item_color"
         app:itemTextColor="@color/selected_item_color"
         app:menu="@menu/navigation" />
