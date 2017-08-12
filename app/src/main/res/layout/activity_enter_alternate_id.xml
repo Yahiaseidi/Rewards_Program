@@ -40,6 +40,7 @@
                 android:layout_alignBaseline="@+id/phone_editText"
                 android:layout_alignBottom="@+id/phone_editText"
                 android:layout_toEndOf="@+id/phone_editText"
+                android:background="@color/colorPrimary"
                 android:onClick="goToMemberAccount"
                 android:text="@string/search"
                 android:textSize="30sp" />

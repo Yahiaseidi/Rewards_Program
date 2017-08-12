@@ -40,10 +40,12 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="29dp"
                 android:height="30dp"
+                android:background="@color/colorPrimary"
                 android:elevation="0dp"
                 android:onClick="goToMemberAdded"
                 android:text="@string/createMember"
-                android:textSize="18sp" />
+                android:textColor="@color/white"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/newMemberTitle"
