@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.yahia.rewards_program.EnterAlternateID"
-    android:background="@drawable/wallpaper2">
+    android:background="@drawable/wallpaper1">
 
     <FrameLayout
         android:id="@+id/content"
@@ -34,8 +34,8 @@
 
             <Button
                 android:id="@+id/phoneSearch_btn"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="wrap_content"
+                style="@android:style/Widget.Button.Toggle"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/phone_editText"
                 android:layout_alignBottom="@+id/phone_editText"
@@ -43,6 +43,7 @@
                 android:background="@color/colorPrimary"
                 android:onClick="goToMemberAccount"
                 android:text="@string/search"
+                android:textColor="@color/white"
                 android:textSize="30sp" />
 
         </RelativeLayout>

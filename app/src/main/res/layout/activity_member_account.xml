@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.yahia.rewards_program.MemberAccount"
     android:orientation="vertical"
-    android:background="@drawable/wallpaper2">
+    android:background="@drawable/wallpaper1">
 
     <FrameLayout
         android:id="@+id/content"

@@ -44,8 +44,8 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
         Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem = menu.getItem(1);
-        menuItem.setChecked(true);
+        MenuItem menuItem = menu.getItem(0);
+        menuItem.setChecked(false);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

@@ -5,6 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.yahia.rewards_program.Settings"
-    android:background="@drawable/wallpaper2">
+    android:background="@drawable/wallpaper1">
 
 </android.support.constraint.ConstraintLayout>

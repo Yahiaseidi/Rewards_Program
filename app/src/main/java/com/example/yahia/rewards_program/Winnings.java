@@ -2,6 +2,7 @@ package com.example.yahia.rewards_program;
 
 import android.content.Intent;
 import android.content.pm.PackageInfo;
+import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +21,7 @@ public class Winnings extends AppCompatActivity {
 
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(0);
-        menuItem.setChecked(true);
+        menuItem.setChecked(false);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -46,5 +47,8 @@ public class Winnings extends AppCompatActivity {
                 return false;
             }
         });
+
+        MediaPlayer ring= MediaPlayer.create(Winnings.this,R.raw.winning);
+        ring.start();
     }
 }

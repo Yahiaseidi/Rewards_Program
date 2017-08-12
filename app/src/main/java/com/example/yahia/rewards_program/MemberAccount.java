@@ -80,7 +80,7 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
 
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(0);
-        menuItem.setChecked(true);
+        menuItem.setChecked(false);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

@@ -1,26 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.yahia.rewards_program.PinView"
-    android:background="@drawable/wallpaper2">
+    android:background="@drawable/wallpaper1">
 
-    <com.goodiebag.pinview.Pinview
-        android:id="@+id/pinView"
-        android:layout_width="784dp"
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.goodiebag.pinview.Pinview
+                android:id="@+id/pinView"
+                android:layout_width="784dp"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteY="158dp"
+                tools:layout_editor_absoluteX="8dp"
+                android:layout_marginTop="137dp"
+                app:pinWidth="80dp"
+                app:pinHeight="80dp"
+                app:inputType="number"
+                app:cursorVisible="true"
+                app:password="true"
+                app:forceKeyboard="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+    </FrameLayout>
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteY="158dp"
-        tools:layout_editor_absoluteX="8dp"
-        android:layout_marginTop="137dp"
-        app:pinWidth="80dp"
-        app:pinHeight="80dp"
-        app:inputType="number"
-        app:cursorVisible="true"
-        app:password="true"
-        app:forceKeyboard="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-</RelativeLayout>
+        android:layout_gravity="bottom"
+        android:background="@android:color/transparent"
+        app:itemIconTint="@color/selected_item_color"
+        app:itemTextColor="@color/selected_item_color"
+        app:menu="@menu/navigation" />
+</LinearLayout>
