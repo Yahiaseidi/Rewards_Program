@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private Handler handler = new Handler();
     EditText barCode_editText;
     private MobileServiceClient mClient;
+    private MobileServiceTable<Rewards> mRewardsTable;
     private MobileServiceTable<Users> mUsersTable;
 
     @Override
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             mUsersTable = mClient.getTable(Users.class);
-
+            mRewardsTable = mClient.getTable(Rewards.class);
         } catch (MalformedURLException e) {
             //  createAndShowDialog(new Exception("There was an error creating the Mobile Service. Verify the URL"), "Error");
         } catch (Exception e){
@@ -156,12 +157,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void goToMemberAccount(String points, String card, String number) {
+    public void goToMemberAccount(String points, String card, String number, int win) {
         Intent newActivity = new Intent(getBaseContext(), MemberAccount.class);
         Bundle extras = new Bundle();
         extras.putString("number", number);
         extras.putString("points", points);
         extras.putString("card", card);
+        extras.putInt("winningTotal", win);
         newActivity.putExtras(extras);
         startActivity(newActivity);
     }
@@ -177,13 +179,16 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
                     List<Users> list = mUsersTable.where().field("card").eq(s).execute().get();
+                    List<Rewards> reward = mRewardsTable.where().field("id").eq("7EE175A6-E1C5-417A-9746-8F838C1BA620").execute().get();
+                    String x = reward.get(0).getTotalWinnings();
+                    int win = Integer.parseInt(x);
                     if(list.size() == 0) {
                         result = "fail";
                     }
                     else
                     {
                         Users user = list.get(0);
-                        goToMemberAccount(user.getPoints(), user.getCard(), user.getNumber());
+                        goToMemberAccount(user.getPoints(), user.getCard(), user.getNumber(), win);
                         result = "success";
                     }
                 } catch (final Exception e) {

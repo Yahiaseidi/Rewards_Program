@@ -23,9 +23,10 @@ import java.net.MalformedURLException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import static android.R.id.list;
+
 public class MemberAccount extends AppCompatActivity implements View.OnClickListener {
 
-    final int rewardPointIncrement = 100;
     private MobileServiceClient mClient;
     private MobileServiceTable<Users> mUsersTable;
     private ProgressBar progressBar_points = null;
@@ -34,6 +35,7 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
     TextView points_needed;
     Button enterOrder_btn;
     Button btn_reward_notification;
+    private int winningTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,20 +46,20 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
         enterOrder_btn.setOnClickListener(MemberAccount.this);
         btn_reward_notification = (Button)findViewById(R.id.btn_reward_notification);
         btn_reward_notification.setOnClickListener(MemberAccount.this);
-
+        //winningTotal = 100;
         progressBar_points = (ProgressBar)findViewById(R.id.progressBar_points);
         Bundle extras = getIntent().getExtras();
         String pointTotal = extras.getString("points"); //Number of points in the customers account
         String cardNumber = extras.getString("card"); //Customer's card number
         String phoneNumber = extras.getString("number"); //Customer's phone number
-
+        winningTotal = extras.getInt("winningTotal");
+        System.out.println(winningTotal);
         int points = Integer.parseInt(pointTotal);
-        int pointsNeeded = pointsNeededForReward(rewardPointIncrement, points);
-
+        int pointsNeeded = pointsNeededForReward(winningTotal, points);
         //Checks the point total. Only after 100 points are available will the button be visible.
-        if(points > 100)
+        if(points > winningTotal)
         {
-            int numberOfRewards = (int)(Math.floor((points / 100)));
+            int numberOfRewards = (int)(Math.floor((points / winningTotal)));
             btn_reward_notification.setText("You currently have " + numberOfRewards + " reward(s) available. CLICK TO REDEEM ONE!");
             btn_reward_notification.setVisibility(View.VISIBLE);
         }
@@ -72,7 +74,7 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
 
         //Sets progress bar progress
         progressBar_points.setVisibility(View.VISIBLE);
-        progressBar_points.setMax(100);
+        progressBar_points.setMax(winningTotal);
         progressBar_points.setProgress(points);
 
         final BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
@@ -80,7 +82,7 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
 
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(0);
-        menuItem.setChecked(false);
+        menuItem.setChecked(true);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -113,7 +115,6 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
                     this);
 
             mUsersTable = mClient.getTable(Users.class);
-
         } catch (MalformedURLException e) {
             //  createAndShowDialog(new Exception("There was an error creating the Mobile Service. Verify the URL"), "Error");
         } catch (Exception e) {
@@ -176,6 +177,7 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
         runAsyncTask(task);
     }
 
+
     //Takes a cardNumber and passes the value to EnterOrderAmount activity
     public void goToEnterOrderAmount(String card) {
         Intent newActivity = new Intent(getBaseContext(), EnterOrderAmount.class);
@@ -188,7 +190,7 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
     //Updates the table with the correct amount of points after the redemption of a reward.
     public void updateItemInTable(Users item) throws ExecutionException, InterruptedException {
         double currentPoints = Integer.parseInt(item.getPoints());
-        int pointsAfterRedemption = (int)(currentPoints - rewardPointIncrement);
+        int pointsAfterRedemption = (int)(currentPoints - winningTotal);
         String newPointTotsl = Integer.toString(pointsAfterRedemption);
         item.setPoints(newPointTotsl);
         mUsersTable.update(item).get();

@@ -37,6 +37,7 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
     private Button createNewMember_btn;
     private MobileServiceClient mClient;
     private MobileServiceTable<Users> mUsersTable;
+    private MobileServiceTable<Rewards> mRewardsTable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,6 +146,7 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
 
 
             mUsersTable = mClient.getTable(Users.class);
+            mRewardsTable = mClient.getTable(Rewards.class);
             newPhoneNumber = (EditText) findViewById(R.id.newPhoneNumber);
             cardNumber = (EditText) findViewById(R.id.enterID_txt);
 
@@ -170,12 +172,13 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public void goToMemberAccount(String points, String card, String number) {
+    public void goToMemberAccount(String points, String card, String number, int win) {
         Intent newActivity = new Intent(getBaseContext(), MemberAccount.class);
         Bundle extras = new Bundle();
         extras.putString("number", number);
         extras.putString("points", points);
         extras.putString("card", card);
+        extras.putInt("winningTotal", win);
         newActivity.putExtras(extras);
         startActivity(newActivity);
     }
@@ -296,10 +299,10 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
 
                 try {
                     List<Users> list = mUsersTable.where().field("card").eq(id).execute().get();
-
+                    List<Rewards> reward = mRewardsTable.where().field("id").eq("7EE175A6-E1C5-417A-9746-8F838C1BA620").execute().get();
                     if(list.size() == 0) {
                         addItem();
-                        result = "success";
+                        result = reward.get(0).getTotalWinnings() ;
                     }
                     else
                     {
@@ -330,7 +333,7 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
                                 }
                             });
                 }
-                else if(result.equalsIgnoreCase("success"))
+                else
                 {
                     AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(AddNewMember.this);
 
@@ -344,7 +347,7 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            goToMemberAccount("0", cardNumber.getText().toString(), newPhoneNumber.getText().toString());
+                            goToMemberAccount("0", cardNumber.getText().toString(), newPhoneNumber.getText().toString(), Integer.parseInt(result));
                         }
                     }, 2000);
                 }
