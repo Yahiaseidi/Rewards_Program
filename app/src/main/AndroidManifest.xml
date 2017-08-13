@@ -24,7 +24,6 @@
         <activity android:name=".EnterAlternateID" />
         <activity android:name=".AddNewMember" />
         <activity android:name=".AdminView" />
-        <activity android:name=".Settings" />
         <activity android:name=".Winnings" />
         <activity android:name=".MemberAccount" />
         <activity android:name=".EnterOrderAmount" />

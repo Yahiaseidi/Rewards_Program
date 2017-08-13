@@ -26,5 +26,11 @@
     <string name="Add_Points_btn">Confirm Total</string>
     <string name="order_total_hint">Enter Order Amount</string>
     <string name="SearchLabel">Search for Member Account</string>
+    <string name="updatePassword">Update Password</string>
+    <string name="changeRewardGoals">Change Reward Criteria</string>
+    <string name="adminMain">Admin Menu</string>
+    <string name="oldPassword">Enter Old Password</string>
+    <string name="newPassword">Enter New Password</string>
+    <string name="confirmPassword">Confirm Password</string>
 
 </resources>

@@ -24,13 +24,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/updatePoints"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="73dp"
+                android:layout_alignStart="@+id/updatePoints"
+                android:layout_marginBottom="40dp"
                 android:width="@android:dimen/thumbnail_width"
                 android:height="90dp"
-                android:background="#636363"
-                android:text="Update Password"
+                android:background="@color/colorPrimary"
                 android:onClick="goToChangePassword"
+                android:text="@string/updatePassword"
                 android:textColor="@android:color/background_light"
                 android:textSize="24sp" />
 
@@ -39,17 +39,30 @@
                 style="@android:style/Widget.Button.Toggle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
+                android:layout_marginBottom="201dp"
                 android:width="@android:dimen/thumbnail_width"
                 android:height="90dp"
-                android:background="#636363"
-                android:text="Update Points"
-                android:layout_centerVertical="true"
+                android:background="@color/colorPrimary"
                 android:onClick="goToAdminView"
+                android:text="@string/changeRewardGoals"
                 android:textColor="@android:color/background_light"
                 android:textSize="24sp"
                 tools:layout_editor_absoluteX="506dp"
-                tools:layout_editor_absoluteY="116dp"/>
+                tools:layout_editor_absoluteY="116dp" />
+
+            <TextView
+                android:id="@+id/adminMainTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="70dp"
+                android:text="@string/adminMain"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="44sp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
     </FrameLayout>

@@ -22,16 +22,15 @@
                 android:id="@+id/phone_editText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/SearchTxtView"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="41dp"
                 android:ems="10"
                 android:hint="Enter Phone Number"
                 android:inputType="phone"
                 android:textAlignment="center"
                 android:textColorLink="@color/colorPrimaryDark"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_below="@+id/SearchTxtView"
-                android:layout_centerHorizontal="true" />
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/phoneSearch_btn"

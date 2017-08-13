@@ -10,6 +10,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,6 +41,41 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
         String cardNumber = extras.getString("card"); //retrieves the variable passed from the previous activity and adds it to cardNumber
         order_amount = (EditText) findViewById(R.id.orderAmount_txt);
         addPoints = (Button) findViewById(R.id.addPoints_btn);
+
+        //**************
+
+        //Makes sure the button is not pressed before validation of text
+        order_amount.setError("Please enter a value");
+        addPoints.setClickable(false);
+
+        //Validation for enter order amount text box
+        order_amount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //Do Nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Do nothing
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(order_amount.getText().length() < 1)
+                {
+                    order_amount.setError("An order amount needs to be entered!");
+                    addPoints.setClickable(false);
+                }
+                else
+                {
+                    addPoints.setClickable(true);
+                }
+            }
+        });
+
+        //**************
+
         addPoints.setOnClickListener(EnterOrderAmount.this);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);

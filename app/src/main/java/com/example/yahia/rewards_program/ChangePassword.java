@@ -35,11 +35,13 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
     private String oldPassword;
     private String newPassword;
     private String secNewPassword;
-    private Button button;
+    private Button changePasswordBtn;
     private Thread thread;
     private Handler handler = new Handler();
     private MobileServiceClient mClient;
     private MobileServiceTable<Admin> mAdminTable;
+    private String tempOldPassword;
+    private String tempNewPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +50,103 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
         oldPass = (EditText)findViewById(R.id.oldPass);
         newPass = (EditText)findViewById(R.id.newPass);
         secNewPass = (EditText)findViewById(R.id.secNewPass);
-        button = (Button)findViewById(R.id.passwordButton);
-        button.setOnClickListener(ChangePassword.this);
-        button.setClickable(false);
+        changePasswordBtn = (Button)findViewById(R.id.changePasswordBtn);
+        changePasswordBtn.setOnClickListener(ChangePassword.this);
+
+        //**************
+
+        //Makes sure the button is not pressed before validation of text
+        oldPass.setError("Required");
+        newPass.setError("Required");
+        secNewPass.setError("Required");
+        changePasswordBtn.setClickable(false);
+
+        //Validation for passwords
+        oldPass.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //Do Nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Do nothing
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(oldPass.getText().length() < 4)
+                {
+                    oldPass.setError("Passwords are 4 digits!");
+                }
+                else
+                {
+                    tempOldPassword = oldPass.getText().toString();
+                    changePasswordBtn.setClickable(false);
+                }
+            }
+        });
+
+
+        newPass.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //Do Nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Do nothing
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if((newPass.getText().length() < 4) || newPass.getText().equals(tempOldPassword))
+                {
+                    newPass.setError("New & old passwords cannot be the same and the password must be 4 digits long!");
+                }
+                else
+                {
+                    tempNewPassword = newPass.getText().toString();
+                    changePasswordBtn.setClickable(false);
+                }
+            }
+        });
+
+        secNewPass.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //Do Nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Do nothing
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(!(secNewPass.getText().equals(tempNewPassword)))
+                {
+                    secNewPass.setError("Passwords do not match!");
+                    changePasswordBtn.setClickable(false);
+                }
+                else
+                {
+                    changePasswordBtn.setClickable(true);
+                }
+            }
+        });
+
+        //**************
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
         Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem = menu.getItem(3);
-        menuItem.setChecked(true);
+        MenuItem menuItem = menu.getItem(0);
+        menuItem.setEnabled(false);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -83,32 +172,6 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
                 return false;
             }
         });
-
-        newPass.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                //Do Nothing
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //Do nothing
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if(newPass.getText().length() < 4)
-                {
-                    newPass.setError("Pin must be 4 digits long");
-                    button.setClickable(false);
-                }
-                else
-                {
-                    button.setClickable(true);
-                }
-            }
-        });
-
 
         try {
             mClient = new MobileServiceClient(
