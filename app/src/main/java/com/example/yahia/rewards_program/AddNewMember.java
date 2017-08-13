@@ -43,6 +43,8 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_member);
+
+        //Hides keyboard until clicked on
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         newPhoneNumber = (EditText)findViewById(R.id.newPhoneNumber);

@@ -46,6 +46,8 @@ public class EnterAlternateID extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_alternate_id);
+
+        //Hides keyboard until clicked on
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         phoneSearch_btn = (Button)findViewById(R.id.phoneSearch_btn);

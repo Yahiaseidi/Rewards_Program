@@ -15,6 +15,7 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
@@ -47,6 +48,9 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
+        //Hides keyboard until clicked on
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         oldPass = (EditText)findViewById(R.id.oldPass);
         newPass = (EditText)findViewById(R.id.newPass);
         secNewPass = (EditText)findViewById(R.id.secNewPass);
