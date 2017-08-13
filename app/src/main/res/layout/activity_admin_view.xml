@@ -19,132 +19,100 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/adminViewTitleTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="39dp"
-                android:text="Admin"
-                android:textSize="50sp"
+                android:text="@string/adminViewTitle"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="44sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/easy"
+                android:id="@+id/easyTxtBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/mediumTxtBox"
+                android:layout_alignBottom="@+id/mediumTxtBox"
                 android:layout_marginEnd="50dp"
+                android:layout_toStartOf="@+id/mediumTxtBox"
                 android:ems="10"
+                android:hint="@string/easy"
                 android:inputType="number"
-                android:layout_alignBaseline="@+id/medium"
-                android:layout_alignBottom="@+id/medium"
-                android:layout_toStartOf="@+id/medium" />
+                android:textSize="24sp" />
 
             <EditText
-                android:id="@+id/medium"
+                android:id="@+id/mediumTxtBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="number"
-                android:layout_below="@+id/textView"
+                android:layout_below="@+id/winningAmountsTxt"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="100dp" />
+                android:layout_marginTop="25dp"
+                android:ems="10"
+                android:hint="@string/medium"
+                android:inputType="number"
+                android:textSize="24sp" />
 
             <EditText
-                android:id="@+id/hard"
+                android:id="@+id/hardTxtBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/medium"
+                android:layout_alignBottom="@+id/mediumTxtBox"
                 android:layout_marginStart="50dp"
-                android:layout_toEndOf="@+id/medium"
+                android:layout_toEndOf="@+id/mediumTxtBox"
                 android:ems="10"
-                android:inputType="number" />
+                android:hint="@string/hard"
+                android:inputType="number"
+                android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/winningAmountsTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textView"
+                android:layout_marginTop="13dp"
+                android:text="@string/updateWinningAmounts"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="40sp"
+                android:layout_below="@+id/adminViewTitleTxt"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/winningTargetTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="19dp"
-                android:text="Winning Amounts"
-                android:textSize="40sp" />
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="(Easy)"
-                android:textSize="25sp"
-                android:textStyle="italic"
-                android:layout_alignStart="@+id/easy"
-                android:layout_marginStart="72dp"
-                android:layout_below="@+id/easy" />
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/textView8"
-                android:layout_centerHorizontal="true"
-                android:text="(Medium)"
-                android:textSize="25sp"
-                android:textStyle="italic" />
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/textView9"
-                android:layout_alignStart="@+id/hard"
-                android:layout_marginStart="77dp"
-                android:text="(Hard)"
-                android:textSize="25sp"
-                android:textStyle="italic" />
-
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView9"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="49dp"
-                android:text="Winning Target"
+                android:layout_marginTop="250dp"
+                android:text="@string/updateWinningTarget"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="40sp" />
 
             <EditText
-                android:id="@+id/target"
+                android:id="@+id/winningTargetTxtBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textView11"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="14dp"
                 android:ems="10"
-                android:inputType="number" />
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="(Points)"
-                android:textSize="25sp"
-                android:textStyle="italic"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/target" />
+                android:hint="@string/winningTarget"
+                android:inputType="number"
+                android:textSize="24sp"
+                android:layout_below="@+id/winningTargetTxtView"
+                android:layout_toEndOf="@+id/easyTxtBox" />
 
             <Button
                 android:id="@+id/update_btn"
                 style="@android:style/Widget.Button.Toggle"
-                android:layout_width="wrap_content"
+                android:layout_width="200sp"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/target"
-                android:layout_alignStart="@+id/target"
-                android:layout_below="@+id/textView12"
-                android:layout_marginTop="28dp"
-                android:background="#636363"
-                android:text="Update"
-                android:textColor="@android:color/background_light"
-                android:textSize="25sp" />
+                android:layout_below="@+id/winningTargetTxtBox"
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="false"
+                android:layout_marginTop="21dp"
+                android:background="@color/colorPrimary"
+                android:text="@string/update"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
         </RelativeLayout>
     </FrameLayout>
 

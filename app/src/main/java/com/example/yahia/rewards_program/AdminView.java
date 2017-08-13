@@ -1,6 +1,5 @@
 package com.example.yahia.rewards_program;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -10,6 +9,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,11 +21,7 @@ import android.widget.EditText;
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.net.MalformedURLException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -52,10 +49,10 @@ public class AdminView extends AppCompatActivity implements View.OnClickListener
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         update_btn = (Button) findViewById(R.id.update_btn);
-        easy = (EditText) findViewById(R.id.easy);
-        medium = (EditText) findViewById(R.id.medium);
-        hard = (EditText) findViewById(R.id.hard);
-        target = (EditText) findViewById(R.id.target);
+        easy = (EditText) findViewById(R.id.easyTxtBox);
+        medium = (EditText) findViewById(R.id.mediumTxtBox);
+        hard = (EditText) findViewById(R.id.hardTxtBox);
+        target = (EditText) findViewById(R.id.winningTargetTxtBox);
         update_btn.setOnClickListener(AdminView.this);
         //Calls the helper function to stop basic android animation.
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
@@ -64,6 +61,116 @@ public class AdminView extends AppCompatActivity implements View.OnClickListener
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(3);
         menuItem.setChecked(true);
+
+        //******************VALIDATION****************
+
+        //Makes sure the createNewMember button is not clicked before text is validated
+        easy.setError("Required");
+        medium.setError("Required");
+        hard.setError("Required");
+        target.setError("Required");
+        update_btn.setEnabled(false);
+
+        //Validation
+        easy.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //Do Nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Do nothing
+            }
+
+            //Validates the length of the text box after each new entry.
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(easy.getText().length() == 0 )
+                {
+                    easy.setError("Required");
+                    update_btn.setClickable(false);
+                }else {
+                    update_btn.setClickable(true);
+                }
+            }
+        });
+
+        medium.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //Do Nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Do nothing
+            }
+
+            //Validates the length of the text box after each new entry.
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(medium.getText().length() == 0 )
+                {
+                    medium.setError("Required");
+                    update_btn.setClickable(false);
+                }else {
+                    update_btn.setClickable(true);
+                }
+            }
+        });
+
+        hard.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //Do Nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Do nothing
+            }
+
+            //Validates the length of the text box after each new entry.
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(hard.getText().length() == 0 )
+                {
+                    hard.setError("Required");
+                    update_btn.setClickable(false);
+                }else {
+                    update_btn.setClickable(true);
+                }
+            }
+        });
+
+        target.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //Do Nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //Do nothing
+            }
+
+            //Validates the length of the text box after every new entry.
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (target.getText().length() == 0) {
+                    target.setError("Required");
+                    update_btn.setClickable(false);
+                } else {
+                    update_btn.setEnabled(true);
+                }
+            }
+        });
+
+        //******************VALIDATION****************
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -140,7 +247,7 @@ public class AdminView extends AppCompatActivity implements View.OnClickListener
             protected void onPostExecute(String result) {
                 if (result.equalsIgnoreCase("success")) {
                     AlertDialog.Builder dlgAlert = new AlertDialog.Builder(AdminView.this);
-                    dlgAlert.setMessage("Winnging total and amounts have been successfully changed!");
+                    dlgAlert.setMessage("Winning target and winning amounts have been successfully changed!");
                     dlgAlert.setTitle("Success...");
                     dlgAlert.setCancelable(true);
                     dlgAlert.create().show();

@@ -46,13 +46,13 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
 
         //Makes sure the button is not pressed before validation of text
         order_amount.setError("Required");
-        addPoints.setClickable(false);
+        addPoints.setEnabled(false);
 
         //Validation for enter order amount text box
         order_amount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                //Do Nothing
+                //do nothing
             }
 
             @Override
@@ -65,11 +65,10 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
                 if(order_amount.getText().length() < 1)
                 {
                     order_amount.setError("An order amount needs to be entered!");
-                    addPoints.setClickable(false);
                 }
                 else
                 {
-                    addPoints.setClickable(true);
+                    addPoints.setEnabled(true);
                 }
             }
         });
