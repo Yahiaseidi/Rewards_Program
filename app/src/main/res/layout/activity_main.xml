@@ -60,12 +60,10 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:text="@string/mainActivityWelcome"
-                android:textAllCaps="false"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="48sp"
-                android:textStyle="bold"
-                android:typeface="serif" />
+                android:textSize="44sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/imageView"

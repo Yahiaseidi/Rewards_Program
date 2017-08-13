@@ -16,7 +16,7 @@
     <string name="hintFirstName">First Name</string>
     <string name="hintLastName">Last Name</string>
     <string name="hintPhoneNumber">Phone Number</string>
-    <string name="mainActivityWelcome">SCAN YOUR CARD</string>
+    <string name="mainActivityWelcome">Scan Your Card</string>
     <string name="title_activity_settings">Settings</string>
     <string name="scan_card">Scan Member Card</string>
     <string name="search">Search</string>
@@ -25,5 +25,6 @@
     <string name="enterOrder">Enter New Order Amount</string>
     <string name="Add_Points_btn">Confirm Total</string>
     <string name="order_total_hint">Enter Order Amount</string>
+    <string name="SearchLabel">Search for Member Account</string>
 
 </resources>

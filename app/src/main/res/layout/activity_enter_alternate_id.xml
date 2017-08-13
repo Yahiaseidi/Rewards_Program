@@ -22,15 +22,16 @@
                 android:id="@+id/phone_editText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="115dp"
+                android:layout_marginTop="41dp"
                 android:ems="10"
                 android:hint="Enter Phone Number"
                 android:inputType="phone"
                 android:textAlignment="center"
-                android:textSize="40sp"
-                android:textStyle="bold" />
+                android:textColorLink="@color/colorPrimaryDark"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/SearchTxtView"
+                android:layout_centerHorizontal="true" />
 
             <Button
                 android:id="@+id/phoneSearch_btn"
@@ -44,7 +45,20 @@
                 android:onClick="goToMemberAccount"
                 android:text="@string/search"
                 android:textColor="@color/white"
-                android:textSize="30sp" />
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/SearchTxtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="59dp"
+                android:text="@string/SearchLabel"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="44sp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
     </FrameLayout>
