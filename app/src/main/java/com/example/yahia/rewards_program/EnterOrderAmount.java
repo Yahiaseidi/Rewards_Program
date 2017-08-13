@@ -28,6 +28,7 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
     Button addPoints;
     private MobileServiceClient mClient;
     private MobileServiceTable<Users> mUsersTable;
+    private MobileServiceTable<Rewards> mRewardsTable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +79,7 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
                     this);
 
             mUsersTable = mClient.getTable(Users.class);
+            mRewardsTable = mClient.getTable(Rewards.class);
 
         } catch (MalformedURLException e) {
             //  createAndShowDialog(new Exception("There was an error creating the Mobile Service. Verify the URL"), "Error");
@@ -119,7 +121,8 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
             protected Void doInBackground(Void... params) {
                 try {
                     List<Users> list = mUsersTable.where().field("card").eq(s).execute().get();
-                    updateItemInTable(list.get(0));
+                    List<Rewards> reward = mRewardsTable.where().field("id").eq("7EE175A6-E1C5-417A-9746-8F838C1BA620").execute().get();
+                    updateItemInTable(list.get(0), reward.get(0));
                 } catch (final Exception e) {
                     //createAndShowDialogFromTask(e, "Error");
                 }
@@ -131,24 +134,25 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
     }
 
     //Updates the table with the correct amount of points.
-    public void updateItemInTable(Users item) throws ExecutionException, InterruptedException {
+    public void updateItemInTable(Users item, Rewards rewards) throws ExecutionException, InterruptedException {
         double currentPoints = Integer.parseInt(item.getPoints());
         double addedPoints = Double.parseDouble(order_amount.getText().toString());
         int total = (int) (addedPoints + currentPoints);
         String totalPoints = Integer.toString(total);
         item.setPoints(totalPoints);
         mUsersTable.update(item).get();
-        goToMemberAccount(item.getPoints(), item.getCard(), item.getNumber());
+        goToMemberAccount(item.getPoints(), item.getCard(), item.getNumber(), Integer.parseInt(rewards.getTotalWinnings()));
 }
 
 
     //Passes the points and cardNumber of the user to MemberAccount
-    public void goToMemberAccount(String points, String card, String number) {
+    public void goToMemberAccount(String points, String card, String number, int win) {
         Intent newActivity = new Intent(getBaseContext(), MemberAccount.class);
         Bundle extras = new Bundle();
         extras.putString("number", number);
         extras.putString("points", points);
         extras.putString("card", card);
+        extras.putInt("winningTotal", win);
         newActivity.putExtras(extras);
         startActivity(newActivity);
     }
