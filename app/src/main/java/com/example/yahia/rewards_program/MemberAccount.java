@@ -46,18 +46,22 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
         enterOrder_btn.setOnClickListener(MemberAccount.this);
         btn_reward_notification = (Button)findViewById(R.id.btn_reward_notification);
         btn_reward_notification.setOnClickListener(MemberAccount.this);
+
         //winningTotal = 100;
         progressBar_points = (ProgressBar)findViewById(R.id.progressBar_points);
         Bundle extras = getIntent().getExtras();
         String pointTotal = extras.getString("points"); //Number of points in the customers account
         String cardNumber = extras.getString("card"); //Customer's card number
         String phoneNumber = extras.getString("number"); //Customer's phone number
-        winningTotal = extras.getInt("winningTotal");
-        System.out.println(winningTotal);
+        winningTotal = extras.getInt("winningTotal"); //WINNING GOAL
+
+        //System.out.println(winningTotal);
+
         int points = Integer.parseInt(pointTotal);
         int pointsNeeded = pointsNeededForReward(winningTotal, points);
+
         //Checks the point total. Only after 100 points are available will the button be visible.
-        if(points > winningTotal)
+        if(points >= winningTotal)
         {
             int numberOfRewards = (int)(Math.floor((points / winningTotal)));
             btn_reward_notification.setText("You currently have " + numberOfRewards + " reward(s) available. CLICK TO REDEEM ONE!");
@@ -200,6 +204,9 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
     //Takes customer to redeem their points.
     public void goToWinnings() {
         Intent newActivity = new Intent(getBaseContext(), Winnings.class);
+
+        //Stops users from coming back to the same account information after redeeming their reward
+        finish();
         startActivity(newActivity);
     }
 

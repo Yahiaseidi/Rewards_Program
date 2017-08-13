@@ -45,7 +45,7 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
         //**************
 
         //Makes sure the button is not pressed before validation of text
-        order_amount.setError("Please enter a value");
+        order_amount.setError("Required");
         addPoints.setClickable(false);
 
         //Validation for enter order amount text box
