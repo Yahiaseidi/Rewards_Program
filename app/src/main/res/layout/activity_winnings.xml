@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.yahia.rewards_program.AdminView"
+    tools:context="com.example.yahia.rewards_program.Winnings"
     android:background="@drawable/wallpaper1">
 
     <FrameLayout
@@ -19,69 +19,58 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/adminViewTxtView"
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="67dp"
                 android:text="@string/congrates"
                 android:textSize="50sp"
-                android:textStyle="bold"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
-
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:elevation="0dp"
-                app:srcCompat="@drawable/potofgold"
-                android:layout_marginEnd="86dp"
-                android:layout_alignParentBottom="true"
-                android:layout_toStartOf="@+id/adminViewTxtView"
-                android:layout_marginBottom="72dp" />
-
-            <ImageButton
-                android:id="@+id/imageButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/imageButton"
-                android:layout_centerHorizontal="true"
-                android:background="@android:color/transparent"
-                android:elevation="0dp"
-                app:srcCompat="@drawable/potofgold" />
-
-            <ImageButton
-                android:id="@+id/imageButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignTop="@+id/imageButton2"
-                android:layout_marginEnd="116dp"
-                android:background="@android:color/transparent"
-                android:elevation="0dp"
-                app:srcCompat="@drawable/potofgold" />
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/adminViewTxtView"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:text="@string/jackpot"
-                android:textSize="27sp" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/winnings_amounts"
+                android:layout_marginTop="180dp"
+                android:text=""
                 android:textSize="27sp"
-                android:textStyle="bold"
-                android:layout_below="@+id/textView2"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/img2"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/cherry"
                 android:layout_centerHorizontal="true" />
+
+            <ImageView
+                android:id="@+id/img3"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                app:srcCompat="@drawable/diamond"
+                android:layout_alignTop="@+id/img2"
+                android:layout_toStartOf="@+id/img2" />
+
+            <ImageView
+                android:id="@+id/img1"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                app:srcCompat="@drawable/lemon"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/img2" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="70dp"
+                android:layout_centerHorizontal="true"
+                android:text="Win Money!" />
 
 
         </RelativeLayout>

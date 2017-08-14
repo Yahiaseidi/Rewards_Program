@@ -3,14 +3,33 @@ package com.example.yahia.rewards_program;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.media.MediaPlayer;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.Random;
 
 public class Winnings extends AppCompatActivity {
+
+    private TextView msg;
+    private ImageView img1, img2, img3;
+    private Wheel wheel1, wheel2, wheel3;
+    private Button btn;
+    private boolean isStarted;
+
+    public static final Random RANDOM = new Random();
+
+    public static long randomLong(long lower, long upper) {
+        return lower + (long) (RANDOM.nextDouble() * (upper - lower));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,10 +37,17 @@ public class Winnings extends AppCompatActivity {
         setContentView(R.layout.activity_winnings);
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
+        img1 = (ImageView) findViewById(R.id.img1);
+        img2 = (ImageView) findViewById(R.id.img2);
+        img3 = (ImageView) findViewById(R.id.img3);
+        btn = (Button) findViewById(R.id.button2);
+        msg = (TextView) findViewById(R.id.msg);
+
 
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(0);
         menuItem.setChecked(false);
+        msg.setText("Click for your chance to win big rewards!");
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -48,7 +74,78 @@ public class Winnings extends AppCompatActivity {
             }
         });
 
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isStarted) {
+                    wheel1.stopWheel();
+                    wheel2.stopWheel();
+                    wheel3.stopWheel();
+
+                    if (wheel1.currentIndex == wheel2.currentIndex && wheel2.currentIndex == wheel3.currentIndex) {
+                        msg.setText("You win 15$ off your next purchase");
+                    } else if (wheel1.currentIndex == wheel2.currentIndex || wheel2.currentIndex == wheel3.currentIndex
+                            || wheel1.currentIndex == wheel3.currentIndex) {
+                        msg.setText("You win 10$ off your next purchase");
+                    } else {
+                        msg.setText("You win 5$ off your next purchase");
+                    }
+
+                    isStarted = false;
+
+                } else {
+
+                    wheel1 = new Wheel(new Wheel.WheelListener() {
+                        @Override
+                        public void newImage(final int img) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    img1.setImageResource(img);
+                                }
+                            });
+                        }
+                    }, 300, randomLong(200, 200));
+
+                    wheel1.start();
+
+                    wheel2 = new Wheel(new Wheel.WheelListener() {
+                        @Override
+                        public void newImage(final int img) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    img2.setImageResource(img);
+                                }
+                            });
+                        }
+                    }, 250, randomLong(100, 200));
+
+                    wheel2.start();
+
+                    wheel3 = new Wheel(new Wheel.WheelListener() {
+                        @Override
+                        public void newImage(final int img) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    img3.setImageResource(img);
+                                }
+                            });
+                        }
+                    }, 200, randomLong(0, 200));
+
+                    wheel3.start();
+
+                    btn.setText("Stop");
+                    msg.setText("");
+                    isStarted = true;
+                }
+            }
+        });
+
         MediaPlayer ring= MediaPlayer.create(Winnings.this,R.raw.winning);
         ring.start();
     }
 }
+
