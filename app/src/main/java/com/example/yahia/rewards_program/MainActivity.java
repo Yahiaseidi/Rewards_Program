@@ -157,13 +157,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void goToMemberAccount(String points, String card, String number, int win) {
+    public void goToMemberAccount(String points, String card, String number, int win, int high, int medium, int low) {
+        System.out.println("main " + high);
         Intent newActivity = new Intent(getBaseContext(), MemberAccount.class);
         Bundle extras = new Bundle();
         extras.putString("number", number);
         extras.putString("points", points);
         extras.putString("card", card);
         extras.putInt("winningTotal", win);
+        extras.putInt("highAmount", high);
+        extras.putInt("mediumAmount", medium);
+        extras.putInt("lowAmount", low);
         newActivity.putExtras(extras);
         startActivity(newActivity);
     }
@@ -180,15 +184,15 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     List<Users> list = mUsersTable.where().field("card").eq(s).execute().get();
                     List<Rewards> reward = mRewardsTable.where().field("id").eq("7EE175A6-E1C5-417A-9746-8F838C1BA620").execute().get();
-                    String x = reward.get(0).getTotalWinnings();
-                    int win = Integer.parseInt(x);
                     if(list.size() == 0) {
                         result = "fail";
                     }
                     else
                     {
                         Users user = list.get(0);
-                        goToMemberAccount(user.getPoints(), user.getCard(), user.getNumber(), win);
+                        goToMemberAccount(user.getPoints(), user.getCard(), user.getNumber(), Integer.parseInt(reward.get(0).getTotalWinnings()),
+                                Integer.parseInt(reward.get(0).getHighAmount()), Integer.parseInt(reward.get(0).getMediumAmount()),
+                                Integer.parseInt(reward.get(0).getLowAmount()));
                         result = "success";
                     }
                 } catch (final Exception e) {

@@ -24,6 +24,8 @@ import android.widget.Toast;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import com.microsoft.windowsazure.mobileservices.table.query.ExecutableQuery;
@@ -174,13 +176,16 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public void goToMemberAccount(String points, String card, String number, int win) {
+    public void goToMemberAccount(String points, String card, String number, Wrapper w) {
         Intent newActivity = new Intent(getBaseContext(), MemberAccount.class);
         Bundle extras = new Bundle();
         extras.putString("number", number);
         extras.putString("points", points);
         extras.putString("card", card);
-        extras.putInt("winningTotal", win);
+        extras.putInt("winningTotal", w.winning);
+        extras.putInt("highAmount", w.high);
+        extras.putInt("mediumAmount", w.medium);
+        extras.putInt("lowAmount", w.low);
         newActivity.putExtras(extras);
         startActivity(newActivity);
     }
@@ -289,38 +294,50 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
 
     //Checks the scanned ID Card Number to make sure it is not a duplicate card number already being used. 
     public void cardExists (final String id) throws ExecutionException, InterruptedException {
-        AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>(){
+        AsyncTask<Void, Void, Wrapper> task = new AsyncTask<Void, Void, Wrapper>(){
+
+
 
             //This method queries the database table to verify that the new member's phone number is not in the database.
             @Override
-            protected String doInBackground(Void... voids) {
+            protected Wrapper doInBackground(Void... voids) {
 
-                String result = "";
+                Wrapper w = new Wrapper();
+                w.result = "";
                 String card = "";
                 String number = "";
 
                 try {
                     List<Users> list = mUsersTable.where().field("card").eq(id).execute().get();
                     List<Rewards> reward = mRewardsTable.where().field("id").eq("7EE175A6-E1C5-417A-9746-8F838C1BA620").execute().get();
+                    w.high = Integer.parseInt(reward.get(0).getHighAmount());
+                    w.medium = Integer.parseInt(reward.get(0).getMediumAmount());
+                    w.low = Integer.parseInt(reward.get(0).getLowAmount());
+                    w.winning = Integer.parseInt(reward.get(0).getTotalWinnings());
+
                     if(list.size() == 0) {
                         addItem();
-                        result = reward.get(0).getTotalWinnings() ;
+                        w.result = "success" ;
                     }
                     else
                     {
-                        result = "duplicate";
+                        w.result = "duplicate";
                     }
                 } catch (final Exception e) {
                     //e.printStackTrace();
                 }
 
-                return result;
+                return w;
             }
 
             //After the query has been completed, this method runs and shows the messages corresponding to the results.
             @Override
-            protected void onPostExecute(final String result) {
-                if(result.equalsIgnoreCase("duplicate")){
+            protected void onPostExecute(final Wrapper w) {
+                int high = w.high;
+                int medium = w.medium;
+                int low = w.low;
+                int win = w.winning;
+                if(w.result.equalsIgnoreCase("duplicate")){
                     AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(AddNewMember.this);
                     dlgAlert.setMessage("Looks like this Card ID number is already linked to an account. Please use new card!");
                     dlgAlert.setTitle("Error Message...");
@@ -349,7 +366,7 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            goToMemberAccount("0", cardNumber.getText().toString(), newPhoneNumber.getText().toString(), Integer.parseInt(result));
+                            goToMemberAccount("0", cardNumber.getText().toString(), newPhoneNumber.getText().toString(), w);
                         }
                     }, 2000);
                 }
@@ -368,4 +385,13 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+}
+
+
+class Wrapper {
+    public String result;
+    public int high;
+    public int medium;
+    public int low;
+    public int winning;
 }

@@ -24,6 +24,7 @@ public class Winnings extends AppCompatActivity {
     private Wheel wheel1, wheel2, wheel3;
     private Button btn;
     private boolean isStarted;
+    private int win, high, medium, low;
 
     public static final Random RANDOM = new Random();
 
@@ -42,8 +43,12 @@ public class Winnings extends AppCompatActivity {
         img3 = (ImageView) findViewById(R.id.img3);
         btn = (Button) findViewById(R.id.button2);
         msg = (TextView) findViewById(R.id.msg);
-
-
+        Bundle extras = getIntent().getExtras();
+        high = extras.getInt("highAmount");
+        medium = extras.getInt("mediumAmount");
+        low = extras.getInt("lowAmount");
+        win = extras.getInt("winningTotal");
+        System.out.println("high: " + high + " " + "medium: " + medium + " low: " + low + " win: " + win);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(0);
         menuItem.setChecked(false);
@@ -83,12 +88,17 @@ public class Winnings extends AppCompatActivity {
                     wheel3.stopWheel();
 
                     if (wheel1.currentIndex == wheel2.currentIndex && wheel2.currentIndex == wheel3.currentIndex) {
-                        msg.setText("You win 15$ off your next purchase");
+                        msg.setText("You win $" + high + " off your next purchase");
+                        //btn.setVisibility(view.INVISIBLE);
                     } else if (wheel1.currentIndex == wheel2.currentIndex || wheel2.currentIndex == wheel3.currentIndex
                             || wheel1.currentIndex == wheel3.currentIndex) {
-                        msg.setText("You win 10$ off your next purchase");
+                        msg.setText("You win $" + medium + " off your next purchase");
+                       // btn.setVisibility(view.INVISIBLE);
+
                     } else {
-                        msg.setText("You win 5$ off your next purchase");
+                        msg.setText("You win $" + low + " off your next purchase");
+                        //btn.setVisibility(view.INVISIBLE);
+
                     }
 
                     isStarted = false;
@@ -105,7 +115,7 @@ public class Winnings extends AppCompatActivity {
                                 }
                             });
                         }
-                    }, 300, randomLong(200, 200));
+                    }, 110, 100);
 
                     wheel1.start();
 
@@ -119,7 +129,7 @@ public class Winnings extends AppCompatActivity {
                                 }
                             });
                         }
-                    }, 250, randomLong(100, 200));
+                    }, 100, 50);
 
                     wheel2.start();
 
@@ -133,13 +143,13 @@ public class Winnings extends AppCompatActivity {
                                 }
                             });
                         }
-                    }, 200, randomLong(0, 200));
+                    }, 90, 0);
 
                     wheel3.start();
-
                     btn.setText("Stop");
                     msg.setText("");
                     isStarted = true;
+
                 }
             }
         });

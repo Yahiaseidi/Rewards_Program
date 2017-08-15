@@ -177,18 +177,23 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
         String totalPoints = Integer.toString(total);
         item.setPoints(totalPoints);
         mUsersTable.update(item).get();
-        goToMemberAccount(item.getPoints(), item.getCard(), item.getNumber(), Integer.parseInt(rewards.getTotalWinnings()));
+        goToMemberAccount(item.getPoints(), item.getCard(), item.getNumber(), Integer.parseInt(rewards.getTotalWinnings()),
+                          Integer.parseInt(rewards.getHighAmount()), Integer.parseInt(rewards.getMediumAmount()),
+                          Integer.parseInt(rewards.getLowAmount()));
 }
 
 
     //Passes the points and cardNumber of the user to MemberAccount
-    public void goToMemberAccount(String points, String card, String number, int win) {
+    public void goToMemberAccount(String points, String card, String number, int win, int high, int medium, int low) {
         Intent newActivity = new Intent(getBaseContext(), MemberAccount.class);
         Bundle extras = new Bundle();
         extras.putString("number", number);
         extras.putString("points", points);
         extras.putString("card", card);
         extras.putInt("winningTotal", win);
+        extras.putInt("highAmount", high);
+        extras.putInt("mediumAmount", medium);
+        extras.putInt("lowAmount", low);
         newActivity.putExtras(extras);
         startActivity(newActivity);
     }

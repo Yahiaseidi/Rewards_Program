@@ -2,6 +2,8 @@ package com.example.yahia.rewards_program;
 
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.Random;
+
 /**
  * Created by Leslie on 8/13/2017.
  */
@@ -13,7 +15,7 @@ public class Wheel extends Thread {
     }
 
     private static int[] imgs = {R.drawable.lemon, R.drawable.diamond, R.drawable.potofgold, R.drawable.cherry,
-            R.drawable.seven, R.drawable.bell};
+            R.drawable.seven, R.drawable.bell, R.drawable.bananas, R.drawable.dollar, R.drawable.horseshoe};
     public int currentIndex;
     private WheelListener wheelListener;
     private long frameDuration;
@@ -24,7 +26,14 @@ public class Wheel extends Thread {
         this.wheelListener = wheelListener;
         this.frameDuration = frameDuration;
         this.startIn = startIn;
-        currentIndex = 0;
+        Random rand = new Random();
+        int x = rand.nextInt(imgs.length);
+        if(imgs.length > x){
+            currentIndex = x;
+        }
+        else {
+            currentIndex = 0;
+        }
         isStarted = true;
     }
 

@@ -147,13 +147,16 @@ public class EnterAlternateID extends AppCompatActivity implements View.OnClickL
     }
 
     //Passes the points and cardNumber of the user to MemberAccount
-    public void goToMemberAccount(String points, String card, String number, int win) {
+    public void goToMemberAccount(String points, String card, String number, int win, int high, int medium, int low) {
         Intent newActivity = new Intent(getBaseContext(), MemberAccount.class);
         Bundle extras = new Bundle();
         extras.putString("number", number);
         extras.putString("points", points);
         extras.putString("card", card);
         extras.putInt("winningTotal", win);
+        extras.putInt("highAmount", high);
+        extras.putInt("mediumAmount", medium);
+        extras.putInt("lowAmount", low);
         newActivity.putExtras(extras);
         startActivity(newActivity);
     }
@@ -178,7 +181,9 @@ public class EnterAlternateID extends AppCompatActivity implements View.OnClickL
                     else
                     {
                         Users user = list.get(0);
-                        goToMemberAccount(user.getPoints(), user.getCard(), user.getNumber(), Integer.parseInt(reward.get(0).getTotalWinnings()));
+                        goToMemberAccount(user.getPoints(), user.getCard(), user.getNumber(), Integer.parseInt(reward.get(0).getTotalWinnings()),
+                                          Integer.parseInt(reward.get(0).getHighAmount()), Integer.parseInt(reward.get(0).getMediumAmount()),
+                                          Integer.parseInt(reward.get(0).getLowAmount()));
                         result = "success";
                     }
                 } catch (final Exception e) {

@@ -33,9 +33,12 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
     TextView point_total;
     TextView phone_number;
     TextView points_needed;
+    public int lowAmount;
+    public int highAmount;
+    public int mediumAmount;
     Button enterOrder_btn;
     Button btn_reward_notification;
-    private int winningTotal;
+    public int winningTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,11 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
         String cardNumber = extras.getString("card"); //Customer's card number
         String phoneNumber = extras.getString("number"); //Customer's phone number
         winningTotal = extras.getInt("winningTotal"); //WINNING GOAL
+        highAmount = extras.getInt("highAmount");
+        System.out.println("memAcct" + highAmount);
+        mediumAmount = extras.getInt("mediumAmount");
+        lowAmount = extras.getInt("lowAmount");
+
 
         //System.out.println(winningTotal);
 
@@ -203,8 +211,14 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
 
     //Takes customer to redeem their points.
     public void goToWinnings() {
+        System.out.println("memberAccount " + highAmount);
         Intent newActivity = new Intent(getBaseContext(), Winnings.class);
-
+        Bundle extras = new Bundle();
+        extras.putInt("winningTotal", winningTotal);
+        extras.putInt("highAmount", highAmount);
+        extras.putInt("mediumAmount", mediumAmount);
+        extras.putInt("lowAmount", lowAmount);
+        newActivity.putExtras(extras);
         //Stops users from coming back to the same account information after redeeming their reward
         finish();
         startActivity(newActivity);
