@@ -115,7 +115,7 @@ public class Winnings extends AppCompatActivity {
                                 }
                             });
                         }
-                    }, 110, 100);
+                    }, 90, 0);
 
                     wheel1.start();
 
@@ -143,7 +143,7 @@ public class Winnings extends AppCompatActivity {
                                 }
                             });
                         }
-                    }, 90, 0);
+                    }, 110, 100);
 
                     wheel3.start();
                     btn.setText("Stop");
