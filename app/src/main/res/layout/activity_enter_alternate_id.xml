@@ -22,16 +22,15 @@
                 android:id="@+id/phone_editText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/SearchTxtView"
-                android:layout_below="@+id/SearchTxtView"
                 android:layout_marginStart="66dp"
-                android:layout_marginTop="38dp"
                 android:ems="10"
                 android:hint="@string/alternateID"
                 android:inputType="phone"
                 android:textAlignment="center"
                 android:textColorLink="@color/colorPrimaryDark"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:layout_below="@+id/SearchTxtView"
+                android:layout_alignStart="@+id/SearchTxtView" />
 
             <Button
                 android:id="@+id/phoneSearch_btn"
@@ -53,7 +52,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="59dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="25dp"
                 android:text="@string/SearchLabel"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/colorPrimaryDark"

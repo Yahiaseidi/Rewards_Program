@@ -53,12 +53,13 @@
                 android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/mainActivityTxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="25dp"
                 android:text="@string/mainActivityWelcome"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/colorPrimaryDark"
@@ -70,8 +71,9 @@
                 android:layout_width="250dp"
                 android:layout_height="250dp"
                 app:srcCompat="@drawable/unnamed"
-                android:layout_below="@+id/textView3"
-                android:layout_centerHorizontal="true" />
+                android:layout_above="@+id/alternateID_btn"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="16dp" />
 
             <EditText
                 android:id="@+id/barCode_editText"

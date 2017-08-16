@@ -24,9 +24,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="67dp"
+                android:layout_marginTop="30dp"
                 android:text="@string/congrates"
-                android:textSize="50sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="44sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -43,36 +44,41 @@
                 android:id="@+id/img2"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:layout_centerVertical="true"
                 app:srcCompat="@drawable/cherry"
-                android:layout_centerHorizontal="true" />
+                android:layout_below="@+id/msg"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="47dp" />
 
             <ImageView
                 android:id="@+id/img3"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                app:srcCompat="@drawable/diamond"
                 android:layout_alignTop="@+id/img2"
+                android:layout_marginEnd="50dp"
                 android:layout_toStartOf="@+id/button2"
-                android:layout_marginEnd="50dp" />
+                app:srcCompat="@drawable/diamond" />
 
             <ImageView
                 android:id="@+id/img1"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                app:srcCompat="@drawable/lemon"
                 android:layout_alignTop="@+id/img2"
+                android:layout_marginStart="50dp"
                 android:layout_toEndOf="@+id/button2"
-                android:layout_marginStart="50dp" />
+                app:srcCompat="@drawable/lemon" />
 
             <Button
                 android:id="@+id/button2"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
+                style="@android:style/Widget.Button.Toggle"
+                android:layout_width="250dp"
+                android:layout_height="70dp"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="70dp"
                 android:layout_centerHorizontal="true"
-                android:text="Win Money!" />
+                android:layout_marginBottom="70dp"
+                android:background="@color/colorPrimary"
+                android:text="@string/play"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
 
 
         </RelativeLayout>

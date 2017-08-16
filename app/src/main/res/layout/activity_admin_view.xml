@@ -24,8 +24,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="39dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="25dp"
                 android:text="@string/adminViewTitle"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="44sp"
                 android:textStyle="bold" />
@@ -41,19 +43,21 @@
                 android:ems="10"
                 android:hint="@string/easy"
                 android:inputType="number"
+                android:textAlignment="center"
                 android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/mediumTxtBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/winningAmountsTxt"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="31dp"
                 android:ems="10"
                 android:hint="@string/medium"
                 android:inputType="number"
-                android:textSize="24sp" />
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:layout_below="@+id/winningAmountsTxt"
+                android:layout_centerHorizontal="true" />
 
             <EditText
                 android:id="@+id/hardTxtBox"
@@ -65,16 +69,16 @@
                 android:ems="10"
                 android:hint="@string/hard"
                 android:inputType="number"
+                android:textAlignment="center"
                 android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/winningAmountsTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="13dp"
                 android:text="@string/updateWinningAmounts"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="40sp"
+                android:textSize="38sp"
                 android:layout_below="@+id/adminViewTitleTxt"
                 android:layout_centerHorizontal="true" />
 
@@ -82,20 +86,22 @@
                 android:id="@+id/winningTargetTxtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="250dp"
+                android:layout_marginTop="31dp"
                 android:text="@string/updateWinningTarget"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="40sp" />
+                android:textSize="38sp"
+                android:layout_below="@+id/easyTxtBox"
+                android:layout_centerHorizontal="true" />
 
             <EditText
                 android:id="@+id/winningTargetTxtBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="30dp"
                 android:ems="10"
                 android:hint="@string/winningTarget"
                 android:inputType="number"
+                android:textAlignment="center"
                 android:textSize="24sp"
                 android:layout_below="@+id/winningTargetTxtView"
                 android:layout_toEndOf="@+id/easyTxtBox" />
@@ -103,16 +109,16 @@
             <Button
                 android:id="@+id/update_btn"
                 style="@android:style/Widget.Button.Toggle"
-                android:layout_width="200sp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/winningTargetTxtBox"
-                android:layout_centerHorizontal="true"
+                android:layout_width="300sp"
+                android:layout_height="70sp"
                 android:layout_centerInParent="false"
-                android:layout_marginTop="21dp"
+                android:layout_marginTop="33dp"
                 android:background="@color/colorPrimary"
                 android:text="@string/update"
                 android:textColor="@color/white"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:layout_below="@+id/winningTargetTxtBox"
+                android:layout_centerHorizontal="true" />
         </RelativeLayout>
     </FrameLayout>
 

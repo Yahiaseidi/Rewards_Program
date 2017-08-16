@@ -24,8 +24,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="38dp"
-                android:text="Member Account"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="25dp"
+                android:text="@string/memberAccountTitle"
                 android:textColor="@color/colorAccent"
                 android:textSize="44sp"
                 android:textStyle="bold" />
@@ -57,22 +58,23 @@
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/point_total"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="17dp"
+                android:layout_marginBottom="33dp"
                 android:indeterminate="false"
                 android:maxHeight="50dp"
                 android:maxWidth="700dp"
                 android:minHeight="50dp"
                 android:minWidth="700dp"
-                android:progressTint="@color/colorPrimaryDark" />
+                android:progressTint="@color/colorPrimaryDark"
+                android:layout_above="@+id/point_total"
+                android:layout_centerHorizontal="true" />
 
             <TextView
                 android:id="@+id/point_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/points_needed"
                 android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
+                android:layout_marginBottom="62dp"
                 android:text="TextView"
                 android:textColor="@color/colorAccent"
                 android:textSize="30sp" />

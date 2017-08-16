@@ -69,7 +69,7 @@ public class AdminView extends AppCompatActivity implements View.OnClickListener
         medium.setError("Required");
         hard.setError("Required");
         target.setError("Required");
-        update_btn.setEnabled(false);
+        update_btn.setClickable(false);
 
         //Validation
         easy.addTextChangedListener(new TextWatcher() {
@@ -165,7 +165,7 @@ public class AdminView extends AppCompatActivity implements View.OnClickListener
                     target.setError("Required");
                     update_btn.setClickable(false);
                 } else {
-                    update_btn.setEnabled(true);
+                    update_btn.setClickable(true);
                 }
             }
         });

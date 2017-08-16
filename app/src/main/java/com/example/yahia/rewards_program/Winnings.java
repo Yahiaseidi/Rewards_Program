@@ -1,19 +1,25 @@
 package com.example.yahia.rewards_program;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.media.MediaPlayer;
+import android.os.CountDownTimer;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -53,6 +59,16 @@ public class Winnings extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(0);
         menuItem.setChecked(false);
         msg.setText("Click for your chance to win big rewards!");
+
+        //*******Lets users know how the game works*****
+
+        AlertDialog.Builder dlgAlert = new AlertDialog.Builder(Winnings.this);
+        dlgAlert.setMessage("No matches, small prize!\nTwo items match, medium prize!\nAll three match, BIG prize!");
+        dlgAlert.setTitle("Rules...");
+        dlgAlert.setNegativeButton("Got it",null);
+        dlgAlert.create().show();
+
+        //******************************************
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

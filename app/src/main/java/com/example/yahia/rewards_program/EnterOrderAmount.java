@@ -132,7 +132,7 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
 
         double orderTotal = Double.parseDouble(order_amount.getText().toString());
 
-            dlgAlert.setMessage("Is $" + orderTotal + " the correct order amount?");
+            dlgAlert.setMessage(String.format("Is $%.2f the correct order amount?", orderTotal));
             dlgAlert.setTitle("Confirmation...");
 
             dlgAlert.setPositiveButton("Yes",

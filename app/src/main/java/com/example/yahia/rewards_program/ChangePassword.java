@@ -63,7 +63,7 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
         oldPass.setError("Required");
         newPass.setError("Required");
         secNewPass.setError("Required");
-        changePasswordBtn.setEnabled(false);
+        changePasswordBtn.setClickable(false);
 
         //Validation for passwords
         oldPass.addTextChangedListener(new TextWatcher() {
@@ -82,6 +82,11 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
                 if(oldPass.getText().length() < 4)
                 {
                     oldPass.setError("Passwords are 4 digits!");
+                    changePasswordBtn.setClickable(false);
+                }
+                else
+                {
+                    changePasswordBtn.setClickable(true);
                 }
             }
         });
@@ -101,9 +106,14 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
 
             @Override
             public void afterTextChanged(Editable s) {
-                if((newPass.getText().length() < 4) || newPass.getText() == oldPass.getText())
+                if(newPass.getText().length() < 4)
                 {
-                    newPass.setError("New & old passwords cannot be the same and the password must be 4 digits long!");
+                    newPass.setError("Passwords are 4 digits!");
+                    changePasswordBtn.setClickable(false);
+                }
+                else
+                {
+                    changePasswordBtn.setClickable(true);
                 }
             }
         });
@@ -121,13 +131,14 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(!(secNewPass.getText() == newPass.getText()))
+                if(secNewPass.getText().length() < 4)
                 {
-                    secNewPass.setError("Passwords do not match!");
+                    secNewPass.setError("Passwords are 4 digits!");
+                    changePasswordBtn.setClickable(false);
                 }
                 else
                 {
-                    changePasswordBtn.setEnabled(true);
+                    changePasswordBtn.setClickable(true);
                 }
             }
         });

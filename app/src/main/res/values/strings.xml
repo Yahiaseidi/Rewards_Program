@@ -33,7 +33,7 @@
     <string name="newPassword">Enter New Password</string>
     <string name="confirmPassword">Confirm Password</string>
     <string name="enterOrderTitle">Enter Customer\'s Order Value</string>
-    <string name="adminViewTitle">Admin View</string>
+    <string name="adminViewTitle">Reward Program Updates</string>
     <string name="updateWinningAmounts">Update Winning Amounts</string>
     <string name="updateWinningTarget">Update Winning Target</string>
     <string name="winningTarget">Winning Target</string>
@@ -41,4 +41,8 @@
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
     <string name="update">Update Criteria</string>
+    <string name="updatePass">Update Admin Password</string>
+    <string name="updatePasswordView">Admin Password Change</string>
+    <string name="memberAccountTitle">Member Account</string>
+    <string name="play">Win Money!</string>
 </resources>
