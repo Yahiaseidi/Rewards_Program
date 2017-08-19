@@ -33,16 +33,11 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
     private EditText oldPass;
     private EditText newPass;
     private EditText secNewPass;
-    private String oldPassword;
     private String newPassword;
     private String secNewPassword;
     private Button changePasswordBtn;
-    private Thread thread;
-    private Handler handler = new Handler();
     private MobileServiceClient mClient;
     private MobileServiceTable<Admin> mAdminTable;
-    private String tempOldPassword;
-    private String tempNewPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -193,7 +188,7 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
 
 
     public void onClick(View view) {
-        oldPassword = oldPass.getText().toString();
+        String oldPassword = oldPass.getText().toString();
         newPassword = newPass.getText().toString();
         secNewPassword = secNewPass.getText().toString();
         getOldPass(oldPassword);
@@ -215,8 +210,13 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
                     }
                     else
                     {
-                        updateItemInTable(list.get(0));
-                        result = "success";
+                        if(newPassword.toString().equals(secNewPassword.toString())){
+                            updateItemInTable(list.get(0));
+                            result = "success";
+                        }
+                        else {
+                            result = "matchPasswords";
+                        }
                     }
                 } catch (final Exception e) {
                     //e.printStackTrace();
@@ -247,6 +247,26 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
                     dlgAlert.setCancelable(true);
                     dlgAlert.create().show();
                 }
+                else if (result.equals("matchPasswords")) {
+                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(ChangePassword.this);
+
+                    dlgAlert.setMessage("Oops, make sure the new password matches the confirmation password!");
+                    dlgAlert.setTitle("Error Message...");
+                    dlgAlert.setPositiveButton("Try again", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = getIntent();
+                            overridePendingTransition(0, 0);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            finish();
+                            overridePendingTransition(0, 0);
+                            startActivity(intent);
+                        }
+                    });
+                    dlgAlert.create().show();
+                    dlgAlert.setCancelable(true);
+                    dlgAlert.create().show();
+                }
+
                 else {
                     AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(ChangePassword.this);
                     dlgAlert.setMessage("Password has been successfully changed!");
