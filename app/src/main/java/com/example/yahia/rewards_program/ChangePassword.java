@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -231,7 +232,8 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
                 if(result.equalsIgnoreCase("fail")){
                     AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(ChangePassword.this);
 
-                    dlgAlert.setMessage("Oops that must be the wrong password!");
+                    dlgAlert.setMessage(Html.fromHtml("<Big>"+"Oops that must be the wrong password!"+"</Big>"));
+//                    dlgAlert.setMessage("Oops that must be the wrong password!");
                     dlgAlert.setTitle("Error Message...");
                     dlgAlert.setPositiveButton("Try again", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -250,7 +252,8 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
                 else if (result.equals("matchPasswords")) {
                     AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(ChangePassword.this);
 
-                    dlgAlert.setMessage("Oops, make sure the new password matches the confirmation password!");
+                    dlgAlert.setMessage(Html.fromHtml("<Big>"+"Oops, make sure the new password matches the confirmation password!"+"</Big>"));
+//                    dlgAlert.setMessage("Oops, make sure the new password matches the confirmation password!");
                     dlgAlert.setTitle("Error Message...");
                     dlgAlert.setPositiveButton("Try again", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -269,7 +272,8 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
 
                 else {
                     AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(ChangePassword.this);
-                    dlgAlert.setMessage("Password has been successfully changed!");
+                    dlgAlert.setMessage(Html.fromHtml("<Big>"+"Password has been successfully changed!"+"</Big>"));
+//                    dlgAlert.setMessage("Password has been successfully changed!");
                     dlgAlert.setTitle("Success...");
                     dlgAlert.setCancelable(true);
                     dlgAlert.create().show();

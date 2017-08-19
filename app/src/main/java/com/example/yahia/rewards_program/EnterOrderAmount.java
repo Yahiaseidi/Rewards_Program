@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +19,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import java.net.MalformedURLException;
@@ -131,8 +134,8 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
         AlertDialog.Builder dlgAlert = new AlertDialog.Builder(EnterOrderAmount.this);
 
         double orderTotal = Double.parseDouble(order_amount.getText().toString());
-
-            dlgAlert.setMessage(String.format("Is $%.2f the correct order amount?", orderTotal));
+            dlgAlert.setMessage(Html.fromHtml("<Big>"+String.format("Is $%.2f the correct order amount?", orderTotal)+"</Big>"));
+//            dlgAlert.setMessage(String.format("Is $%.2f the correct order amount?", orderTotal));
             dlgAlert.setTitle("Confirmation...");
 
             dlgAlert.setPositiveButton("Yes",
@@ -194,6 +197,7 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
         extras.putInt("highAmount", high);
         extras.putInt("mediumAmount", medium);
         extras.putInt("lowAmount", low);
+
         newActivity.putExtras(extras);
         startActivity(newActivity);
     }

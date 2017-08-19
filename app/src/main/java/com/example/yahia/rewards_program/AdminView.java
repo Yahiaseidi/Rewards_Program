@@ -10,6 +10,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -247,7 +248,8 @@ public class AdminView extends AppCompatActivity implements View.OnClickListener
             protected void onPostExecute(String result) {
                 if (result.equalsIgnoreCase("success")) {
                     AlertDialog.Builder dlgAlert = new AlertDialog.Builder(AdminView.this);
-                    dlgAlert.setMessage("Winning target and winning amounts have been successfully changed!");
+                    dlgAlert.setMessage(Html.fromHtml("<Big>"+"Winning target and winning amounts have been successfully changed!"+"</Big>"));
+//                    dlgAlert.setMessage("Winning target and winning amounts have been successfully changed!");
                     dlgAlert.setTitle("Success...");
                     dlgAlert.setCancelable(true);
                     dlgAlert.create().show();

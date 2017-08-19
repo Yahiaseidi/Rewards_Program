@@ -12,6 +12,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -63,7 +64,8 @@ public class Winnings extends AppCompatActivity {
         //*******Lets users know how the game works*****
 
         AlertDialog.Builder dlgAlert = new AlertDialog.Builder(Winnings.this);
-        dlgAlert.setMessage("No matches, small prize!\nTwo items match, medium prize!\nAll three match, BIG prize!");
+        dlgAlert.setMessage(Html.fromHtml("<Big>"+"*No matches, small prize!<br />**Two items match, medium prize!<br />***All three match, BIG prize!"+"</Big>"));
+//        dlgAlert.setMessage("No matches, small prize!\nTwo items match, medium prize!\nAll three match, BIG prize!");
         dlgAlert.setTitle("Rules...");
         dlgAlert.setNegativeButton("Got it",null);
         dlgAlert.create().show();

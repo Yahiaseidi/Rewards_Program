@@ -10,6 +10,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -262,7 +263,7 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
                 if(result.equalsIgnoreCase("fail")){
                     AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(AddNewMember.this);
 
-                    dlgAlert.setMessage("There is an account linked to this phone number already!");
+                    dlgAlert.setMessage(Html.fromHtml("<Big>"+"There is an account linked to this phone number already!"+"</Big>"));
                     dlgAlert.setTitle("Error Message...");
                     dlgAlert.setPositiveButton("OK", null);
                     dlgAlert.setCancelable(true);
@@ -339,7 +340,8 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
                 int win = w.winning;
                 if(w.result.equalsIgnoreCase("duplicate")){
                     AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(AddNewMember.this);
-                    dlgAlert.setMessage("Looks like this Card ID number is already linked to an account. Please use new card!");
+                    dlgAlert.setMessage(Html.fromHtml("<Big>"+"Looks like this Card ID number is already linked to an account. Please use new card!"+"</Big>"));
+//                    dlgAlert.setMessage("Looks like this Card ID number is already linked to an account. Please use new card!");
                     dlgAlert.setTitle("Error Message...");
                     dlgAlert.setPositiveButton("OK", null);
                     dlgAlert.setCancelable(true);
@@ -356,7 +358,8 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
                 {
                     AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(AddNewMember.this);
 
-                    dlgAlert.setMessage("New member has been added!!");
+                    dlgAlert.setMessage(Html.fromHtml("<Big>"+"New member has been added!!"+"</Big>"));
+//                    dlgAlert.setMessage("New member has been added!!");
                     dlgAlert.setTitle("Success...");
                     dlgAlert.setCancelable(true);
                     dlgAlert.create().show();

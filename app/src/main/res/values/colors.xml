@@ -8,6 +8,7 @@
     <color name="black">#000000</color>
     <color name="secondAccent">#00dbc1</color>
     <color name="color">#0F02FF</color>
+    <color name="accentGray">#8e8e8e</color>
 </resources>
 
 

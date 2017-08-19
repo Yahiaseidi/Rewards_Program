@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -198,8 +199,8 @@ public class EnterAlternateID extends AppCompatActivity implements View.OnClickL
             protected void onPostExecute(String result) {
                 if(result.equalsIgnoreCase("fail")){
                     AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(EnterAlternateID.this);
-
-                    dlgAlert.setMessage("Oops there is no account linked to this phone number!");
+                    dlgAlert.setMessage(Html.fromHtml("<Big>"+"Oops there is no account linked to this phone number!"+"</Big>"));
+//                    dlgAlert.setMessage("Oops there is no account linked to this phone number!");
                     dlgAlert.setTitle("Error Message...");
                     dlgAlert.setPositiveButton("OK", null);
                     dlgAlert.setCancelable(true);

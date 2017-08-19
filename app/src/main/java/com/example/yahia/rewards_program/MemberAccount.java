@@ -9,6 +9,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -147,8 +148,8 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
 
             case R.id.btn_reward_notification:
                 AlertDialog.Builder dlgAlert = new AlertDialog.Builder(MemberAccount.this);
-
-                dlgAlert.setMessage("Would you like to redeem one reward? 100 Points will be deducted from your account!");
+                dlgAlert.setMessage(Html.fromHtml("<Big>"+"Would you like to redeem one reward? " + winningTotal + " points will be deducted from your account!"+"</Big>"));
+//                dlgAlert.setMessage("Would you like to redeem one reward? 100 Points will be deducted from your account!");
                 dlgAlert.setTitle("Confirmation...");
 
                 dlgAlert.setPositiveButton("Yes",

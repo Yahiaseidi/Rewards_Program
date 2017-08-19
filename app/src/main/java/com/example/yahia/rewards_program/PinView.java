@@ -9,6 +9,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -131,8 +132,8 @@ public class PinView extends AppCompatActivity {
             protected void onPostExecute(String result) {
                 if(result.equalsIgnoreCase("fail")){
                     AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(PinView.this);
-
-                    dlgAlert.setMessage("Oops that must be the wrong password!");
+                    dlgAlert.setMessage(Html.fromHtml("<Big>"+"Oops that must be the wrong password!"+"</Big>"));
+//                    dlgAlert.setMessage("Oops that must be the wrong password!");
                     dlgAlert.setTitle("Error Message...");
                     dlgAlert.setPositiveButton("Try again", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {

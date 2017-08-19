@@ -13,6 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -207,8 +208,8 @@ public class MainActivity extends AppCompatActivity {
             protected void onPostExecute(String result) {
                 if(result.equalsIgnoreCase("fail")){
                     AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(MainActivity.this);
-
-                    dlgAlert.setMessage("There is no account linked to this card number. Add member if needed!");
+                    dlgAlert.setMessage(Html.fromHtml("<Big>"+"There is no account linked to this card. Add member if needed!"+"</Big>"));
+//                    dlgAlert.setMessage("There is no account linked to this card number. Add member if needed!");
                     dlgAlert.setTitle("Error Message...");
                     dlgAlert.setPositiveButton("OK", null);
                     dlgAlert.setCancelable(true);
