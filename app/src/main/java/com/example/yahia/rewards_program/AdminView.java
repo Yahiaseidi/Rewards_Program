@@ -190,7 +190,7 @@ public class AdminView extends AppCompatActivity implements View.OnClickListener
                         startActivity(intent3);
                         break;
                     case R.id.navigation_notifications:
-                        Intent intent4 = new Intent(AdminView.this, AdminView.class);
+                        Intent intent4 = new Intent(AdminView.this, AdminMain.class);
                         startActivity(intent4);
                         break;
                 }

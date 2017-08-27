@@ -145,8 +145,8 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
         Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem = menu.getItem(0);
-        menuItem.setEnabled(false);
+        MenuItem menuItem = menu.getItem(3);
+        menuItem.setChecked(true);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -165,7 +165,7 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
                         startActivity(intent3);
                         break;
                     case R.id.navigation_notifications:
-                        Intent intent4 = new Intent(ChangePassword.this, PinView.class);
+                        Intent intent4 = new Intent(ChangePassword.this, AdminMain.class);
                         startActivity(intent4);
                         break;
                 }

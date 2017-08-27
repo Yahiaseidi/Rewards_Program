@@ -37,9 +37,9 @@
     <string name="updateWinningAmounts">Update Winning Amounts</string>
     <string name="updateWinningTarget">Update Winning Target</string>
     <string name="winningTarget">Winning Target</string>
-    <string name="easy">Easy</string>
-    <string name="medium">Medium</string>
-    <string name="hard">Hard</string>
+    <string name="easy">Low Winning</string>
+    <string name="medium">Medium Winning</string>
+    <string name="hard">High Winning</string>
     <string name="update">Update Criteria</string>
     <string name="updatePass">Update Admin Password</string>
     <string name="updatePasswordView">Admin Password Change</string>
