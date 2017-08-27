@@ -19,66 +19,67 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
-                android:text="@string/congrates"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="44sp"
-                android:textStyle="bold" />
-
-            <TextView
                 android:id="@+id/msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="180dp"
                 android:text=""
-                android:textSize="27sp"
-                android:textStyle="bold" />
+                android:layout_marginTop="35dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="44sp"
+                android:textStyle="bold"
+                android:typeface="serif" />
+
+            <ImageView
+                android:layout_width="550dp"
+                android:layout_height="350dp"
+                android:background="@drawable/border"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="145dp"/>
 
             <ImageView
                 android:id="@+id/img2"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                app:srcCompat="@drawable/cherry"
-                android:layout_below="@+id/msg"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="47dp" />
+                android:layout_marginTop="280dp"
+                app:srcCompat="@drawable/cherry" />
 
             <ImageView
                 android:id="@+id/img3"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_alignTop="@+id/img2"
-                android:layout_marginEnd="50dp"
-                android:layout_toStartOf="@+id/button2"
+                android:layout_marginEnd="68dp"
+                android:layout_toStartOf="@+id/img2"
                 app:srcCompat="@drawable/diamond" />
 
             <ImageView
                 android:id="@+id/img1"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_alignTop="@+id/img2"
-                android:layout_marginStart="50dp"
-                android:layout_toEndOf="@+id/button2"
+                android:layout_marginStart="64dp"
+                android:layout_toEndOf="@+id/img2"
                 app:srcCompat="@drawable/lemon" />
+
 
             <Button
                 android:id="@+id/button2"
                 style="@android:style/Widget.Button.Toggle"
-                android:layout_width="250dp"
+                android:layout_width="150dp"
                 android:layout_height="70dp"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="70dp"
-                android:background="@color/colorPrimary"
+                android:layout_marginBottom="23dp"
+                android:background="@drawable/button_round"
+                android:shadowColor="#5C5C5C"
+                android:shadowDx="4"
+                android:shadowDy="-2"
+                android:shadowRadius="2"
                 android:text="@string/play"
-                android:textColor="@color/white"
-                android:textSize="24sp" />
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
 
 
         </RelativeLayout>

@@ -17,6 +17,8 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,7 +28,7 @@ import java.util.Random;
 
 public class Winnings extends AppCompatActivity {
 
-    private TextView msg;
+    private TextView msg, msg2;
     private ImageView img1, img2, img3;
     private Wheel wheel1, wheel2, wheel3;
     private Button btn;
@@ -104,18 +106,35 @@ public class Winnings extends AppCompatActivity {
                     wheel1.stopWheel();
                     wheel2.stopWheel();
                     wheel3.stopWheel();
-
                     if (wheel1.currentIndex == wheel2.currentIndex && wheel2.currentIndex == wheel3.currentIndex) {
-                        msg.setText("You win $" + high + " off your next purchase");
-                        //btn.setVisibility(view.INVISIBLE);
+                        Animation anim = new AlphaAnimation(0.0f, 1.0f);
+                        anim.setDuration(1000); //You can manage the time of the blink with this parameter
+                        anim.setStartOffset(20);
+                        anim.setRepeatMode(Animation.REVERSE);
+                        anim.setRepeatCount(Animation.INFINITE);
+                        msg.setText("You win $" + high + " off your next purchase!");
+                        msg.startAnimation(anim);
+                        btn.setVisibility(view.INVISIBLE);
                     } else if (wheel1.currentIndex == wheel2.currentIndex || wheel2.currentIndex == wheel3.currentIndex
                             || wheel1.currentIndex == wheel3.currentIndex) {
-                        msg.setText("You win $" + medium + " off your next purchase");
-                       // btn.setVisibility(view.INVISIBLE);
+                        Animation anim = new AlphaAnimation(0.0f, 1.0f);
+                        anim.setDuration(1000); //You can manage the time of the blink with this parameter
+                        anim.setStartOffset(20);
+                        anim.setRepeatMode(Animation.REVERSE);
+                        anim.setRepeatCount(Animation.INFINITE);
+                        msg.setText("You win $" + medium + " off your next purchase!");
+                        msg.startAnimation(anim);
+                        btn.setVisibility(view.INVISIBLE);
 
                     } else {
-                        msg.setText("You win $" + low + " off your next purchase");
-                        //btn.setVisibility(view.INVISIBLE);
+                        Animation anim = new AlphaAnimation(0.0f, 1.0f);
+                        anim.setDuration(1000); //You can manage the time of the blink with this parameter
+                        anim.setStartOffset(20);
+                        anim.setRepeatMode(Animation.REVERSE);
+                        anim.setRepeatCount(Animation.INFINITE);
+                        msg.setText("You win $" + low + " off your next purchase!");
+                        msg.startAnimation(anim);
+                        btn.setVisibility(view.INVISIBLE);
 
                     }
 
@@ -133,7 +152,7 @@ public class Winnings extends AppCompatActivity {
                                 }
                             });
                         }
-                    }, 90, 0);
+                    }, 110, 0);
 
                     wheel1.start();
 
@@ -161,11 +180,10 @@ public class Winnings extends AppCompatActivity {
                                 }
                             });
                         }
-                    }, 110, 100);
+                    }, 90, 100);
 
                     wheel3.start();
-                    btn.setText("Stop");
-                    msg.setText("");
+                    msg.setText("Good Luck!");
                     isStarted = true;
 
                 }

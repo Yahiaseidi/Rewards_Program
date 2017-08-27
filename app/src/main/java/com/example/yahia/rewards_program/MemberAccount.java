@@ -59,12 +59,8 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
         String phoneNumber = extras.getString("number"); //Customer's phone number
         winningTotal = extras.getInt("winningTotal"); //WINNING GOAL
         highAmount = extras.getInt("highAmount");
-        System.out.println("memAcct" + highAmount);
         mediumAmount = extras.getInt("mediumAmount");
         lowAmount = extras.getInt("lowAmount");
-
-
-        //System.out.println(winningTotal);
 
         int points = Integer.parseInt(pointTotal);
         int pointsNeeded = pointsNeededForReward(winningTotal, points);
@@ -83,7 +79,17 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
 
         points_needed.setText("Points until next reward: " + pointsNeeded);
         point_total.setText(points + " points");
-        phone_number.setText(phoneNumber);
+        String advPhoneNum = "(";
+        for(int i = 0; i < phoneNumber.length(); i++ ){
+            if(i == 3) {
+                advPhoneNum = advPhoneNum + ")";
+            }
+            else if (i == 6){
+                advPhoneNum = advPhoneNum + "-";
+            }
+            advPhoneNum = advPhoneNum + phoneNumber.charAt(i);
+        }
+        phone_number.setText(advPhoneNum);
 
         //Sets progress bar progress
         progressBar_points.setVisibility(View.VISIBLE);
@@ -149,7 +155,7 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
             case R.id.btn_reward_notification:
                 AlertDialog.Builder dlgAlert = new AlertDialog.Builder(MemberAccount.this);
                 dlgAlert.setMessage(Html.fromHtml("<Big>"+"Would you like to redeem one reward? " + winningTotal + " points will be deducted from your account!"+"</Big>"));
-//                dlgAlert.setMessage("Would you like to redeem one reward? 100 Points will be deducted from your account!");
+
                 dlgAlert.setTitle("Confirmation...");
 
                 dlgAlert.setPositiveButton("Yes",
