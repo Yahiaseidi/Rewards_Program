@@ -59,8 +59,7 @@ public class Winnings extends AppCompatActivity {
         win = extras.getInt("winningTotal");
         System.out.println("high: " + high + " " + "medium: " + medium + " low: " + low + " win: " + win);
         Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem = menu.getItem(0);
-        menuItem.setChecked(false);
+
         msg.setText("Click for your chance to win big rewards!");
 
         //*******Lets users know how the game works*****
@@ -183,6 +182,7 @@ public class Winnings extends AppCompatActivity {
                     }, 90, 100);
 
                     wheel3.start();
+                    btn.setText("Stop");
                     msg.setText("Good Luck!");
                     isStarted = true;
 
