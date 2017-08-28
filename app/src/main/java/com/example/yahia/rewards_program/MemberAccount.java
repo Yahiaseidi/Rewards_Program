@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,7 +56,7 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
         progressBar_points = (ProgressBar)findViewById(R.id.progressBar_points);
         Bundle extras = getIntent().getExtras();
         String pointTotal = extras.getString("points"); //Number of points in the customers account
-        String cardNumber = extras.getString("card"); //Customer's card number
+        final String cardNumber = extras.getString("card"); //Customer's card number
         String phoneNumber = extras.getString("number"); //Customer's phone number
         winningTotal = extras.getInt("winningTotal"); //WINNING GOAL
         highAmount = extras.getInt("highAmount");
@@ -69,8 +70,22 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
         if(points >= winningTotal)
         {
             int numberOfRewards = (int)(Math.floor((points / winningTotal)));
-            btn_reward_notification.setText("You currently have " + numberOfRewards + " reward(s) available. CLICK TO REDEEM ONE!");
-            btn_reward_notification.setVisibility(View.VISIBLE);
+            /*btn_reward_notification.setText("You currently have " + numberOfRewards + " reward(s) available. CLICK TO REDEEM ONE!");
+            btn_reward_notification.setVisibility(View.VISIBLE);*/
+            LayoutInflater inflater = getLayoutInflater();
+            View titleView = inflater.inflate(R.layout.layout, null);
+            AlertDialog.Builder dlgAlert = new AlertDialog.Builder(MemberAccount.this)
+                    .setCustomTitle(titleView);
+            ((TextView) titleView.findViewById(R.id.Alert)).setText("You have a reward!");
+            dlgAlert.setMessage(Html.fromHtml("<Big>"+String.format("You currently have " + numberOfRewards + " reward(s) available. Would you like to redeem one?</Big>")));
+            dlgAlert.setPositiveButton("Yes",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            updateItem(cardNumber);
+                        }
+                    });
+            dlgAlert.setNegativeButton("No",null);
+            dlgAlert.create().show();
         }
 
         point_total = (TextView)findViewById(R.id.point_total);
@@ -152,12 +167,13 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
                 goToEnterOrderAmount(cardNumber);
                 break;
 
-            case R.id.btn_reward_notification:
-                AlertDialog.Builder dlgAlert = new AlertDialog.Builder(MemberAccount.this);
+            /*case R.id.btn_reward_notification:
+                LayoutInflater inflater = this.getLayoutInflater();
+                View titleView = inflater.inflate(R.layout.layout, null);
+                AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this)
+                        .setCustomTitle(titleView);
+                ((TextView) titleView.findViewById(R.id.Alert)).setText("Confirmation...");
                 dlgAlert.setMessage(Html.fromHtml("<Big>"+"Would you like to redeem one reward? " + winningTotal + " points will be deducted from your account!"+"</Big>"));
-
-                dlgAlert.setTitle("Confirmation...");
-
                 dlgAlert.setPositiveButton("Yes",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
@@ -167,7 +183,7 @@ public class MemberAccount extends AppCompatActivity implements View.OnClickList
                         });
                 dlgAlert.setNegativeButton("Cancel",null);
                 dlgAlert.create().show();
-                break;
+                break;*/
 
             default:
                 break;

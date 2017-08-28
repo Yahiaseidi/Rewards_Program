@@ -15,6 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,11 +41,13 @@ public class MainActivity extends AppCompatActivity {
     private MobileServiceClient mClient;
     private MobileServiceTable<Rewards> mRewardsTable;
     private MobileServiceTable<Users> mUsersTable;
+    private LayoutInflater inflater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        inflater = getLayoutInflater();
         setContentView(R.layout.activity_main);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
@@ -207,10 +210,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(String result) {
                 if(result.equalsIgnoreCase("fail")){
-                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(MainActivity.this);
+                    View titleView = inflater.inflate(R.layout.layout, null);
+                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(MainActivity.this)
+                            .setCustomTitle(titleView);
+                    ((TextView) titleView.findViewById(R.id.Alert)).setText("Error Message...");
                     dlgAlert.setMessage(Html.fromHtml("<Big>"+"There is no account linked to this card. Add member if needed!"+"</Big>"));
-//                    dlgAlert.setMessage("There is no account linked to this card number. Add member if needed!");
-                    dlgAlert.setTitle("Error Message...");
                     dlgAlert.setPositiveButton("OK", null);
                     dlgAlert.setCancelable(true);
                     dlgAlert.create().show();

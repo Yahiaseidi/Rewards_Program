@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +29,7 @@ import java.util.Random;
 
 public class Winnings extends AppCompatActivity {
 
-    private TextView msg, msg2;
+    private TextView msg, alertMsg;
     private ImageView img1, img2, img3;
     private Wheel wheel1, wheel2, wheel3;
     private Button btn;
@@ -57,17 +58,15 @@ public class Winnings extends AppCompatActivity {
         medium = extras.getInt("mediumAmount");
         low = extras.getInt("lowAmount");
         win = extras.getInt("winningTotal");
-        System.out.println("high: " + high + " " + "medium: " + medium + " low: " + low + " win: " + win);
-        Menu menu = bottomNavigationView.getMenu();
-
         msg.setText("Click for your chance to win big rewards!");
-
+        alertMsg = (TextView) findViewById(R.id.Alert);
         //*******Lets users know how the game works*****
-
-        AlertDialog.Builder dlgAlert = new AlertDialog.Builder(Winnings.this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View titleView = inflater.inflate(R.layout.layout, null);
+        AlertDialog.Builder dlgAlert = new AlertDialog.Builder(Winnings.this)
+                .setCustomTitle(titleView);
+        ((TextView) titleView.findViewById(R.id.Alert)).setText("Rules...");
         dlgAlert.setMessage(Html.fromHtml("<Big>"+"*No matches, small prize!<br />**Two items match, medium prize!<br />***All three match, BIG prize!"+"</Big>"));
-//        dlgAlert.setMessage("No matches, small prize!\nTwo items match, medium prize!\nAll three match, BIG prize!");
-        dlgAlert.setTitle("Rules...");
         dlgAlert.setNegativeButton("Got it",null);
         dlgAlert.create().show();
 

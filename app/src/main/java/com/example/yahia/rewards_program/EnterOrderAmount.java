@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -131,21 +132,21 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         Bundle extras = getIntent().getExtras();
         final String cardNumber = extras.getString("card");
-        AlertDialog.Builder dlgAlert = new AlertDialog.Builder(EnterOrderAmount.this);
-
+        LayoutInflater inflater = getLayoutInflater();
+        View titleView = inflater.inflate(R.layout.layout, null);
+        AlertDialog.Builder dlgAlert = new AlertDialog.Builder(EnterOrderAmount.this)
+                .setCustomTitle(titleView);
+        ((TextView) titleView.findViewById(R.id.Alert)).setText("Confirmation...");
         double orderTotal = Double.parseDouble(order_amount.getText().toString());
-            dlgAlert.setMessage(Html.fromHtml("<Big>"+String.format("Is $%.2f the correct order amount?", orderTotal)+"</Big>"));
-//            dlgAlert.setMessage(String.format("Is $%.2f the correct order amount?", orderTotal));
-            dlgAlert.setTitle("Confirmation...");
-
-            dlgAlert.setPositiveButton("Yes",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            updateItem(cardNumber);
-                        }
-                    });
-            dlgAlert.setNegativeButton("Cancel",null);
-            dlgAlert.create().show();
+        dlgAlert.setMessage(Html.fromHtml("<Big>"+String.format("Is $%.2f the correct order amount?", orderTotal)+"</Big>"));
+        dlgAlert.setPositiveButton("Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        updateItem(cardNumber);
+                    }
+                });
+        dlgAlert.setNegativeButton("Cancel",null);
+        dlgAlert.create().show();
 
     }
 

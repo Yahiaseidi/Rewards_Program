@@ -13,12 +13,15 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 
@@ -39,10 +42,12 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
     private Button changePasswordBtn;
     private MobileServiceClient mClient;
     private MobileServiceTable<Admin> mAdminTable;
+    private LayoutInflater inflater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        inflater = getLayoutInflater();
         setContentView(R.layout.activity_change_password);
         //Hides keyboard until clicked on
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -230,11 +235,11 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
             @Override
             protected void onPostExecute(String result) {
                 if(result.equalsIgnoreCase("fail")){
-                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(ChangePassword.this);
-
+                    View titleView = inflater.inflate(R.layout.layout, null);
+                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(ChangePassword.this)
+                            .setCustomTitle(titleView);
+                    ((TextView) titleView.findViewById(R.id.Alert)).setText("Error Message...");
                     dlgAlert.setMessage(Html.fromHtml("<Big>"+"Oops that must be the wrong password!"+"</Big>"));
-//                    dlgAlert.setMessage("Oops that must be the wrong password!");
-                    dlgAlert.setTitle("Error Message...");
                     dlgAlert.setPositiveButton("Try again", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             Intent intent = getIntent();
@@ -250,11 +255,11 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
                     dlgAlert.create().show();
                 }
                 else if (result.equals("matchPasswords")) {
-                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(ChangePassword.this);
-
+                    View titleView = inflater.inflate(R.layout.layout, null);
+                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(ChangePassword.this)
+                            .setCustomTitle(titleView);
+                    ((TextView) titleView.findViewById(R.id.Alert)).setText("Error Message...");
                     dlgAlert.setMessage(Html.fromHtml("<Big>"+"Oops, make sure the new password matches the confirmation password!"+"</Big>"));
-//                    dlgAlert.setMessage("Oops, make sure the new password matches the confirmation password!");
-                    dlgAlert.setTitle("Error Message...");
                     dlgAlert.setPositiveButton("Try again", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             Intent intent = getIntent();
@@ -271,10 +276,11 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
                 }
 
                 else {
-                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(ChangePassword.this);
+                    View titleView = inflater.inflate(R.layout.layout, null);
+                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(ChangePassword.this)
+                            .setCustomTitle(titleView);
+                    ((TextView) titleView.findViewById(R.id.Alert)).setText("Success...");
                     dlgAlert.setMessage(Html.fromHtml("<Big>"+"Password has been successfully changed!"+"</Big>"));
-//                    dlgAlert.setMessage("Password has been successfully changed!");
-                    dlgAlert.setTitle("Success...");
                     dlgAlert.setCancelable(true);
                     dlgAlert.create().show();
 

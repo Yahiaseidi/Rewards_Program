@@ -12,12 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
@@ -40,9 +42,12 @@ public class AdminView extends AppCompatActivity implements View.OnClickListener
     private MobileServiceClient mClient;
     private MobileServiceTable<Rewards> mRewardsTable;
     Button update_btn;
+    LayoutInflater inflater;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        inflater = this.getLayoutInflater();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_view);
 
@@ -197,6 +202,7 @@ public class AdminView extends AppCompatActivity implements View.OnClickListener
                 return false;
             }
         });
+        LayoutInflater inflater = this.getLayoutInflater();
 
         try {
             mClient = new MobileServiceClient(
@@ -247,10 +253,11 @@ public class AdminView extends AppCompatActivity implements View.OnClickListener
 
             protected void onPostExecute(String result) {
                 if (result.equalsIgnoreCase("success")) {
-                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(AdminView.this);
+                    View titleView = inflater.inflate(R.layout.layout, null);
+                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(AdminView.this)
+                            .setCustomTitle(titleView);
+                    ((TextView) titleView.findViewById(R.id.Alert)).setText("Success...");
                     dlgAlert.setMessage(Html.fromHtml("<Big>"+"Winning target and winning amounts have been successfully changed!"+"</Big>"));
-//                    dlgAlert.setMessage("Winning target and winning amounts have been successfully changed!");
-                    dlgAlert.setTitle("Success...");
                     dlgAlert.setCancelable(true);
                     dlgAlert.create().show();
 

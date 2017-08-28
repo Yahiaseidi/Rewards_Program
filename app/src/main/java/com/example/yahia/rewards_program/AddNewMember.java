@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.net.MalformedURLException;
@@ -41,12 +43,13 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
     private MobileServiceClient mClient;
     private MobileServiceTable<Users> mUsersTable;
     private MobileServiceTable<Rewards> mRewardsTable;
+    private LayoutInflater inflater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_member);
-
+        inflater = getLayoutInflater();
         //Hides keyboard until clicked on
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
@@ -261,10 +264,11 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
             @Override
             protected void onPostExecute(String result) {
                 if(result.equalsIgnoreCase("fail")){
-                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(AddNewMember.this);
-
+                    View titleView = inflater.inflate(R.layout.layout, null);
+                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(AddNewMember.this)
+                            .setCustomTitle(titleView);
+                    ((TextView) titleView.findViewById(R.id.Alert)).setText("Error Message...");
                     dlgAlert.setMessage(Html.fromHtml("<Big>"+"There is an account linked to this phone number already!"+"</Big>"));
-                    dlgAlert.setTitle("Error Message...");
                     dlgAlert.setPositiveButton("OK", null);
                     dlgAlert.setCancelable(true);
                     dlgAlert.create().show();
@@ -339,10 +343,11 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
                 int low = w.low;
                 int win = w.winning;
                 if(w.result.equalsIgnoreCase("duplicate")){
-                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(AddNewMember.this);
+                    View titleView = inflater.inflate(R.layout.layout, null);
+                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(AddNewMember.this)
+                            .setCustomTitle(titleView);
+                    ((TextView) titleView.findViewById(R.id.Alert)).setText("Error Message...");
                     dlgAlert.setMessage(Html.fromHtml("<Big>"+"Looks like this Card ID number is already linked to an account. Please use new card!"+"</Big>"));
-//                    dlgAlert.setMessage("Looks like this Card ID number is already linked to an account. Please use new card!");
-                    dlgAlert.setTitle("Error Message...");
                     dlgAlert.setPositiveButton("OK", null);
                     dlgAlert.setCancelable(true);
                     dlgAlert.create().show();
@@ -356,11 +361,11 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
                 }
                 else
                 {
-                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(AddNewMember.this);
-
+                    View titleView = inflater.inflate(R.layout.layout, null);
+                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(AddNewMember.this)
+                            .setCustomTitle(titleView);
+                    ((TextView) titleView.findViewById(R.id.Alert)).setText("Success...");
                     dlgAlert.setMessage(Html.fromHtml("<Big>"+"New member has been added!!"+"</Big>"));
-//                    dlgAlert.setMessage("New member has been added!!");
-                    dlgAlert.setTitle("Success...");
                     dlgAlert.setCancelable(true);
                     dlgAlert.create().show();
 

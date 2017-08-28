@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,13 +42,14 @@ public class EnterAlternateID extends AppCompatActivity implements View.OnClickL
     private MobileServiceClient mClient;
     private MobileServiceTable<Users> mUsersTable;
     private MobileServiceTable<Rewards> mRewardsTable;
+    private LayoutInflater inflater;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_alternate_id);
-
+        inflater = getLayoutInflater();
         phoneSearch_btn = (Button)findViewById(R.id.phoneSearch_btn);
         phone_editText = (EditText)findViewById(R.id.phone_editText);
         phoneSearch_btn.setOnClickListener(EnterAlternateID.this);
@@ -198,10 +200,10 @@ public class EnterAlternateID extends AppCompatActivity implements View.OnClickL
             @Override
             protected void onPostExecute(String result) {
                 if(result.equalsIgnoreCase("fail")){
-                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(EnterAlternateID.this);
-                    dlgAlert.setMessage(Html.fromHtml("<Big>"+"Oops there is no account linked to this phone number!"+"</Big>"));
-//                    dlgAlert.setMessage("Oops there is no account linked to this phone number!");
-                    dlgAlert.setTitle("Error Message...");
+                    View titleView = inflater.inflate(R.layout.layout, null);
+                    AlertDialog.Builder dlgAlert = new AlertDialog.Builder(EnterAlternateID.this)
+                            .setCustomTitle(titleView);
+                    ((TextView) titleView.findViewById(R.id.Alert)).setText("Error Message...");                    dlgAlert.setMessage(Html.fromHtml("<Big>"+"Oops there is no account linked to this phone number!"+"</Big>"));
                     dlgAlert.setPositiveButton("OK", null);
                     dlgAlert.setCancelable(true);
                     dlgAlert.create().show();
