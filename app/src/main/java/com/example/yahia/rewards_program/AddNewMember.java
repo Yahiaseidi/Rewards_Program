@@ -167,15 +167,30 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if (v == createNewMember_btn)
-        {
-            try {
-                numExists(newPhoneNumber.getText().toString());
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        if (v == createNewMember_btn) {
+
+            //Asks user to confirm input before quering the database
+            View titleView = inflater.inflate(R.layout.layout, null);
+            AlertDialog.Builder dlgAlert = new AlertDialog.Builder(AddNewMember.this)
+                    .setCustomTitle(titleView);
+            ((TextView) titleView.findViewById(R.id.Alert)).setText("Please confirm your input...");
+            dlgAlert.setMessage(Html.fromHtml("<Big>"+"Card Number: " + cardNumber.getText().toString() + "<br>" + "Phone Number: " + newPhoneNumber.getText().toString() + "</Big>"));
+
+            dlgAlert.setPositiveButton("Confirm",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            try {
+                                numExists(newPhoneNumber.getText().toString());
+                            } catch (ExecutionException e) {
+                                e.printStackTrace();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+            dlgAlert.setNegativeButton("Cancel",null);
+            dlgAlert.create().show();
         }
     }
 

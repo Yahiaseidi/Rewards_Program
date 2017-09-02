@@ -28,6 +28,9 @@ import java.net.MalformedURLException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import static com.example.yahia.rewards_program.R.id.mainActivityTxtView;
+import static com.example.yahia.rewards_program.R.id.newPhoneNumber;
+
 public class EnterOrderAmount extends AppCompatActivity implements View.OnClickListener {
 
     EditText order_amount;
@@ -132,17 +135,38 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         Bundle extras = getIntent().getExtras();
         final String cardNumber = extras.getString("card");
-        LayoutInflater inflater = getLayoutInflater();
+        final LayoutInflater inflater = getLayoutInflater();
         View titleView = inflater.inflate(R.layout.layout, null);
         AlertDialog.Builder dlgAlert = new AlertDialog.Builder(EnterOrderAmount.this)
                 .setCustomTitle(titleView);
         ((TextView) titleView.findViewById(R.id.Alert)).setText("Confirmation...");
-        double orderTotal = Double.parseDouble(order_amount.getText().toString());
+        final double orderTotal = Double.parseDouble(order_amount.getText().toString());
         dlgAlert.setMessage(Html.fromHtml("<Big>"+String.format("Is $%.2f the correct order amount?", orderTotal)+"</Big>"));
         dlgAlert.setPositiveButton("Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        updateItem(cardNumber);
+
+                        double points = Math.floor(orderTotal);
+                        int wholeValue = (int)points;
+                        String pointsAdded = Integer.toString(wholeValue);
+
+                        View titleView = inflater.inflate(R.layout.layout, null);
+                        AlertDialog.Builder dlgAlert = new AlertDialog.Builder(EnterOrderAmount.this)
+                                .setCustomTitle(titleView);
+                        ((TextView) titleView.findViewById(R.id.Alert)).setText("Confirmation...");
+                        dlgAlert.setMessage(Html.fromHtml("<Big>" + pointsAdded + " points have been added to customer\'s account!" + "</Big>"));
+                        dlgAlert.create().show();
+
+                        //Delays the adding of the customers points which takes users back home after completing
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                //Perform below code after 7s = 7000ms
+                                updateItem(cardNumber);
+                            }
+                        }, 7000);
+
                     }
                 });
         dlgAlert.setNegativeButton("Cancel",null);
@@ -181,25 +205,14 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
         String totalPoints = Integer.toString(total);
         item.setPoints(totalPoints);
         mUsersTable.update(item).get();
-        goToMemberAccount(item.getPoints(), item.getCard(), item.getNumber(), Integer.parseInt(rewards.getTotalWinnings()),
-                          Integer.parseInt(rewards.getHighAmount()), Integer.parseInt(rewards.getMediumAmount()),
-                          Integer.parseInt(rewards.getLowAmount()));
-}
 
+        goHome();
+    }
 
-    //Passes the points and cardNumber of the user to MemberAccount
-    public void goToMemberAccount(String points, String card, String number, int win, int high, int medium, int low) {
-        Intent newActivity = new Intent(getBaseContext(), MemberAccount.class);
-        Bundle extras = new Bundle();
-        extras.putString("number", number);
-        extras.putString("points", points);
-        extras.putString("card", card);
-        extras.putInt("winningTotal", win);
-        extras.putInt("highAmount", high);
-        extras.putInt("mediumAmount", medium);
-        extras.putInt("lowAmount", low);
-
-        newActivity.putExtras(extras);
+    //Takes users to main activity after adding points to member account
+    public void goHome()
+    {
+        Intent newActivity = new Intent(getBaseContext(), MainActivity.class);
         startActivity(newActivity);
     }
 

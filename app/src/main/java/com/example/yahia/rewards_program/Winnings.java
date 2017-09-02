@@ -59,6 +59,11 @@ public class Winnings extends AppCompatActivity {
         low = extras.getInt("lowAmount");
         win = extras.getInt("winningTotal");
         msg.setText("Click for your chance to win big rewards!");
+
+        String firstPrize = Integer.toString(low);
+        String secondPrize = Integer.toString(medium);
+        String thirdPrize = Integer.toString(high);
+
         alertMsg = (TextView) findViewById(R.id.Alert);
         //*******Lets users know how the game works*****
         LayoutInflater inflater = this.getLayoutInflater();
@@ -66,7 +71,8 @@ public class Winnings extends AppCompatActivity {
         AlertDialog.Builder dlgAlert = new AlertDialog.Builder(Winnings.this)
                 .setCustomTitle(titleView);
         ((TextView) titleView.findViewById(R.id.Alert)).setText("Rules...");
-        dlgAlert.setMessage(Html.fromHtml("<Big>"+"*No matches, small prize!<br />**Two items match, medium prize!<br />***All three match, BIG prize!"+"</Big>"));
+        dlgAlert.setMessage(Html.fromHtml("<Big>"+"*No matches wins you $" + firstPrize + "!<br>**Two matches wins you $" + secondPrize + "!<br>***Three matches wins you $" + thirdPrize + "!<br>"
+                +"Please note that prizes are set by owner and are subject to change.<br>" + "</Big>"));
         dlgAlert.setNegativeButton("Got it",null);
         dlgAlert.create().show();
 
