@@ -1,5 +1,6 @@
 package com.example.yahia.rewards_program;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -226,6 +227,17 @@ public class AdminView extends AppCompatActivity implements View.OnClickListener
     public void queryItems() {
         AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
 
+            ProgressDialog progDailog = new ProgressDialog(AdminView.this, R.style.AppCompatAlertDialogStyle);
+
+            @Override
+            protected void onPreExecute () {
+                progDailog.setMessage("Loading...");
+                progDailog.setIndeterminate(false);
+                progDailog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progDailog.setCancelable(true);
+                progDailog.show();
+            }
+
             //Runs a query to the database in the background.
             @Override
             protected String doInBackground(Void... voids) {
@@ -252,6 +264,7 @@ public class AdminView extends AppCompatActivity implements View.OnClickListener
             //After the query has been completed, this method runs and shows the messages corresponding to the results.
 
             protected void onPostExecute(String result) {
+                progDailog.dismiss();
                 if (result.equalsIgnoreCase("success")) {
                     View titleView = inflater.inflate(R.layout.layout, null);
                     AlertDialog.Builder dlgAlert = new AlertDialog.Builder(AdminView.this)

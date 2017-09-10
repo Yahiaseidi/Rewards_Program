@@ -153,7 +153,7 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
                         View titleView = inflater.inflate(R.layout.layout, null);
                         AlertDialog.Builder dlgAlert = new AlertDialog.Builder(EnterOrderAmount.this)
                                 .setCustomTitle(titleView);
-                        ((TextView) titleView.findViewById(R.id.Alert)).setText("Confirmation...");
+                        ((TextView) titleView.findViewById(R.id.Alert)).setText("Please wait...");
                         dlgAlert.setMessage(Html.fromHtml("<Big>" + pointsAdded + " points have been added to customer\'s account!" + "</Big>"));
                         dlgAlert.create().show();
 
@@ -162,10 +162,10 @@ public class EnterOrderAmount extends AppCompatActivity implements View.OnClickL
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                //Perform below code after 7s = 7000ms
+                                //Perform below code after 6s = 6000ms
                                 updateItem(cardNumber);
                             }
-                        }, 7000);
+                        }, 6000);
 
                     }
                 });

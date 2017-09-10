@@ -1,5 +1,6 @@
 package com.example.yahia.rewards_program;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -203,6 +204,17 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
     public void getOldPass(final String pass) {
         AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>(){
 
+            ProgressDialog progDailog = new ProgressDialog(ChangePassword.this, R.style.AppCompatAlertDialogStyle);
+
+            @Override
+            protected void onPreExecute () {
+                progDailog.setMessage("Loading...");
+                progDailog.setIndeterminate(false);
+                progDailog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progDailog.setCancelable(true);
+                progDailog.show();
+            }
+
             //Runs a query to the database in the background.
             @Override
             protected String doInBackground(Void... voids) {
@@ -234,6 +246,7 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
             //After the query has been completed, this method runs and shows the messages corresponding to the results.
             @Override
             protected void onPostExecute(String result) {
+                progDailog.dismiss();
                 if(result.equalsIgnoreCase("fail")){
                     View titleView = inflater.inflate(R.layout.layout, null);
                     AlertDialog.Builder dlgAlert = new AlertDialog.Builder(ChangePassword.this)

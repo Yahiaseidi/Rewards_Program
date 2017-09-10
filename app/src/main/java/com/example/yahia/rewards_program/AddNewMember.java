@@ -1,5 +1,6 @@
 package com.example.yahia.rewards_program;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -253,6 +254,17 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
     public void numExists(final String s) throws ExecutionException, InterruptedException {
         AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>(){
 
+            ProgressDialog progDailog = new ProgressDialog(AddNewMember.this, R.style.AppCompatAlertDialogStyle);
+
+            @Override
+            protected void onPreExecute () {
+                progDailog.setMessage("Loading...");
+                progDailog.setIndeterminate(false);
+                progDailog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progDailog.setCancelable(true);
+                progDailog.show();
+            }
+
             //This method queries the database table to verify that the new member's phone number is not in the database.
             @Override
             protected String doInBackground(Void... voids) {
@@ -278,6 +290,7 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
             //After the query has been completed, this method runs and shows the messages corresponding to the results.
             @Override
             protected void onPostExecute(String result) {
+                progDailog.dismiss();
                 if(result.equalsIgnoreCase("fail")){
                     View titleView = inflater.inflate(R.layout.layout, null);
                     AlertDialog.Builder dlgAlert = new AlertDialog.Builder(AddNewMember.this)
@@ -316,7 +329,16 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
     public void cardExists (final String id) throws ExecutionException, InterruptedException {
         AsyncTask<Void, Void, Wrapper> task = new AsyncTask<Void, Void, Wrapper>(){
 
+            ProgressDialog progDailog = new ProgressDialog(AddNewMember.this, R.style.AppCompatAlertDialogStyle);
 
+            @Override
+            protected void onPreExecute () {
+                progDailog.setMessage("Loading...");
+                progDailog.setIndeterminate(false);
+                progDailog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progDailog.setCancelable(true);
+                progDailog.show();
+            }
 
             //This method queries the database table to verify that the new member's phone number is not in the database.
             @Override
@@ -353,6 +375,7 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
             //After the query has been completed, this method runs and shows the messages corresponding to the results.
             @Override
             protected void onPostExecute(final Wrapper w) {
+                progDailog.dismiss();
                 int high = w.high;
                 int medium = w.medium;
                 int low = w.low;

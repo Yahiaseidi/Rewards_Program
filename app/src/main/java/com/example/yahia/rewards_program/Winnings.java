@@ -25,11 +25,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.Random;
 
 public class Winnings extends AppCompatActivity {
 
-    private TextView msg, alertMsg;
+    private TextView msg, alertMsg, msg2;
     private ImageView img1, img2, img3;
     private Wheel wheel1, wheel2, wheel3;
     private Button btn;
@@ -53,6 +55,7 @@ public class Winnings extends AppCompatActivity {
         img3 = (ImageView) findViewById(R.id.img3);
         btn = (Button) findViewById(R.id.button2);
         msg = (TextView) findViewById(R.id.msg);
+        msg2 = (TextView) findViewById(R.id.msg2);
         Bundle extras = getIntent().getExtras();
         high = extras.getInt("highAmount");
         medium = extras.getInt("mediumAmount");
@@ -117,6 +120,7 @@ public class Winnings extends AppCompatActivity {
                         anim.setRepeatMode(Animation.REVERSE);
                         anim.setRepeatCount(Animation.INFINITE);
                         msg.setText("You win $" + high + " off your next purchase!");
+                        msg2.setText("Click the home button when done.");
                         msg.startAnimation(anim);
                         btn.setVisibility(view.INVISIBLE);
                     } else if (wheel1.currentIndex == wheel2.currentIndex || wheel2.currentIndex == wheel3.currentIndex
@@ -127,6 +131,7 @@ public class Winnings extends AppCompatActivity {
                         anim.setRepeatMode(Animation.REVERSE);
                         anim.setRepeatCount(Animation.INFINITE);
                         msg.setText("You win $" + medium + " off your next purchase!");
+                        msg2.setText("Click the home button when done.");
                         msg.startAnimation(anim);
                         btn.setVisibility(view.INVISIBLE);
 
@@ -137,6 +142,7 @@ public class Winnings extends AppCompatActivity {
                         anim.setRepeatMode(Animation.REVERSE);
                         anim.setRepeatCount(Animation.INFINITE);
                         msg.setText("You win $" + low + " off your next purchase!");
+                        msg2.setText("Click the home button when done.");
                         msg.startAnimation(anim);
                         btn.setVisibility(view.INVISIBLE);
 
