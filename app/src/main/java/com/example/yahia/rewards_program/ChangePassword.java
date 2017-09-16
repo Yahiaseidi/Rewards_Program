@@ -86,10 +86,7 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
                     oldPass.setError("Passwords are 4 digits!");
                     changePasswordBtn.setClickable(false);
                 }
-                else
-                {
-                    changePasswordBtn.setClickable(true);
-                }
+
             }
         });
 
@@ -113,12 +110,10 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
                     newPass.setError("Passwords are 4 digits!");
                     changePasswordBtn.setClickable(false);
                 }
-                else
-                {
-                    changePasswordBtn.setClickable(true);
-                }
+
             }
         });
+
 
         secNewPass.addTextChangedListener(new TextWatcher() {
             @Override
@@ -138,12 +133,15 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
                     secNewPass.setError("Passwords are 4 digits!");
                     changePasswordBtn.setClickable(false);
                 }
-                else
-                {
+                else if (secNewPass.getText().length() == 4 && newPass.getText().length() == 4 && oldPass.getText().length() == 4) {
                     changePasswordBtn.setClickable(true);
                 }
+
             }
         });
+
+
+
 
         //**************
 
@@ -265,9 +263,9 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
                     });
                     dlgAlert.create().show();
                     dlgAlert.setCancelable(true);
-                    dlgAlert.create().show();
                 }
                 else if (result.equals("matchPasswords")) {
+                    progDailog.dismiss();
                     View titleView = inflater.inflate(R.layout.layout, null);
                     AlertDialog.Builder dlgAlert = new AlertDialog.Builder(ChangePassword.this)
                             .setCustomTitle(titleView);
@@ -285,10 +283,11 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
                     });
                     dlgAlert.create().show();
                     dlgAlert.setCancelable(true);
-                    dlgAlert.create().show();
+
                 }
 
                 else {
+                    progDailog.dismiss();
                     View titleView = inflater.inflate(R.layout.layout, null);
                     AlertDialog.Builder dlgAlert = new AlertDialog.Builder(ChangePassword.this)
                             .setCustomTitle(titleView);

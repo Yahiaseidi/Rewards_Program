@@ -144,9 +144,8 @@ public class PinView extends AppCompatActivity {
             protected void onPostExecute(String result) {
                 progDailog.dismiss();
                 if(result.equalsIgnoreCase("fail")){
-                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(PinView.this);
+                    final AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(PinView.this);
                     dlgAlert.setMessage(Html.fromHtml("<Big>"+"Oops that must be the wrong password!"+"</Big>"));
-//                    dlgAlert.setMessage("Oops that must be the wrong password!");
                     dlgAlert.setTitle("Error Message...");
                     dlgAlert.setPositiveButton("Try again", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -155,12 +154,12 @@ public class PinView extends AppCompatActivity {
                             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                             finish();
                             overridePendingTransition(0, 0);
+
                             startActivity(intent);
                         }
                     });
                     dlgAlert.create().show();
                     dlgAlert.setCancelable(true);
-                    dlgAlert.create().show();
                 }
                 else {
                     Intent intent = new Intent(PinView.this, AdminMain.class);

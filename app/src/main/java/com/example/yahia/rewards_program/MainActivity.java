@@ -230,14 +230,21 @@ public class MainActivity extends AppCompatActivity {
                     dlgAlert.setMessage(Html.fromHtml("<Big>"+"There is no account linked to this card. Add member if needed!"+"</Big>"));
                     dlgAlert.setPositiveButton("OK", null);
                     dlgAlert.setCancelable(true);
-                    dlgAlert.create().show();
 
                     dlgAlert.setPositiveButton("Ok",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = getIntent();
+                                    overridePendingTransition(0, 0);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                    finish();
+                                    overridePendingTransition(0, 0);
 
+                                    startActivity(intent);
                                 }
                             });
+                    dlgAlert.create().show();
+
                 }
             }
         };
