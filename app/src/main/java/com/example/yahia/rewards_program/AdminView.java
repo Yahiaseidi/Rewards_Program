@@ -97,9 +97,6 @@ public class AdminView extends AppCompatActivity implements View.OnClickListener
                 if(easy.getText().length() == 0 )
                 {
                     easy.setError("Required");
-                    update_btn.setClickable(false);
-                }else {
-                    update_btn.setClickable(true);
                 }
             }
         });
@@ -122,9 +119,6 @@ public class AdminView extends AppCompatActivity implements View.OnClickListener
                 if(medium.getText().length() == 0 )
                 {
                     medium.setError("Required");
-                    update_btn.setClickable(false);
-                }else {
-                    update_btn.setClickable(true);
                 }
             }
         });
@@ -147,9 +141,6 @@ public class AdminView extends AppCompatActivity implements View.OnClickListener
                 if(hard.getText().length() == 0 )
                 {
                     hard.setError("Required");
-                    update_btn.setClickable(false);
-                }else {
-                    update_btn.setClickable(true);
                 }
             }
         });
@@ -170,8 +161,7 @@ public class AdminView extends AppCompatActivity implements View.OnClickListener
             public void afterTextChanged(Editable s) {
                 if (target.getText().length() == 0) {
                     target.setError("Required");
-                    update_btn.setClickable(false);
-                } else {
+                } else if (easy.getText().length() > 0 && medium.getText().length() >0 && hard.getText().length() > 0 && target.getText().length() > 0 ) {
                     update_btn.setClickable(true);
                 }
             }
