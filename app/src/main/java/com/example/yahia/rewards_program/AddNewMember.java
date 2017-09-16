@@ -62,13 +62,13 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
         //Makes sure the createNewMember button is not clicked before text is validated
         newPhoneNumber.setError("Invalid Phone #");
         cardNumber.setError("Required");
-        createNewMember_btn.setClickable(false);
+        createNewMember_btn.setEnabled(false);
 
         //Validate Card ID
         cardNumber.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                //Do Nothing
+
             }
 
             @Override
@@ -79,14 +79,20 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
             //Validates the length of the text box after each new entry.
             @Override
             public void afterTextChanged(Editable s) {
-                if(cardNumber.getText().length() == 0 )
+                if(cardNumber.getText().length() <= 0 )
                 {
                     cardNumber.setError("Required");
                     createNewMember_btn.setClickable(false);
                 }
                 else
                 {
-                    createNewMember_btn.setClickable(true);
+                    if(newPhoneNumber.getText().length() <= 0)
+                    {
+                        createNewMember_btn.setEnabled(false);
+                    }
+                    else {
+                        createNewMember_btn.setEnabled(true);
+                    }
                 }
             }
         });
@@ -95,7 +101,7 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
         newPhoneNumber.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                //Do Nothing
+                createNewMember_btn.setEnabled(false);
             }
 
             @Override
@@ -108,9 +114,14 @@ public class AddNewMember extends AppCompatActivity implements View.OnClickListe
             public void afterTextChanged(Editable s) {
                 if (newPhoneNumber.getText().length() < 10 || newPhoneNumber.getText().length() > 10) {
                     newPhoneNumber.setError("Invalid Phone #");
-                    createNewMember_btn.setClickable(false);
+                    createNewMember_btn.setEnabled(false);
                 } else {
-                    createNewMember_btn.setClickable(true);
+                    if(cardNumber.getText().length() <= 0) {
+                        createNewMember_btn.setEnabled(false);
+                    }
+                    else {
+                        createNewMember_btn.setEnabled(true);
+                    }
                 }
             }
         });
