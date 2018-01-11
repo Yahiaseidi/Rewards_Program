@@ -1,7 +1,5 @@
 package com.example.yahia.rewards_program;
 
-import android.support.v7.app.AppCompatActivity;
-
 import java.util.Random;
 
 /**
@@ -15,7 +13,9 @@ public class Wheel extends Thread {
     }
 
     private static int[] imgs = {R.drawable.lemon, R.drawable.diamond, R.drawable.potofgold, R.drawable.cherry,
-            R.drawable.seven, R.drawable.bell, R.drawable.bananas, R.drawable.dollar, R.drawable.horseshoe};
+            R.drawable.seven, R.drawable.bell, R.drawable.bananas, R.drawable.dollar, R.drawable.horseshoe,
+            R.drawable.triplesevens, R.drawable.business, R.drawable.casino_tokens, R.drawable.clover, R.drawable.grapes, R.drawable.bar,
+            R.drawable.strawberry, R.drawable.melon, R.drawable.spades, R.drawable.clubs, R.drawable.hearts, R.drawable.diamonds};
     public int currentIndex;
     private WheelListener wheelListener;
     private long frameDuration;

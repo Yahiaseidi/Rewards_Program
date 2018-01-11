@@ -74,7 +74,7 @@ public class Winnings extends AppCompatActivity {
         AlertDialog.Builder dlgAlert = new AlertDialog.Builder(Winnings.this)
                 .setCustomTitle(titleView);
         ((TextView) titleView.findViewById(R.id.Alert)).setText("Rules...");
-        dlgAlert.setMessage(Html.fromHtml("<Big>"+"*No matches wins you $" + firstPrize + "!<br>**Two consecutive matches wins you $" + secondPrize + "!<br>***Three matches wins you $" + thirdPrize + "!<br>"
+        dlgAlert.setMessage(Html.fromHtml("<Big>"+"*No matches wins you $" + firstPrize + "!<br>**Two matches wins you $" + secondPrize + "!<br>***Three matches wins you $" + thirdPrize + "!<br>"
                 +"Please note that prizes are set by owner and are subject to change.<br>" + "</Big>"));
         dlgAlert.setNegativeButton("Got it",null);
         dlgAlert.create().show();
@@ -132,7 +132,8 @@ public class Winnings extends AppCompatActivity {
                         msg2.setText("Click the home button when done.");
                         msg.startAnimation(anim);
                         btn.setVisibility(view.INVISIBLE);
-                    } else if (wheel1.currentIndex == wheel2.currentIndex || wheel2.currentIndex == wheel3.currentIndex) {
+                    } else if (wheel1.currentIndex == wheel2.currentIndex || wheel2.currentIndex == wheel3.currentIndex
+                            || wheel1.currentIndex == wheel3.currentIndex) {
                         Animation anim = new AlphaAnimation(0.0f, 1.0f);
                         anim.setDuration(1000); //You can manage the time of the blink with this parameter
                         anim.setStartOffset(20);
