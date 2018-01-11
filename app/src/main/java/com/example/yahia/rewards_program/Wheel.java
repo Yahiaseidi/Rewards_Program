@@ -37,8 +37,18 @@ public class Wheel extends Thread {
         isStarted = true;
     }
 
+    public int returnImgs(int k){
+        for(int i = 0; i<imgs.length; i++ ){
+            if(k == i) {
+                return imgs[i];
+            }
+        }
+        return -1;
+    }
+
     public void nextImg() {
-        currentIndex++;
+        Random rand = new Random();
+        currentIndex = rand.nextInt(imgs.length);
 
         if (currentIndex == imgs.length) {
             currentIndex = 0;
